@@ -6,7 +6,7 @@ interface FadeInProps {
   children: React.ReactNode;
   className?: string;
   delay?: number;
-  direction?: 'up' | 'down' | 'left' | 'right' | 'none';
+  direction?: 'up' | 'down' | 'left' | 'right' | 'none' | 'scale';
   duration?: number;
   threshold?: number;
   once?: boolean;
@@ -17,7 +17,7 @@ const FadeIn: React.FC<FadeInProps> = ({
   className,
   delay = 0,
   direction = 'up',
-  duration = 0.4,
+  duration = 0.6,
   threshold = 0.1,
   once = true,
 }) => {
@@ -57,15 +57,16 @@ const FadeIn: React.FC<FadeInProps> = ({
   const getDirectionClasses = () => {
     if (!isVisible) {
       switch (direction) {
-        case 'up': return 'translate-y-10 opacity-0';
-        case 'down': return '-translate-y-10 opacity-0';
-        case 'left': return 'translate-x-10 opacity-0';
-        case 'right': return '-translate-x-10 opacity-0';
+        case 'up': return 'translate-y-8 opacity-0';
+        case 'down': return '-translate-y-8 opacity-0';
+        case 'left': return 'translate-x-8 opacity-0';
+        case 'right': return '-translate-x-8 opacity-0';
+        case 'scale': return 'scale-95 opacity-0';
         case 'none': return 'opacity-0';
-        default: return 'translate-y-10 opacity-0';
+        default: return 'translate-y-8 opacity-0';
       }
     }
-    return 'translate-y-0 translate-x-0 opacity-100';
+    return 'translate-y-0 translate-x-0 scale-100 opacity-100';
   };
 
   return (
@@ -79,6 +80,7 @@ const FadeIn: React.FC<FadeInProps> = ({
       style={{
         transitionDuration: `${duration}s`,
         transitionDelay: `${delay}s`,
+        transitionTimingFunction: 'cubic-bezier(0.16, 1, 0.3, 1)'
       }}
     >
       {children}

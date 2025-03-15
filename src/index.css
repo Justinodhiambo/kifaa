@@ -1,5 +1,6 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://rsms.me/inter/inter.css');
 
 @tailwind base;
 @tailwind components;
@@ -111,7 +112,7 @@
   }
 
   h1, h2, h3, h4, h5, h6 {
-    @apply font-display tracking-tight;
+    @apply font-sf tracking-tight;
   }
 
   h1 {
@@ -163,10 +164,11 @@
   @apply bg-clip-text text-transparent bg-gradient-to-r from-kifaa-dark via-kifaa to-kifaa-light;
 }
 
+/* Apple-style animations */
 .reveal-animation {
   opacity: 0;
-  transform: translateY(30px);
-  transition: all 0.7s ease-out;
+  transform: translateY(20px);
+  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .reveal-animation.active {
@@ -175,7 +177,8 @@
 }
 
 .hover-lift {
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
+              box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .hover-lift:hover {
@@ -187,7 +190,8 @@
   opacity: 0;
   transform: translateY(20px);
   visibility: hidden;
-  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), 
+              transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
   will-change: opacity, visibility;
 }
 
@@ -201,3 +205,37 @@
   @apply bg-gradient-to-br from-white via-white/90 to-white/70 bg-clip-text text-transparent;
 }
 
+/* Apple-style blur effect */
+.apple-blur {
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+/* SF Pro font faces */
+@font-face {
+  font-family: 'SF Pro Display';
+  src: url('https://applesocial.s3.amazonaws.com/assets/styles/fonts/sanfrancisco/sanfranciscodisplay-regular-webfont.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'SF Pro Display';
+  src: url('https://applesocial.s3.amazonaws.com/assets/styles/fonts/sanfrancisco/sanfranciscodisplay-medium-webfont.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'SF Pro Display';
+  src: url('https://applesocial.s3.amazonaws.com/assets/styles/fonts/sanfrancisco/sanfranciscodisplay-semibold-webfont.woff2') format('woff2');
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'SF Pro Display';
+  src: url('https://applesocial.s3.amazonaws.com/assets/styles/fonts/sanfrancisco/sanfranciscodisplay-bold-webfont.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+}
