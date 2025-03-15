@@ -10,6 +10,7 @@ import { ThemeProvider } from '@/components/ThemeProvider';
 
 const Index = () => {
   useEffect(() => {
+    // Handle animations with intersection observer
     const observerOptions = {
       root: null,
       rootMargin: '0px',
@@ -29,6 +30,28 @@ const Index = () => {
     revealElements.forEach((element) => {
       observer.observe(element);
     });
+
+    // Handle hash links on page load
+    const handleHashLinkOnLoad = () => {
+      const { hash } = window.location;
+      if (hash) {
+        setTimeout(() => {
+          const element = document.getElementById(hash.slice(1));
+          if (element) {
+            const headerHeight = 80; // Approximate navbar height
+            const elementPosition = element.getBoundingClientRect().top;
+            const offsetPosition = elementPosition + window.pageYOffset - headerHeight;
+            
+            window.scrollTo({
+              top: offsetPosition,
+              behavior: 'smooth'
+            });
+          }
+        }, 100); // Small delay to ensure elements are rendered
+      }
+    };
+    
+    handleHashLinkOnLoad();
 
     return () => {
       revealElements.forEach((element) => {
