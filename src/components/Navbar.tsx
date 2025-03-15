@@ -25,7 +25,7 @@ const Navbar: React.FC = () => {
       className={cn(
         "fixed top-0 left-0 right-0 z-50 transition-all duration-300 ease-in-out",
         isScrolled ? 
-          "py-3 backdrop-blur-lg bg-white/80 dark:bg-gray-900/80 shadow-soft" : 
+          "py-3 backdrop-blur-xl bg-black/70 shadow-[0_4px_12px_-2px_rgba(0,0,0,0.3)]" : 
           "py-5 bg-transparent"
       )}
     >
@@ -68,7 +68,7 @@ const Navbar: React.FC = () => {
         {/* Mobile Navigation */}
         <div 
           className={cn(
-            "fixed inset-0 bg-background/95 backdrop-blur-lg transition-transform duration-300 flex flex-col justify-center items-center md:hidden",
+            "fixed inset-0 bg-background/95 backdrop-blur-xl transition-transform duration-300 flex flex-col justify-center items-center md:hidden",
             mobileMenuOpen ? "translate-x-0" : "translate-x-full"
           )}
         >

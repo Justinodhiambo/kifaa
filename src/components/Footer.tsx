@@ -4,7 +4,7 @@ import { ArrowUpRight } from 'lucide-react';
 
 const Footer: React.FC = () => {
   return (
-    <footer className="bg-secondary/50 pt-16 pb-8">
+    <footer className="bg-secondary/20 pt-16 pb-8">
       <div className="container mx-auto px-6">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-16">
           <div>
@@ -70,7 +70,7 @@ const Footer: React.FC = () => {
           </div>
         </div>
         
-        <div className="pt-8 border-t border-border flex flex-col md:flex-row justify-between items-center">
+        <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center">
           <p className="text-muted-foreground text-sm mb-4 md:mb-0">
             © {new Date().getFullYear()} Kifaa. All rights reserved.
           </p>
