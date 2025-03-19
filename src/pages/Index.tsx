@@ -65,7 +65,7 @@ const Index = () => {
   }, []);
 
   return (
-    <ThemeProvider defaultTheme="dark">
+    <ThemeProvider defaultTheme="light">
       <div className="min-h-screen flex flex-col bg-background text-foreground font-sf">
         <Navbar />
         <main className="flex-1">

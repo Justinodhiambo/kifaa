@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { MenuIcon, X, ChevronRight } from "lucide-react";
+import { useTheme } from './ThemeProvider';
 
 interface NavLinkProps {
   href: string;
@@ -52,7 +53,7 @@ const Navbar: React.FC = () => {
       className={cn(
         "fixed top-0 left-0 right-0 z-50 transition-all duration-300 ease-in-out",
         isScrolled ? 
-          "py-3 backdrop-blur-xl bg-background/80 border-b border-border/20 shadow-sm" : 
+          "py-3 backdrop-blur-xl bg-white/90 border-b border-gray-200/30 shadow-sm" : 
           "py-5 bg-transparent"
       )}
     >
@@ -65,9 +66,17 @@ const Navbar: React.FC = () => {
             window.scrollTo({ top: 0, behavior: 'smooth' });
           }}
         >
-          <span className="text-2xl font-display font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary-300 to-primary">
-            <span className="text-primary">K</span>ifaa
-          </span>
+          <div className="flex items-center">
+            <div className="h-10 w-10 rounded-lg bg-primary-600 flex items-center justify-center mr-2 shadow-sm">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 2L6 7V16L12 21L18 16V7L12 2Z" fill="white"/>
+                <path d="M12 8V16M8 12H16" stroke="white" strokeWidth="1.5" strokeLinecap="round"/>
+              </svg>
+            </div>
+            <span className="text-2xl font-display font-bold text-gray-900">
+              Kifaa
+            </span>
+          </div>
         </a>
 
         {/* Desktop Navigation */}
@@ -75,8 +84,8 @@ const Navbar: React.FC = () => {
           <NavLink href="#features" onClick={() => scrollToSection('features')}>Features</NavLink>
           <NavLink href="#how-it-works" onClick={() => scrollToSection('how-it-works')}>How It Works</NavLink>
           <NavLink href="#testimonials" onClick={() => scrollToSection('testimonials')}>Testimonials</NavLink>
-          <Button variant="ghost" className="ml-4 text-foreground/80 hover:text-foreground">Sign In</Button>
-          <Button className="bg-primary hover:bg-primary/90">Get Started</Button>
+          <Button variant="ghost" className="ml-4 text-gray-700 hover:text-gray-900">Sign In</Button>
+          <Button className="bg-primary-600 hover:bg-primary-700 text-white shadow-sm">Get Started</Button>
         </nav>
 
         {/* Mobile Menu Button */}
@@ -86,16 +95,16 @@ const Navbar: React.FC = () => {
           aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
         >
           {mobileMenuOpen ? (
-            <X className="h-6 w-6 text-foreground" />
+            <X className="h-6 w-6 text-gray-900" />
           ) : (
-            <MenuIcon className="h-6 w-6 text-foreground" />
+            <MenuIcon className="h-6 w-6 text-gray-900" />
           )}
         </button>
 
         {/* Mobile Navigation */}
         <div 
           className={cn(
-            "fixed inset-0 bg-background/95 backdrop-blur-xl transition-transform duration-300 flex flex-col justify-center items-center md:hidden",
+            "fixed inset-0 bg-white/98 backdrop-blur-xl transition-transform duration-300 flex flex-col justify-center items-center md:hidden",
             mobileMenuOpen ? "translate-x-0" : "translate-x-full"
           )}
         >
@@ -133,14 +142,14 @@ const NavLink: React.FC<NavLinkProps> = ({ href, children, onClick }) => {
   return (
     <a 
       href={href} 
-      className="font-medium text-muted-foreground hover:text-foreground transition-colors duration-200 relative group"
+      className="font-medium text-gray-600 hover:text-gray-900 transition-colors duration-200 relative group"
       onClick={(e) => {
         e.preventDefault();
         if (onClick) onClick();
       }}
     >
       {children}
-      <span className="absolute left-0 bottom-0 h-0.5 w-0 bg-primary transition-all duration-200 group-hover:w-full"></span>
+      <span className="absolute left-0 bottom-0 h-0.5 w-0 bg-primary-600 transition-all duration-200 group-hover:w-full"></span>
     </a>
   );
 };
@@ -149,7 +158,7 @@ const MobileNavLink: React.FC<NavLinkProps> = ({ href, children, onClick }) => {
   return (
     <a 
       href={href} 
-      className="font-medium text-foreground transition-colors duration-200 px-4 py-2 rounded-lg hover:bg-accent flex items-center"
+      className="font-medium text-gray-900 transition-colors duration-200 px-4 py-2 rounded-lg hover:bg-gray-100 flex items-center"
       onClick={(e) => {
         e.preventDefault();
         if (onClick) onClick();
