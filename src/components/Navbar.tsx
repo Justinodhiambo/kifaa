@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
-import { MenuIcon, X, ChevronRight } from "lucide-react";
+import { MenuIcon, X, ChevronRight, Hexagon, Zap } from "lucide-react";
 import { useTheme } from './ThemeProvider';
 
 interface NavLinkProps {
@@ -14,6 +14,7 @@ interface NavLinkProps {
 const Navbar: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { theme } = useTheme();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -53,8 +54,10 @@ const Navbar: React.FC = () => {
       className={cn(
         "fixed top-0 left-0 right-0 z-50 transition-all duration-300 ease-in-out",
         isScrolled ? 
-          "py-3 backdrop-blur-xl bg-white/90 border-b border-gray-200/30 shadow-sm" : 
-          "py-5 bg-transparent"
+          theme === "dark" ? 
+            "py-3 backdrop-blur-xl bg-gray-900/90 border-b border-gray-800/30 shadow-sm" : 
+            "py-3 backdrop-blur-xl bg-white/90 border-b border-gray-200/30 shadow-sm"
+          : "py-5 bg-transparent"
       )}
     >
       <div className="container max-w-7xl mx-auto px-6 flex items-center justify-between">
@@ -67,13 +70,17 @@ const Navbar: React.FC = () => {
           }}
         >
           <div className="flex items-center">
-            <div className="h-10 w-10 rounded-lg bg-primary-600 flex items-center justify-center mr-2 shadow-sm">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M12 2L6 7V16L12 21L18 16V7L12 2Z" fill="white"/>
-                <path d="M12 8V16M8 12H16" stroke="white" strokeWidth="1.5" strokeLinecap="round"/>
-              </svg>
+            <div className="h-11 w-11 rounded-xl bg-primary flex items-center justify-center mr-2 shadow-md relative overflow-hidden">
+              <div className="absolute inset-0 bg-gradient-to-br from-blue-500 to-primary opacity-80"></div>
+              <div className="relative z-10 flex items-center justify-center">
+                <Hexagon className="h-6 w-6 text-white" strokeWidth={1.5} />
+                <Zap className="h-4 w-4 text-white absolute" strokeWidth={2.5} />
+              </div>
             </div>
-            <span className="text-2xl font-display font-bold text-gray-900">
+            <span className={cn(
+              "text-2xl font-display font-bold",
+              theme === "dark" ? "text-white" : "text-gray-900"
+            )}>
               Kifaa
             </span>
           </div>
@@ -84,8 +91,11 @@ const Navbar: React.FC = () => {
           <NavLink href="#features" onClick={() => scrollToSection('features')}>Features</NavLink>
           <NavLink href="#how-it-works" onClick={() => scrollToSection('how-it-works')}>How It Works</NavLink>
           <NavLink href="#testimonials" onClick={() => scrollToSection('testimonials')}>Testimonials</NavLink>
-          <Button variant="ghost" className="ml-4 text-gray-700 hover:text-gray-900">Sign In</Button>
-          <Button className="bg-primary-600 hover:bg-primary-700 text-white shadow-sm">Get Started</Button>
+          <Button variant="ghost" className={cn(
+            "ml-4",
+            theme === "dark" ? "text-gray-300 hover:text-white" : "text-gray-700 hover:text-gray-900"
+          )}>Sign In</Button>
+          <Button className="bg-primary hover:bg-primary/90 text-white shadow-md">Get Started</Button>
         </nav>
 
         {/* Mobile Menu Button */}
@@ -95,16 +105,17 @@ const Navbar: React.FC = () => {
           aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
         >
           {mobileMenuOpen ? (
-            <X className="h-6 w-6 text-gray-900" />
+            <X className={cn("h-6 w-6", theme === "dark" ? "text-white" : "text-gray-900")} />
           ) : (
-            <MenuIcon className="h-6 w-6 text-gray-900" />
+            <MenuIcon className={cn("h-6 w-6", theme === "dark" ? "text-white" : "text-gray-900")} />
           )}
         </button>
 
         {/* Mobile Navigation */}
         <div 
           className={cn(
-            "fixed inset-0 bg-white/98 backdrop-blur-xl transition-transform duration-300 flex flex-col justify-center items-center md:hidden",
+            "fixed inset-0 backdrop-blur-xl transition-transform duration-300 flex flex-col justify-center items-center md:hidden",
+            theme === "dark" ? "bg-gray-900/98" : "bg-white/98",
             mobileMenuOpen ? "translate-x-0" : "translate-x-full"
           )}
         >
@@ -139,26 +150,38 @@ const Navbar: React.FC = () => {
 };
 
 const NavLink: React.FC<NavLinkProps> = ({ href, children, onClick }) => {
+  const { theme } = useTheme();
+  
   return (
     <a 
       href={href} 
-      className="font-medium text-gray-600 hover:text-gray-900 transition-colors duration-200 relative group"
+      className={cn(
+        "font-medium transition-colors duration-200 relative group",
+        theme === "dark" ? "text-gray-400 hover:text-white" : "text-gray-600 hover:text-gray-900"
+      )}
       onClick={(e) => {
         e.preventDefault();
         if (onClick) onClick();
       }}
     >
       {children}
-      <span className="absolute left-0 bottom-0 h-0.5 w-0 bg-primary-600 transition-all duration-200 group-hover:w-full"></span>
+      <span className="absolute left-0 bottom-0 h-0.5 w-0 bg-primary transition-all duration-200 group-hover:w-full"></span>
     </a>
   );
 };
 
 const MobileNavLink: React.FC<NavLinkProps> = ({ href, children, onClick }) => {
+  const { theme } = useTheme();
+  
   return (
     <a 
       href={href} 
-      className="font-medium text-gray-900 transition-colors duration-200 px-4 py-2 rounded-lg hover:bg-gray-100 flex items-center"
+      className={cn(
+        "font-medium transition-colors duration-200 px-4 py-2 rounded-lg flex items-center",
+        theme === "dark" ? 
+          "text-gray-300 hover:bg-gray-800/70" : 
+          "text-gray-900 hover:bg-gray-100"
+      )}
       onClick={(e) => {
         e.preventDefault();
         if (onClick) onClick();

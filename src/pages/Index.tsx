@@ -65,8 +65,8 @@ const Index = () => {
   }, []);
 
   return (
-    <ThemeProvider defaultTheme="light">
-      <div className="min-h-screen flex flex-col bg-background text-foreground font-sf">
+    <ThemeProvider defaultTheme="dark">
+      <div className="min-h-screen flex flex-col bg-background text-foreground font-sf dark:bg-gray-950">
         <Navbar />
         <main className="flex-1">
           <Hero />
