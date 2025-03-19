@@ -1,7 +1,8 @@
 
 import React, { useState, useEffect } from 'react';
 import { cn } from "@/lib/utils";
-import { MenuIcon, X } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { MenuIcon, X, ChevronRight } from "lucide-react";
 
 interface NavLinkProps {
   href: string;
@@ -51,11 +52,11 @@ const Navbar: React.FC = () => {
       className={cn(
         "fixed top-0 left-0 right-0 z-50 transition-all duration-300 ease-in-out",
         isScrolled ? 
-          "py-3 backdrop-blur-xl bg-black/70 shadow-[0_4px_12px_-2px_rgba(0,0,0,0.3)]" : 
+          "py-3 backdrop-blur-xl bg-background/80 border-b border-border/20 shadow-sm" : 
           "py-5 bg-transparent"
       )}
     >
-      <div className="container mx-auto px-6 flex items-center justify-between">
+      <div className="container max-w-7xl mx-auto px-6 flex items-center justify-between">
         <a 
           href="#" 
           className="flex items-center z-10"
@@ -64,8 +65,8 @@ const Navbar: React.FC = () => {
             window.scrollTo({ top: 0, behavior: 'smooth' });
           }}
         >
-          <span className="text-2xl font-display font-bold text-foreground">
-            <span className="text-kifaa">K</span>ifaa
+          <span className="text-2xl font-display font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary-300 to-primary">
+            <span className="text-primary">K</span>ifaa
           </span>
         </a>
 
@@ -74,8 +75,8 @@ const Navbar: React.FC = () => {
           <NavLink href="#features" onClick={() => scrollToSection('features')}>Features</NavLink>
           <NavLink href="#how-it-works" onClick={() => scrollToSection('how-it-works')}>How It Works</NavLink>
           <NavLink href="#testimonials" onClick={() => scrollToSection('testimonials')}>Testimonials</NavLink>
-          <button className="btn-secondary ml-4">Sign Up</button>
-          <button className="btn-primary">Get Started</button>
+          <Button variant="ghost" className="ml-4 text-foreground/80 hover:text-foreground">Sign In</Button>
+          <Button className="bg-primary hover:bg-primary/90">Get Started</Button>
         </nav>
 
         {/* Mobile Menu Button */}
@@ -118,8 +119,8 @@ const Navbar: React.FC = () => {
               Testimonials
             </MobileNavLink>
             <div className="pt-6 flex flex-col space-y-4">
-              <button className="btn-secondary w-48">Sign Up</button>
-              <button className="btn-primary w-48">Get Started</button>
+              <Button variant="outline" className="w-48">Sign In</Button>
+              <Button className="w-48">Get Started</Button>
             </div>
           </nav>
         </div>
@@ -139,7 +140,7 @@ const NavLink: React.FC<NavLinkProps> = ({ href, children, onClick }) => {
       }}
     >
       {children}
-      <span className="absolute left-0 bottom-0 h-0.5 w-0 bg-kifaa transition-all duration-200 group-hover:w-full"></span>
+      <span className="absolute left-0 bottom-0 h-0.5 w-0 bg-primary transition-all duration-200 group-hover:w-full"></span>
     </a>
   );
 };
@@ -148,13 +149,14 @@ const MobileNavLink: React.FC<NavLinkProps> = ({ href, children, onClick }) => {
   return (
     <a 
       href={href} 
-      className="font-medium text-foreground transition-colors duration-200 px-4 py-2 rounded-lg hover:bg-accent"
+      className="font-medium text-foreground transition-colors duration-200 px-4 py-2 rounded-lg hover:bg-accent flex items-center"
       onClick={(e) => {
         e.preventDefault();
         if (onClick) onClick();
       }}
     >
       {children}
+      <ChevronRight className="ml-1 h-4 w-4 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
     </a>
   );
 };

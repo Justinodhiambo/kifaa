@@ -1,6 +1,7 @@
 
 import React from 'react';
 import FadeIn from './FadeIn';
+import { Badge } from "@/components/ui/badge";
 import { 
   UserPlus, 
   BarChart3, 
@@ -27,9 +28,9 @@ const StepCard: React.FC<StepCardProps> = ({
     <FadeIn delay={delay} direction="up" className="relative">
       <div className="glass-card p-6 md:p-8 flex flex-col md:flex-row md:items-start gap-6 hover-lift">
         <div className="flex-shrink-0">
-          <div className="h-16 w-16 rounded-full bg-kifaa-50 text-kifaa-800 flex items-center justify-center text-2xl font-bold relative">
+          <div className="h-16 w-16 rounded-full bg-primary/10 text-primary flex items-center justify-center text-2xl font-bold relative">
             {icon}
-            <span className="absolute -top-2 -right-2 h-6 w-6 rounded-full bg-kifaa text-white flex items-center justify-center text-xs font-bold">
+            <span className="absolute -top-2 -right-2 h-6 w-6 rounded-full bg-primary text-white flex items-center justify-center text-xs font-bold">
               {number}
             </span>
           </div>
@@ -76,10 +77,11 @@ const HowItWorks: React.FC = () => {
   ];
 
   return (
-    <section id="how-it-works" className="section bg-secondary/50">
+    <section id="how-it-works" className="section mesh-gradient">
       <div className="max-w-7xl mx-auto">
         <FadeIn className="text-center mb-16">
-          <h2 className="mb-4">How <span className="text-kifaa">Kifaa</span> Works</h2>
+          <Badge className="mb-4 bg-primary/10 hover:bg-primary/20 text-primary border-primary/20 px-3 py-1.5">Process</Badge>
+          <h2 className="mb-4">How <span className="text-primary">Kifaa</span> Works</h2>
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
             Our simple 4-step process makes accessing financial services easier than ever before.
           </p>
@@ -99,7 +101,7 @@ const HowItWorks: React.FC = () => {
         </div>
 
         <FadeIn className="mt-16 text-center" delay={0.6}>
-          <div className="inline-block bg-kifaa-50 rounded-full px-6 py-3 text-kifaa-800 font-medium">
+          <div className="inline-block rounded-full px-6 py-3 text-primary-300 font-medium bg-primary-900/20 border border-primary-700/30">
             🚀 Join Kifaa Today & Take Control of Your Financial Future!
           </div>
         </FadeIn>

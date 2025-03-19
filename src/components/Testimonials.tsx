@@ -2,7 +2,8 @@
 import React, { useState } from 'react';
 import FadeIn from './FadeIn';
 import { cn } from "@/lib/utils";
-import { ChevronLeft, ChevronRight, Star } from 'lucide-react';
+import { Badge } from "@/components/ui/badge";
+import { ChevronLeft, ChevronRight, Star, Quote } from 'lucide-react';
 
 interface Testimonial {
   quote: string;
@@ -51,6 +52,7 @@ const Testimonials: React.FC = () => {
     <section id="testimonials" className="section relative">
       <div className="max-w-7xl mx-auto">
         <FadeIn className="text-center mb-16">
+          <Badge className="mb-4 bg-primary/10 hover:bg-primary/20 text-primary border-primary/20 px-3 py-1.5">Testimonials</Badge>
           <h2 className="mb-4">What Our Users Say</h2>
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
             Join thousands who have already transformed their financial future with Kifaa.
@@ -58,9 +60,8 @@ const Testimonials: React.FC = () => {
         </FadeIn>
 
         <div className="relative max-w-4xl mx-auto glass-card p-8 md:p-12">
-          <div className="absolute inset-0 pointer-events-none">
-            <div className="absolute -top-6 -left-6 h-12 w-12 rounded-full bg-kifaa-50"></div>
-            <div className="absolute -bottom-6 -right-6 h-12 w-12 rounded-full bg-kifaa-50"></div>
+          <div className="absolute -top-4 left-8 text-primary opacity-30">
+            <Quote size={80} className="rotate-180" />
           </div>
           
           <div className="mb-10 md:mb-8 relative">
@@ -78,7 +79,7 @@ const Testimonials: React.FC = () => {
               >
                 <div className="flex flex-col items-center text-center">
                   <div className="mb-8">
-                    <div className="h-16 w-16 rounded-full bg-kifaa-50 text-kifaa-800 flex items-center justify-center text-xl font-bold">
+                    <div className="h-16 w-16 rounded-full bg-primary/10 text-primary flex items-center justify-center text-xl font-bold">
                       {testimonial.avatar}
                     </div>
                   </div>
@@ -90,14 +91,14 @@ const Testimonials: React.FC = () => {
                         className={cn(
                           "h-5 w-5",
                           i < testimonial.rating 
-                            ? "text-kifaa fill-kifaa" 
-                            : "text-gray-300"
+                            ? "text-primary fill-primary" 
+                            : "text-muted-foreground/30"
                         )}
                       />
                     ))}
                   </div>
                   
-                  <blockquote className="text-xl md:text-2xl font-display italic mb-6">
+                  <blockquote className="text-xl md:text-2xl font-display mb-6 relative z-10">
                     "{testimonial.quote}"
                   </blockquote>
                   
@@ -147,8 +148,8 @@ const Testimonials: React.FC = () => {
                   className={cn(
                     "h-2.5 rounded-full transition-all duration-300",
                     activeIndex === index 
-                      ? "w-8 bg-kifaa" 
-                      : "w-2.5 bg-gray-300"
+                      ? "w-8 bg-primary" 
+                      : "w-2.5 bg-muted-foreground/30"
                   )}
                   aria-label={`Go to testimonial ${index + 1}`}
                 />

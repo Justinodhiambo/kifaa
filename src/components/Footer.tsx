@@ -4,13 +4,13 @@ import { ArrowUpRight } from 'lucide-react';
 
 const Footer: React.FC = () => {
   return (
-    <footer className="bg-secondary/20 pt-16 pb-8">
+    <footer className="bg-secondary pt-16 pb-8">
       <div className="container mx-auto px-6">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-16">
           <div>
             <a href="#" className="inline-block mb-6">
-              <span className="text-2xl font-display font-bold text-foreground">
-                <span className="text-kifaa">K</span>ifaa
+              <span className="text-2xl font-display font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary-300 to-primary">
+                <span className="text-primary">K</span>ifaa
               </span>
             </a>
             <p className="text-muted-foreground mb-6">
@@ -70,7 +70,7 @@ const Footer: React.FC = () => {
           </div>
         </div>
         
-        <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center">
+        <div className="pt-8 border-t border-accent/30 flex flex-col md:flex-row justify-between items-center">
           <p className="text-muted-foreground text-sm mb-4 md:mb-0">
             © {new Date().getFullYear()} Kifaa. All rights reserved.
           </p>
@@ -102,7 +102,7 @@ const SocialLink: React.FC<SocialLinkProps> = ({ href, label, children }) => {
     <a
       href={href}
       aria-label={label}
-      className="h-10 w-10 rounded-full bg-foreground/5 flex items-center justify-center text-muted-foreground hover:bg-foreground/10 hover:text-foreground transition-colors"
+      className="h-10 w-10 rounded-full bg-accent/50 flex items-center justify-center text-muted-foreground hover:bg-accent hover:text-foreground transition-colors"
     >
       {children}
     </a>

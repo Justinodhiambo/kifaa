@@ -27,7 +27,17 @@ export default {
 				foreground: 'hsl(var(--foreground))',
 				primary: {
 					DEFAULT: 'hsl(var(--primary))',
-					foreground: 'hsl(var(--primary-foreground))'
+					foreground: 'hsl(var(--primary-foreground))',
+                    50: '#e6f1ff',
+                    100: '#cce3ff',
+                    200: '#99c7ff',
+                    300: '#66aaff',
+                    400: '#338eff',
+                    500: '#0072ff',
+                    600: '#005bcc',
+                    700: '#004399',
+                    800: '#002c66',
+                    900: '#001633'
 				},
 				secondary: {
 					DEFAULT: 'hsl(var(--secondary))',
@@ -64,19 +74,19 @@ export default {
 					ring: 'hsl(var(--sidebar-ring))'
 				},
 				kifaa: {
-					DEFAULT: '#1a73e8',
-					dark: '#1557b0',
-					light: '#4285f4',
-					50: '#e8f0fe',
-					100: '#c1d9fa',
-					200: '#95bef8',
-					300: '#6aa6f5',
-					400: '#4990f2',
-					500: '#3c83e8',
-					600: '#3676d9',
-					700: '#2e66c3',
-					800: '#2656ad',
-					900: '#1e4897'
+					DEFAULT: '#0072ff',
+					dark: '#0057c2',
+					light: '#3390ff',
+					50: '#e6f1ff',
+					100: '#cce3ff',
+					200: '#99c7ff',
+					300: '#66aaff',
+					400: '#338eff',
+					500: '#0072ff',
+					600: '#005bcc',
+					700: '#004399',
+					800: '#002c66',
+					900: '#001633'
 				}
 			},
 			fontFamily: {

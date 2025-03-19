@@ -1,12 +1,15 @@
 
 import React from 'react';
 import FadeIn from './FadeIn';
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import { 
   Brain, 
   Wallet, 
   CreditCard, 
   Layers, 
-  Smartphone 
+  Smartphone,
+  ArrowRight 
 } from 'lucide-react';
 
 interface FeatureCardProps {
@@ -25,7 +28,7 @@ const FeatureCard: React.FC<FeatureCardProps> = ({
   return (
     <FadeIn delay={delay} className="hover-lift">
       <div className="glass-card p-6 md:p-8 h-full flex flex-col">
-        <div className="h-12 w-12 bg-kifaa-50 rounded-xl flex items-center justify-center text-kifaa-800 mb-6">
+        <div className="h-12 w-12 bg-primary/10 rounded-xl flex items-center justify-center text-primary mb-6">
           {icon}
         </div>
         <h3 className="text-xl font-semibold mb-3">{title}</h3>
@@ -73,7 +76,8 @@ const Features: React.FC = () => {
     <section id="features" className="section relative">
       <div className="max-w-7xl mx-auto">
         <FadeIn className="text-center mb-16">
-          <h2 className="mb-4">Why Choose <span className="text-kifaa">Kifaa</span>?</h2>
+          <Badge className="mb-4 bg-primary/10 hover:bg-primary/20 text-primary border-primary/20 px-3 py-1.5">Features</Badge>
+          <h2 className="mb-4">Why Choose <span className="text-primary">Kifaa</span>?</h2>
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
             Our platform combines cutting-edge AI with seamless financial tools to give you unprecedented access to affordable financing.
           </p>
@@ -91,24 +95,29 @@ const Features: React.FC = () => {
           ))}
         </div>
 
-        <FadeIn className="mt-16 text-center" delay={0.7}>
+        <FadeIn className="mt-16" delay={0.7}>
           <div className="glass-card p-8 md:p-10 max-w-3xl mx-auto">
-            <h3 className="text-2xl font-semibold mb-4">Who is Kifaa for?</h3>
+            <h3 className="text-2xl font-semibold mb-4 text-center">Who is Kifaa for?</h3>
             <ul className="text-left space-y-4 mb-6">
               <li className="flex items-start">
-                <span className="h-6 w-6 rounded-full bg-kifaa-50 text-kifaa flex items-center justify-center mr-3 mt-0.5 flex-shrink-0">✓</span>
+                <span className="h-6 w-6 rounded-full bg-primary/10 text-primary flex items-center justify-center mr-3 mt-0.5 flex-shrink-0">✓</span>
                 <span>Individuals seeking affordable financing for vehicles, electronics, and business tools.</span>
               </li>
               <li className="flex items-start">
-                <span className="h-6 w-6 rounded-full bg-kifaa-50 text-kifaa flex items-center justify-center mr-3 mt-0.5 flex-shrink-0">✓</span>
+                <span className="h-6 w-6 rounded-full bg-primary/10 text-primary flex items-center justify-center mr-3 mt-0.5 flex-shrink-0">✓</span>
                 <span>Small businesses & entrepreneurs looking for growth capital and streamlined transactions.</span>
               </li>
               <li className="flex items-start">
-                <span className="h-6 w-6 rounded-full bg-kifaa-50 text-kifaa flex items-center justify-center mr-3 mt-0.5 flex-shrink-0">✓</span>
+                <span className="h-6 w-6 rounded-full bg-primary/10 text-primary flex items-center justify-center mr-3 mt-0.5 flex-shrink-0">✓</span>
                 <span>Enterprises requiring intelligent credit risk assessment for financial decision-making.</span>
               </li>
             </ul>
-            <button className="btn-primary">Join Kifaa Today</button>
+            <div className="flex justify-center">
+              <Button className="group">
+                Join Kifaa Today
+                <ArrowRight className="ml-2 h-4 w-4 inline group-hover:translate-x-1 transition-transform" />
+              </Button>
+            </div>
           </div>
         </FadeIn>
       </div>
