@@ -53,10 +53,14 @@ const Index = () => {
     
     handleHashLinkOnLoad();
 
+    // Apply Apple-like smooth scrolling to the entire page
+    document.documentElement.style.scrollBehavior = 'smooth';
+
     return () => {
       revealElements.forEach((element) => {
         observer.unobserve(element);
       });
+      document.documentElement.style.scrollBehavior = '';
     };
   }, []);
 
