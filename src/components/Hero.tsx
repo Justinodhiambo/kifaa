@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import FadeIn from './FadeIn';
 import AnimatedGradient from './AnimatedGradient';
@@ -9,9 +8,9 @@ import { useIsMobile } from '@/hooks/use-mobile';
 import { cn } from '@/lib/utils';
 
 const transactions = [
-  { icon: <CreditCard className="h-5 w-5 text-white" />, title: "Netflix Subscription", time: "2 hours ago", amount: "-$15.99", color: "bg-red-500" },
-  { icon: <Shield className="h-5 w-5 text-white" />, title: "Insurance Payment", time: "Yesterday", amount: "-$85.40", color: "bg-green-500" },
-  { icon: <LineChart className="h-5 w-5 text-white" />, title: "Investment Return", time: "Jan 12", amount: "+$250.00", color: "bg-blue-500" }
+  { icon: <CreditCard className="h-5 w-5 text-white" />, title: "Netflix Subscription", time: "2 hours ago", amount: "-1,599", color: "bg-red-500" },
+  { icon: <Shield className="h-5 w-5 text-white" />, title: "Insurance Payment", time: "Yesterday", amount: "-8,540", color: "bg-green-500" },
+  { icon: <LineChart className="h-5 w-5 text-white" />, title: "Investment Return", time: "Jan 12", amount: "+25,000", color: "bg-blue-500" }
 ];
 
 const Hero: React.FC = () => {
@@ -19,7 +18,7 @@ const Hero: React.FC = () => {
   const isDark = theme === "dark";
   const isMobile = useIsMobile();
   const [activeTransaction, setActiveTransaction] = useState(0);
-  const [balance, setBalance] = useState(12580.00);
+  const [balance, setBalance] = useState(125800.00);
 
   // Simulate interactive transactions
   useEffect(() => {
@@ -28,7 +27,7 @@ const Hero: React.FC = () => {
       
       // Randomly adjust balance slightly to create a "live" effect
       setBalance(prev => {
-        const adjustment = Math.random() * 10 - 5; // Random adjustment between -5 and +5
+        const adjustment = Math.random() * 1000 - 500; // Random adjustment between -500 and +500
         return Math.round((prev + adjustment) * 100) / 100;
       });
     }, 3000);
@@ -36,12 +35,13 @@ const Hero: React.FC = () => {
     return () => clearInterval(interval);
   }, []);
 
-  // Format currency
+  // Format currency in KSH
   const formatCurrency = (amount: number) => {
-    return new Intl.NumberFormat('en-US', {
+    return new Intl.NumberFormat('en-KE', {
       style: 'currency',
-      currency: 'USD',
-      minimumFractionDigits: 2
+      currency: 'KES',
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 0
     }).format(amount);
   };
 
@@ -153,7 +153,7 @@ const Hero: React.FC = () => {
                           <div>
                             <div className="text-xs text-white/80">Available Balance</div>
                             <div className="text-2xl font-bold text-white mt-1">{formatCurrency(balance)}</div>
-                            <div className="text-xs text-white/70 mt-1">+$2,456.00 this month</div>
+                            <div className="text-xs text-white/70 mt-1">+KSh 245,600 this month</div>
                           </div>
                           <div className="flex space-x-1">
                             <div className="px-3 py-1.5 rounded-full bg-white/20 text-white text-[10px] font-medium backdrop-blur-sm">Send</div>
@@ -186,7 +186,7 @@ const Hero: React.FC = () => {
                                 <div className="text-[10px] text-gray-500">{item.time}</div>
                               </div>
                             </div>
-                            <div className={`text-xs font-medium ${item.amount.startsWith('+') ? 'text-green-600' : 'text-gray-800'}`}>{item.amount}</div>
+                            <div className={`text-xs font-medium ${item.amount.startsWith('+') ? 'text-green-600' : 'text-gray-800'}`}>KSh {item.amount}</div>
                           </div>
                         ))}
                         
@@ -202,7 +202,7 @@ const Hero: React.FC = () => {
                                 <div className="text-[10px] text-gray-500">Due in 3 days</div>
                               </div>
                             </div>
-                            <div className="text-xs font-medium text-gray-800">$45.00</div>
+                            <div className="text-xs font-medium text-gray-800">KSh 4,500</div>
                           </div>
                         </div>
                       </div>
