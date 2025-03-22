@@ -8,10 +8,40 @@ import { ArrowRight, CheckCircle, Smartphone, Shield, LineChart, CreditCard, Hex
 import { useIsMobile } from '@/hooks/use-mobile';
 import { cn } from '@/lib/utils';
 
+// Updated transactions to align with Kifaa's business model
 const transactions = [
-  { icon: <CreditCard className="h-5 w-5 text-white" />, title: "Netflix Subscription", time: "2 hours ago", amount: "-1,599", color: "bg-red-500" },
-  { icon: <Shield className="h-5 w-5 text-white" />, title: "Insurance Payment", time: "Yesterday", amount: "-8,540", color: "bg-green-500" },
-  { icon: <LineChart className="h-5 w-5 text-white" />, title: "Investment Return", time: "Jan 12", amount: "+25,000", color: "bg-blue-500" }
+  { 
+    icon: <CreditCard className="h-5 w-5 text-white" />, 
+    title: "Smartphone Financing", 
+    time: "2 hours ago", 
+    amount: "-18,000", 
+    color: "bg-green-500",
+    isPositive: false
+  },
+  { 
+    icon: <Shield className="h-5 w-5 text-white" />, 
+    title: "Motorbike Repayment #2", 
+    time: "Yesterday", 
+    amount: "-3,500", 
+    color: "bg-blue-500",
+    isPositive: false
+  },
+  { 
+    icon: <LineChart className="h-5 w-5 text-white" />, 
+    title: "M-Pesa Top-up", 
+    time: "Jan 12", 
+    amount: "+5,000", 
+    color: "bg-purple-500",
+    isPositive: true
+  },
+  { 
+    icon: <Smartphone className="h-5 w-5 text-white" />, 
+    title: "Referral Reward", 
+    time: "Jan 10", 
+    amount: "+300", 
+    color: "bg-amber-500",
+    isPositive: true
+  },
 ];
 
 const Hero: React.FC = () => {
@@ -154,7 +184,7 @@ const Hero: React.FC = () => {
                           <div>
                             <div className="text-xs text-white/80">Available Balance</div>
                             <div className="text-2xl font-bold text-white mt-1">{formatCurrency(balance)}</div>
-                            <div className="text-xs text-white/70 mt-1">+KSh 245,600 this month</div>
+                            <div className="text-xs text-white/70 mt-1">+KES 245,600 this month</div>
                           </div>
                           <div className="flex space-x-1">
                             <div className="px-3 py-1.5 rounded-full bg-white/20 text-white text-[10px] font-medium backdrop-blur-sm">Send</div>
@@ -187,7 +217,9 @@ const Hero: React.FC = () => {
                                 <div className="text-[10px] text-gray-500">{item.time}</div>
                               </div>
                             </div>
-                            <div className={`text-xs font-medium ${item.amount.startsWith('+') ? 'text-green-600' : 'text-gray-800'}`}>KSh {item.amount}</div>
+                            <div className={`text-xs font-medium ${item.isPositive ? 'text-green-600' : 'text-gray-800'}`}>
+                              {item.isPositive ? '+' : ''}KES {item.amount}
+                            </div>
                           </div>
                         ))}
                         
@@ -199,11 +231,11 @@ const Hero: React.FC = () => {
                                 <Smartphone className="h-4 w-4 text-white" />
                               </div>
                               <div>
-                                <div className="text-xs font-medium text-gray-800">Phone Bill</div>
+                                <div className="text-xs font-medium text-gray-800">Laptop Financing</div>
                                 <div className="text-[10px] text-gray-500">Due in 3 days</div>
                               </div>
                             </div>
-                            <div className="text-xs font-medium text-gray-800">KSh 4,500</div>
+                            <div className="text-xs font-medium text-gray-800">KES 4,500</div>
                           </div>
                         </div>
                       </div>

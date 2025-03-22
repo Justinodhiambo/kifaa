@@ -90,11 +90,17 @@ const Features: React.FC = () => {
   ];
 
   return (
-    <section id="features" className="section relative">
+    <section id="features" className={cn(
+      "section relative",
+      isDark ? "bg-gray-950" : "bg-white"
+    )}>
       <div className="max-w-7xl mx-auto">
         <FadeIn className="text-center mb-16">
           <Badge className="mb-4 bg-primary/10 hover:bg-primary/20 text-primary border-primary/20 px-3 py-1.5">Features</Badge>
-          <h2 className="mb-4">Why Choose <span className="text-primary">Kifaa</span>?</h2>
+          <h2 className={cn(
+            "mb-4",
+            isDark ? "text-white" : "text-gray-900"
+          )}>Why Choose <span className="text-primary">Kifaa</span>?</h2>
           <p className={cn(
             "text-lg max-w-2xl mx-auto",
             isDark ? "text-gray-300" : "text-muted-foreground"

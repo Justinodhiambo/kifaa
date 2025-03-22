@@ -9,6 +9,8 @@ import {
   Wallet, 
   TrendingUp 
 } from 'lucide-react';
+import { useTheme } from './ThemeProvider';
+import { cn } from '@/lib/utils';
 
 interface StepCardProps {
   number: number;
@@ -25,9 +27,15 @@ const StepCard: React.FC<StepCardProps> = ({
   icon, 
   delay 
 }) => {
+  const { theme } = useTheme();
+  const isDark = theme === "dark";
+  
   return (
     <FadeIn delay={delay} direction="up" className="relative">
-      <div className="glass-card p-6 md:p-8 hover-lift">
+      <div className={cn(
+        "p-6 md:p-8 hover-lift",
+        isDark ? "bg-gray-800 border border-gray-700" : "bg-white border border-gray-100"
+      )}>
         <div className="flex flex-col md:flex-row md:items-start gap-6">
           <div className="flex-shrink-0">
             <div className="h-14 w-14 rounded-2xl bg-primary/10 text-primary flex items-center justify-center text-xl font-medium relative">
@@ -38,8 +46,14 @@ const StepCard: React.FC<StepCardProps> = ({
             </div>
           </div>
           <div>
-            <h3 className="text-xl font-semibold mb-3">{title}</h3>
-            <p className="text-muted-foreground text-sm md:text-base leading-relaxed">{description}</p>
+            <h3 className={cn(
+              "text-xl font-semibold mb-3",
+              isDark ? "text-white" : "text-gray-900"
+            )}>{title}</h3>
+            <p className={cn(
+              "text-muted-foreground text-sm md:text-base leading-relaxed",
+              isDark ? "text-gray-300" : "text-gray-600"
+            )}>{description}</p>
           </div>
         </div>
       </div>
@@ -48,6 +62,9 @@ const StepCard: React.FC<StepCardProps> = ({
 };
 
 const HowItWorks: React.FC = () => {
+  const { theme } = useTheme();
+  const isDark = theme === "dark";
+  
   const steps = [
     {
       number: 1,
@@ -80,20 +97,32 @@ const HowItWorks: React.FC = () => {
   ];
 
   return (
-    <section id="how-it-works" className="section relative">
+    <section id="how-it-works" className={cn(
+      "section relative",
+      isDark ? "bg-gray-950" : "bg-gray-50"
+    )}>
       <div className="max-w-7xl mx-auto">
         <FadeIn className="text-center mb-16">
           <Badge className="mb-4 bg-primary/10 hover:bg-primary/20 text-primary border-primary/20 px-3 py-1.5">Process</Badge>
-          <h2 className="mb-4 text-4xl md:text-5xl font-semibold tracking-tight">
+          <h2 className={cn(
+            "mb-4 text-4xl md:text-5xl font-semibold tracking-tight",
+            isDark ? "text-white" : "text-gray-900"
+          )}>
             How <span className="text-primary">Kifaa</span> Works
           </h2>
-          <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+          <p className={cn(
+            "text-lg max-w-2xl mx-auto",
+            isDark ? "text-gray-300" : "text-muted-foreground"
+          )}>
             Our simple 4-step process makes accessing financial services easier than ever before.
           </p>
         </FadeIn>
 
         <div className="relative max-w-4xl mx-auto">
-          <div className="absolute top-0 bottom-0 left-[27px] md:left-[31px] w-0.5 bg-primary/10"></div>
+          <div className={cn(
+            "absolute top-0 bottom-0 left-[27px] md:left-[31px] w-0.5",
+            isDark ? "bg-primary/20" : "bg-primary/10"
+          )}></div>
           
           <div className="space-y-8 md:space-y-12 relative">
             {steps.map((step, index) => (
@@ -110,7 +139,10 @@ const HowItWorks: React.FC = () => {
                   <div className="mt-4 pl-[54px] md:pl-[62px]">
                     <Progress 
                       value={step.number === 4 ? 100 : (step.number / 4) * 100} 
-                      className="h-1.5 bg-primary/10" 
+                      className={cn(
+                        "h-1.5",
+                        isDark ? "bg-gray-700" : "bg-primary/10"
+                      )} 
                     />
                   </div>
                 </FadeIn>
