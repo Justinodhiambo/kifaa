@@ -7,7 +7,9 @@ import {
   UserPlus, 
   BarChart3, 
   Wallet, 
-  TrendingUp 
+  TrendingUp,
+  Database,
+  Globe 
 } from 'lucide-react';
 import { useTheme } from './ThemeProvider';
 import { cn } from '@/lib/utils';
@@ -33,14 +35,20 @@ const StepCard: React.FC<StepCardProps> = ({
   return (
     <FadeIn delay={delay} direction="up" className="relative">
       <div className={cn(
-        "p-6 md:p-8 hover-lift",
+        "p-6 md:p-8 hover-lift rounded-xl shadow-sm",
         isDark ? "bg-gray-800 border border-gray-700" : "bg-white border border-gray-100"
       )}>
         <div className="flex flex-col md:flex-row md:items-start gap-6">
           <div className="flex-shrink-0">
-            <div className="h-14 w-14 rounded-2xl bg-primary/10 text-primary flex items-center justify-center text-xl font-medium relative">
+            <div className={cn(
+              "h-14 w-14 rounded-2xl text-primary flex items-center justify-center text-xl font-medium relative",
+              isDark ? "bg-primary-900/30 text-primary-400" : "bg-primary/10"
+            )}>
               {icon}
-              <div className="absolute -top-2 -right-2 h-6 w-6 rounded-full bg-primary text-background flex items-center justify-center text-xs font-medium">
+              <div className={cn(
+                "absolute -top-2 -right-2 h-6 w-6 rounded-full flex items-center justify-center text-xs font-medium",
+                isDark ? "bg-primary-600 text-white" : "bg-primary text-background"
+              )}>
                 {number}
               </div>
             </div>
@@ -51,8 +59,8 @@ const StepCard: React.FC<StepCardProps> = ({
               isDark ? "text-white" : "text-gray-900"
             )}>{title}</h3>
             <p className={cn(
-              "text-muted-foreground text-sm md:text-base leading-relaxed",
-              isDark ? "text-gray-300" : "text-gray-600"
+              "text-sm md:text-base leading-relaxed",
+              isDark ? "text-gray-300" : "text-muted-foreground"
             )}>{description}</p>
           </div>
         </div>
@@ -76,30 +84,44 @@ const HowItWorks: React.FC = () => {
     {
       number: 2,
       title: "Get Assessed",
-      description: "Our AI analyzes your financial data to provide you with a personalized financing tier, taking into account your spending patterns and financial health.",
+      description: "Our AI analyzes your financial data to provide a personalized risk profile, which our banking partners use to offer you appropriate financing options.",
       icon: <BarChart3 className="h-6 w-6" />,
       delay: 0.3
     },
     {
       number: 3,
       title: "Access Financing",
-      description: "Instantly receive funding options based on your eligibility. Choose the financing plan that works best for your needs and get approved quickly.",
+      description: "Our partner financial institutions provide funding options based on your Kifaa score. Choose the plan that works best for your needs.",
       icon: <Wallet className="h-6 w-6" />,
       delay: 0.4
     },
     {
       number: 4,
       title: "Repay & Grow",
-      description: "Build your financial profile and unlock even better financing terms over time. Timely repayments improve your Kifaa score for future financing.",
+      description: "Build your financial profile and unlock even better financing terms over time. Timely repayments improve your Kifaa score for future opportunities.",
       icon: <TrendingUp className="h-6 w-6" />,
       delay: 0.5
+    },
+    {
+      number: 5,
+      title: "Secure Data Management",
+      description: "Your financial data is securely stored and processed using advanced encryption, ensuring privacy while powering our AI risk assessment.",
+      icon: <Database className="h-6 w-6" />,
+      delay: 0.6
+    },
+    {
+      number: 6,
+      title: "Cross-Border Transactions",
+      description: "Access seamless international payments through our blockchain infrastructure, enabling global business opportunities with minimal fees.",
+      icon: <Globe className="h-6 w-6" />,
+      delay: 0.7
     }
   ];
 
   return (
     <section id="how-it-works" className={cn(
-      "section relative",
-      isDark ? "bg-gray-950" : "bg-gray-50"
+      "section relative py-20 px-6",
+      isDark ? "bg-gray-900" : "bg-white"
     )}>
       <div className="max-w-7xl mx-auto">
         <FadeIn className="text-center mb-16">
@@ -114,17 +136,17 @@ const HowItWorks: React.FC = () => {
             "text-lg max-w-2xl mx-auto",
             isDark ? "text-gray-300" : "text-muted-foreground"
           )}>
-            Our simple 4-step process makes accessing financial services easier than ever before.
+            Our simple process makes accessing financial services easier than ever before.
           </p>
         </FadeIn>
 
-        <div className="relative max-w-4xl mx-auto">
+        <div className="relative max-w-5xl mx-auto">
           <div className={cn(
             "absolute top-0 bottom-0 left-[27px] md:left-[31px] w-0.5",
-            isDark ? "bg-primary/20" : "bg-primary/10"
+            isDark ? "bg-primary-700/30" : "bg-primary/10"
           )}></div>
           
-          <div className="space-y-8 md:space-y-12 relative">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 relative">
             {steps.map((step, index) => (
               <div key={step.number} className="relative">
                 <StepCard
@@ -138,7 +160,7 @@ const HowItWorks: React.FC = () => {
                 <FadeIn delay={step.delay + 0.1}>
                   <div className="mt-4 pl-[54px] md:pl-[62px]">
                     <Progress 
-                      value={step.number === 4 ? 100 : (step.number / 4) * 100} 
+                      value={step.number === 6 ? 100 : (step.number / 6) * 100} 
                       className={cn(
                         "h-1.5",
                         isDark ? "bg-gray-700" : "bg-primary/10"
@@ -151,13 +173,18 @@ const HowItWorks: React.FC = () => {
           </div>
         </div>
 
-        <FadeIn className="mt-20 text-center" delay={0.6}>
-          <div className="inline-block rounded-xl px-8 py-6 text-white font-medium bg-gradient-to-r from-primary-900 to-primary-800 border border-primary-700/30 hover-lift">
+        <FadeIn className="mt-20 text-center" delay={0.8}>
+          <div className={cn(
+            "inline-block rounded-xl px-8 py-6 font-medium border hover-lift",
+            isDark 
+              ? "bg-gradient-to-r from-primary-900 to-primary-800 border-primary-700/30 text-white" 
+              : "bg-gradient-to-r from-primary-600 to-primary-500 border-primary-400/30 text-white"
+          )}>
             <div className="flex items-center gap-3">
               <span className="h-10 w-10 rounded-full bg-white/10 flex items-center justify-center">
                 <Wallet className="h-5 w-5" />
               </span>
-              <span className="text-lg">Join Kifaa Today & Take Control of Your Financial Future!</span>
+              <span className="text-lg">Join Kifaa Today & Access Smarter Financing!</span>
             </div>
           </div>
         </FadeIn>
