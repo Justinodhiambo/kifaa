@@ -144,131 +144,200 @@ const Hero: React.FC = () => {
         
         <FadeIn className="mt-16 md:mt-20 max-w-6xl mx-auto" delay={0.9} duration={0.8}>
           <div className="relative grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
-            {/* Device Mockup with more modern fintech styling */}
+            {/* Modern Dashboard UI instead of phone */}
             <div className="relative z-10 lg:order-last mx-auto">
-              <div className="relative transform scale-[0.85] md:scale-95">
-                {/* Phone Frame - more modern and sleek */}
+              <div className="relative transform scale-[0.8] sm:scale-[0.85] md:scale-90 lg:scale-100">
+                {/* Browser/Dashboard Frame */}
                 <div className={cn(
-                  "relative mx-auto w-[280px] h-[580px] rounded-[40px] shadow-apple overflow-hidden border-[10px]",
-                  isDark ? "bg-gray-900 border-gray-800" : "bg-gray-950 border-gray-900"
+                  "relative mx-auto w-[360px] sm:w-[500px] rounded-xl shadow-apple overflow-hidden border-8",
+                  isDark ? "bg-gray-900 border-gray-800" : "bg-white border-gray-100"
                 )}>
-                  {/* Notch */}
-                  <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-[120px] h-6 bg-black z-30 rounded-b-2xl"></div>
-                  
-                  {/* Speaker */}
-                  <div className="absolute top-[8px] left-1/2 transform -translate-x-1/2 w-[40px] h-[4px] bg-gray-700 rounded-full z-30"></div>
-                  
-                  {/* Camera */}
-                  <div className="absolute top-[8px] right-[80px] w-[8px] h-[8px] bg-gray-700 rounded-full z-30 flex items-center justify-center">
-                    <div className="w-[4px] h-[4px] bg-gray-600 rounded-full"></div>
+                  {/* Browser Header */}
+                  <div className={cn(
+                    "h-10 flex items-center px-3 border-b",
+                    isDark ? "bg-gray-800 border-gray-700" : "bg-gray-50 border-gray-200"
+                  )}>
+                    <div className="flex space-x-2">
+                      <div className="w-3 h-3 rounded-full bg-red-500"></div>
+                      <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
+                      <div className="w-3 h-3 rounded-full bg-green-500"></div>
+                    </div>
+                    <div className={cn(
+                      "mx-auto text-xs px-4 py-1 rounded-full",
+                      isDark ? "bg-gray-700 text-gray-300" : "bg-gray-100 text-gray-600"
+                    )}>
+                      app.kifaa.finance
+                    </div>
                   </div>
                   
-                  {/* Phone Screen */}
-                  <div className="h-full w-full overflow-hidden rounded-[30px] relative bg-white">
-                    {/* App UI - more modern, stripe/wise inspired UI */}
-                    <div className="absolute inset-0 bg-gradient-to-b from-gray-50 to-white">
-                      {/* App Header */}
-                      <div className="h-16 flex items-center justify-between px-4 bg-gradient-to-r from-primary-600 to-primary-500">
-                        <div className="flex items-center">
-                          <div className="h-9 w-9 rounded-xl bg-white flex items-center justify-center mr-2 relative overflow-hidden">
-                            <div className="absolute inset-0 bg-gradient-to-br from-blue-500 to-primary opacity-20"></div>
-                            <div className="relative z-10 flex items-center justify-center">
-                              <Hexagon className="h-5 w-5 text-primary" strokeWidth={1.5} />
-                              <Zap className="h-3 w-3 text-primary absolute" strokeWidth={2.5} />
-                            </div>
+                  {/* Dashboard UI */}
+                  <div className={cn(
+                    "p-6 h-[400px] overflow-hidden",
+                    isDark ? "bg-gray-900" : "bg-white"
+                  )}>
+                    {/* Dashboard Header with Logo */}
+                    <div className="flex justify-between items-center mb-6">
+                      <div className="flex items-center">
+                        <div className={cn(
+                          "h-10 w-10 rounded-lg flex items-center justify-center relative mr-3",
+                          isDark ? "bg-primary-900" : "bg-primary-50"
+                        )}>
+                          <div className="relative z-10 flex items-center justify-center">
+                            <Hexagon className={cn(
+                              "h-6 w-6",
+                              isDark ? "text-primary-400" : "text-primary-600"
+                            )} strokeWidth={1.5} />
+                            <Zap className={cn(
+                              "h-3.5 w-3.5 absolute",
+                              isDark ? "text-primary-400" : "text-primary-600"
+                            )} strokeWidth={2} />
                           </div>
-                          <span className="text-white font-semibold text-base">Kifaa</span>
                         </div>
-                        <div className="h-8 w-8 rounded-full bg-white/10 flex items-center justify-center">
-                          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <circle cx="12" cy="12" r="10" stroke="white" strokeWidth="1.5"/>
-                            <path d="M12 8V12L15 15" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                          </svg>
+                        <span className={cn(
+                          "text-xl font-semibold",
+                          isDark ? "text-white" : "text-gray-900"
+                        )}>
+                          Kifaa Dashboard
+                        </span>
+                      </div>
+                      <div className={cn(
+                        "h-8 w-8 rounded-full",
+                        isDark ? "bg-gray-800" : "bg-gray-100"
+                      )}>
+                        <div className="h-full w-full rounded-full flex items-center justify-center">
+                          <img 
+                            src="https://randomuser.me/api/portraits/men/32.jpg" 
+                            alt="User avatar" 
+                            className="h-full w-full object-cover rounded-full"
+                          />
                         </div>
                       </div>
-                      
-                      {/* App Content - cleaner, more modern layout */}
-                      <div className="p-4 space-y-4">
-                        <div 
-                          className="h-36 rounded-xl bg-gradient-to-br from-primary-600 to-primary-500 shadow-lg p-4 flex flex-col justify-between transition-all duration-300 ease-in-out"
-                        >
+                    </div>
+                    
+                    {/* Main Dashboard Content */}
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                      {/* Available Balance Card */}
+                      <div className="md:col-span-2">
+                        <div className={cn(
+                          "h-36 rounded-xl p-4 flex flex-col justify-between shadow-sm",
+                          isDark ? 
+                            "bg-gradient-to-br from-primary-900/80 to-primary-800/50 border border-primary-700/30" : 
+                            "bg-gradient-to-br from-primary-600 to-primary-500"
+                        )}>
                           <div>
                             <div className="text-xs text-white/80 font-medium">Available Balance</div>
                             <div className="text-2xl font-bold text-white mt-1">{formatCurrency(balance)}</div>
                             <div className="text-xs text-white/70 mt-1">+KES 245,600 this month</div>
                           </div>
                           <div className="flex space-x-2">
-                            <div className="px-3 py-1.5 rounded-full bg-white/20 text-white text-[10px] font-medium backdrop-blur-sm">Send</div>
-                            <div className="px-3 py-1.5 rounded-full bg-white/20 text-white text-[10px] font-medium backdrop-blur-sm">Deposit</div>
-                            <div className="px-3 py-1.5 rounded-full bg-white/20 text-white text-[10px] font-medium backdrop-blur-sm">Invest</div>
+                            <div className="px-3 py-1.5 rounded-full bg-white/20 text-white text-xs font-medium backdrop-blur-sm">Send</div>
+                            <div className="px-3 py-1.5 rounded-full bg-white/20 text-white text-xs font-medium backdrop-blur-sm">Top Up</div>
+                            <div className="px-3 py-1.5 rounded-full bg-white/20 text-white text-xs font-medium backdrop-blur-sm">Finance</div>
                           </div>
                         </div>
-                        
-                        <div className="flex justify-between items-center">
-                          <div className="text-xs font-semibold text-gray-800">Recent Activity</div>
-                          <div className="text-[10px] text-primary-600 font-medium">View All</div>
+                      </div>
+                      
+                      {/* Credit Score Card */}
+                      <div>
+                        <div className={cn(
+                          "h-36 rounded-xl p-4 flex flex-col justify-between shadow-sm",
+                          isDark ? "bg-gray-800 border border-gray-700" : "bg-gray-50 border border-gray-200"
+                        )}>
+                          <div>
+                            <div className={cn(
+                              "text-xs font-medium",
+                              isDark ? "text-gray-400" : "text-gray-500"
+                            )}>Kifaa Score</div>
+                            <div className={cn(
+                              "mt-2 text-3xl font-bold",
+                              isDark ? "text-white" : "text-gray-900"
+                            )}>728</div>
+                            <div className={cn(
+                              "text-xs mt-1",
+                              isDark ? "text-green-400" : "text-green-600"
+                            )}>+15 points this month</div>
+                          </div>
+                          <div className={cn(
+                            "w-full h-1.5 rounded-full overflow-hidden",
+                            isDark ? "bg-gray-700" : "bg-gray-200"
+                          )}>
+                            <div className="h-full w-[72%] bg-green-500 rounded-full"></div>
+                          </div>
                         </div>
-                        
-                        {transactions.map((item, index) => (
+                      </div>
+                    </div>
+                    
+                    {/* Recent Transactions */}
+                    <div className={cn(
+                      "rounded-xl overflow-hidden shadow-sm border",
+                      isDark ? "border-gray-700" : "border-gray-200"
+                    )}>
+                      <div className={cn(
+                        "px-4 py-3 flex justify-between items-center",
+                        isDark ? "bg-gray-800" : "bg-gray-50"
+                      )}>
+                        <div className={cn(
+                          "text-sm font-medium",
+                          isDark ? "text-white" : "text-gray-800"
+                        )}>Recent Activity</div>
+                        <div className={cn(
+                          "text-xs",
+                          isDark ? "text-primary-400" : "text-primary-600"
+                        )}>View All</div>
+                      </div>
+                      
+                      <div className={cn(
+                        "divide-y overflow-hidden",
+                        isDark ? "divide-gray-700 bg-gray-800/50" : "divide-gray-100 bg-white"
+                      )}>
+                        {transactions.slice(0, 3).map((item, index) => (
                           <div 
                             key={index} 
                             className={cn(
-                              "flex items-center justify-between p-3 rounded-lg border transition-all duration-300",
+                              "flex items-center justify-between p-3 transition-all duration-300",
                               activeTransaction === index ? 
-                                "bg-white shadow-md scale-[1.02] border-gray-200" : 
-                                "bg-gray-50 border-gray-100",
-                              "cursor-pointer hover:bg-white hover:shadow-sm"
+                                (isDark ? "bg-gray-700/50" : "bg-gray-50") : 
+                                "",
+                              "cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700/50"
                             )}
-                            onClick={() => setActiveTransaction(index)}
                           >
                             <div className="flex items-center">
-                              <div className={`h-8 w-8 rounded-full ${item.color} flex items-center justify-center mr-3`}>
+                              <div className={`h-8 w-8 rounded-lg ${item.color} flex items-center justify-center mr-3 flex-shrink-0`}>
                                 {item.icon}
                               </div>
                               <div>
-                                <div className="text-xs font-medium text-gray-800">{item.title}</div>
-                                <div className="text-[10px] text-gray-500">{item.time}</div>
+                                <div className={cn(
+                                  "text-sm font-medium",
+                                  isDark ? "text-white" : "text-gray-800"
+                                )}>{item.title}</div>
+                                <div className={cn(
+                                  "text-xs",
+                                  isDark ? "text-gray-400" : "text-gray-500"
+                                )}>{item.time}</div>
                               </div>
                             </div>
-                            <div className={`text-xs font-medium ${item.isPositive ? 'text-green-600' : 'text-gray-800'}`}>
+                            <div className={cn(
+                              "text-sm font-medium",
+                              item.isPositive ? 'text-green-600 dark:text-green-400' : 
+                              isDark ? 'text-white' : 'text-gray-800'
+                            )}>
                               {item.amount && (item.isPositive ? '+' : '')}
                               {item.amount && `KES ${item.amount}`}
-                              {!item.amount && <span className="text-emerald-600">✓ Complete</span>}
+                              {!item.amount && <span className="text-emerald-600 dark:text-emerald-400">✓ Complete</span>}
                             </div>
                           </div>
                         ))}
-                        
-                        <div className="bg-white rounded-lg p-3 mt-2 border border-gray-200 shadow-sm">
-                          <div className="text-xs font-medium text-gray-800 mb-2">Upcoming Payment</div>
-                          <div className="flex justify-between items-center">
-                            <div className="flex items-center">
-                              <div className="h-8 w-8 rounded-full bg-purple-500 flex items-center justify-center mr-3">
-                                <Smartphone className="h-4 w-4 text-white" />
-                              </div>
-                              <div>
-                                <div className="text-xs font-medium text-gray-800">Laptop Financing</div>
-                                <div className="text-[10px] text-gray-500">Due in 3 days</div>
-                              </div>
-                            </div>
-                            <div className="text-xs font-medium text-gray-800">KES 4,500</div>
-                          </div>
-                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
                 
-                {/* Reflection Overlay */}
-                <div className="absolute top-[10px] left-[10px] right-[10px] h-[560px] rounded-[30px] pointer-events-none overflow-hidden">
-                  <div className="absolute inset-0 bg-gradient-to-b from-white/20 via-transparent to-transparent opacity-60"></div>
-                </div>
-                
-                {/* Shadow under phone */}
-                <div className="absolute -bottom-4 left-1/2 transform -translate-x-1/2 w-[200px] h-[15px] bg-black/20 blur-xl rounded-full"></div>
+                {/* Shadow under dashboard */}
+                <div className="absolute -bottom-4 left-1/2 transform -translate-x-1/2 w-3/4 h-[15px] bg-black/20 blur-xl rounded-full"></div>
               </div>
             </div>
             
-            {/* Text Content - more modern fintech style */}
+            {/* Text Content */}
             <div className="text-left space-y-6">
               <FadeIn delay={1.1} direction="left" className={cn(
                 "rounded-xl p-7 border shadow-sm",

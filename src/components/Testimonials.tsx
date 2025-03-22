@@ -10,6 +10,7 @@ interface Testimonial {
   quote: string;
   author: string;
   role: string;
+  location: string;
   avatar: string;
   rating: number;
 }
@@ -20,44 +21,50 @@ const Testimonials: React.FC = () => {
 
   const testimonials: Testimonial[] = [
     {
-      quote: "Kifaa has completely transformed how I access financing for my business. The AI-based scoring helped me get better terms through their banking partners.",
+      quote: "Sikuwa na hope ya kupata smartphone ya kisasa bila kulipa cash yote upfront. Kifaa ilinielewa—wakanipa mpango wa kulipa polepole. Saa hii natumia simu hiyo ku-manage orders na deliveries. Wamechange life yangu kabisa!",
       author: "Brian Kiptoo",
-      role: "Small Business Owner",
+      role: "Boda Boda Rider",
+      location: "Eldoret",
       avatar: "BK",
       rating: 5
     },
     {
-      quote: "As someone who was previously excluded from the financial system, Kifaa's USSD service has been life-changing. I can now access credit without a smartphone.",
+      quote: "Nilitaka fridge ya kuweka products fresh kwa salon lakini pesa haikutosha. Kifaa walinipea financing bila stress, na sasa naweza serve customers vizuri zaidi. Malipo ni rahisi, hakuna pressure!",
       author: "Grace Achieng",
-      role: "Entrepreneur",
+      role: "Salon Owner",
+      location: "Kisumu",
       avatar: "GA",
       rating: 5
     },
     {
-      quote: "The cross-border payment feature saved my import business thousands in fees. Transactions that used to take days now complete in minutes.",
+      quote: "I needed a laptop for work, but I didn't want to spend all my savings at once. Kifaa pre-approved me for financing, and paying through my wallet via M-Pesa is super easy. Very convenient, very transparent.",
       author: "Daniel Muriuki",
-      role: "Import/Export Business",
+      role: "Junior Accountant",
+      location: "Thika",
       avatar: "DM",
       rating: 4
     },
     {
-      quote: "Before Kifaa, I couldn't qualify for financing. Now banks offer me pre-approved loans based on my Kifaa score!",
+      quote: "I didn't have a credit history, so most lenders ignored me. Kifaa gave me a chance. Nilipewa tablet ya masomo, nimeanza kulipa polepole, and they even upgraded me to Tier 2. That's real empowerment.",
       author: "Faith Chebet",
-      role: "Self-employed Professional",
+      role: "University Student",
+      location: "Nakuru",
       avatar: "FC",
       rating: 5
     },
     {
-      quote: "The wallet integration is seamless. I can receive money via M-Pesa and use it to pay my installments automatically.",
+      quote: "I use Kifaa's wallet to receive payments from clients and to pay for my design tablet. Everything is clear, fast, and fair. Na pia niko na access ya financing bila drama ya bank.",
       author: "Kevin Otieno",
-      role: "Ride-sharing Driver",
+      role: "Freelance Graphic Designer",
+      location: "Nairobi",
       avatar: "KO",
       rating: 4
     },
     {
-      quote: "My business grew by 30% after I accessed affordable inventory financing through Kifaa's platform. Their banking partners offered terms I couldn't get elsewhere.",
+      quote: "Kifaa walinisaidia kupata freezer kwa duka yangu. Sasa mboga haziharibiki haraka na wateja wanafurahia. Kulipa kidogo kidogo ni rahisi, na sina wasiwasi kama pesa haitoshi siku moja.",
       author: "Jane Nyambura",
-      role: "Retail Shop Owner",
+      role: "Mama Mboga",
+      location: "Mombasa",
       avatar: "JN",
       rating: 5
     }
@@ -155,7 +162,7 @@ const Testimonials: React.FC = () => {
                     )}>{testimonial.author}</p>
                     <p className={cn(
                       isDark ? "text-gray-400" : "text-muted-foreground"
-                    )}>{testimonial.role}</p>
+                    )}>{testimonial.role}, {testimonial.location}</p>
                   </div>
                 </div>
               </div>
@@ -177,7 +184,7 @@ const Testimonials: React.FC = () => {
                 </blockquote>
                 <div>
                   <p className="font-semibold">{testimonials[activeIndex].author}</p>
-                  <p className="text-muted-foreground">{testimonials[activeIndex].role}</p>
+                  <p className="text-muted-foreground">{testimonials[activeIndex].role}, {testimonials[activeIndex].location}</p>
                 </div>
               </div>
             </div>
