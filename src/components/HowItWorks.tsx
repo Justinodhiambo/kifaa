@@ -35,8 +35,8 @@ const StepCard: React.FC<StepCardProps> = ({
   return (
     <FadeIn delay={delay} direction="up" className="relative">
       <div className={cn(
-        "p-6 md:p-8 hover-lift rounded-xl shadow-sm",
-        isDark ? "bg-gray-800 border border-gray-700" : "bg-white border border-gray-100"
+        "p-6 md:p-8 hover-lift rounded-2xl shadow-sm",
+        isDark ? "bg-gray-800/90 backdrop-blur-sm border border-gray-700" : "bg-white border border-gray-100"
       )}>
         <div className="flex flex-col md:flex-row md:items-start gap-6">
           <div className="flex-shrink-0">
@@ -121,16 +121,16 @@ const HowItWorks: React.FC = () => {
   return (
     <section id="how-it-works" className={cn(
       "section relative py-20 px-6",
-      isDark ? "bg-gray-900" : "bg-white"
+      isDark ? "bg-gray-900/80 backdrop-blur-sm" : "bg-white"
     )}>
       <div className="max-w-7xl mx-auto">
         <FadeIn className="text-center mb-16">
-          <Badge className="mb-4 bg-primary/10 hover:bg-primary/20 text-primary border-primary/20 px-3 py-1.5">Process</Badge>
+          <Badge className="mb-4 bg-primary/10 hover:bg-primary/20 text-primary border-primary/20 px-3 py-1.5 rounded-full">Process</Badge>
           <h2 className={cn(
             "mb-4 text-4xl md:text-5xl font-semibold tracking-tight",
             isDark ? "text-white" : "text-gray-900"
           )}>
-            How <span className="text-primary">Kifaa</span> Works
+            How <span className="text-gradient-primary">Kifaa</span> Works
           </h2>
           <p className={cn(
             "text-lg max-w-2xl mx-auto",
@@ -175,17 +175,15 @@ const HowItWorks: React.FC = () => {
 
         <FadeIn className="mt-20 text-center" delay={0.8}>
           <div className={cn(
-            "inline-block rounded-xl px-8 py-6 font-medium border hover-lift",
+            "inline-flex items-center gap-3 rounded-xl px-8 py-6 font-medium border hover-lift",
             isDark 
               ? "bg-gradient-to-r from-primary-900 to-primary-800 border-primary-700/30 text-white" 
               : "bg-gradient-to-r from-primary-600 to-primary-500 border-primary-400/30 text-white"
           )}>
-            <div className="flex items-center gap-3">
-              <span className="h-10 w-10 rounded-full bg-white/10 flex items-center justify-center">
-                <Wallet className="h-5 w-5" />
-              </span>
-              <span className="text-lg">Join Kifaa Today & Access Smarter Financing!</span>
-            </div>
+            <span className="h-10 w-10 rounded-full bg-white/10 flex items-center justify-center">
+              <Wallet className="h-5 w-5" />
+            </span>
+            <span className="text-lg">Join Kifaa Today & Access Smarter Financing!</span>
           </div>
         </FadeIn>
       </div>

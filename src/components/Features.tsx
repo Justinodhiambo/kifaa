@@ -9,7 +9,8 @@ import {
   CreditCard, 
   Layers, 
   Smartphone,
-  ArrowRight 
+  ArrowRight,
+  Shield
 } from 'lucide-react';
 import { useTheme } from './ThemeProvider';
 import { cn } from '@/lib/utils';
@@ -19,24 +20,29 @@ interface FeatureCardProps {
   description: string;
   icon: React.ReactNode;
   delay: number;
+  iconBg?: string;
 }
 
 const FeatureCard: React.FC<FeatureCardProps> = ({ 
   title, 
   description, 
   icon, 
-  delay 
+  delay,
+  iconBg = "bg-primary/10" 
 }) => {
   const { theme } = useTheme();
   const isDark = theme === "dark";
   
   return (
-    <FadeIn delay={delay} className="hover-lift">
+    <FadeIn delay={delay} className="fintech-card">
       <div className={cn(
-        "p-6 md:p-8 h-full flex flex-col rounded-xl border",
-        isDark ? "bg-gray-800 border-gray-700" : "bg-white border-gray-100"
+        "p-6 md:p-8 h-full flex flex-col rounded-2xl border",
+        isDark ? "bg-gray-800/80 backdrop-blur-sm border-gray-700" : "bg-white border-gray-100"
       )}>
-        <div className="h-12 w-12 bg-primary/10 rounded-xl flex items-center justify-center text-primary mb-6">
+        <div className={cn(
+          "h-12 w-12 rounded-xl flex items-center justify-center text-primary mb-6",
+          iconBg
+        )}>
           {icon}
         </div>
         <h3 className={cn(
@@ -61,46 +67,58 @@ const Features: React.FC = () => {
       title: "AI-Based Credit Scoring",
       description: "Our proprietary models assess risk based on spending habits and behavioral data—especially for those with limited credit history.",
       icon: <Brain className="h-6 w-6" />,
-      delay: 0.2
+      delay: 0.2,
+      iconBg: "bg-indigo-500/10 text-indigo-500 dark:bg-indigo-500/20 dark:text-indigo-400"
     },
     {
       title: "Seamless Wallet Integration",
       description: "Fund your Kifaa wallet through M-Pesa, Airtel Money, bank transfers, or cryptocurrency for easy transactions.",
       icon: <Wallet className="h-6 w-6" />,
-      delay: 0.3
+      delay: 0.3,
+      iconBg: "bg-green-500/10 text-green-500 dark:bg-green-500/20 dark:text-green-400"
     },
     {
       title: "Connect to Financial Partners",
       description: "We connect you to bank-backed financing options with reduced risk and better terms through our partner network.",
       icon: <CreditCard className="h-6 w-6" />,
-      delay: 0.4
+      delay: 0.4,
+      iconBg: "bg-blue-500/10 text-blue-500 dark:bg-blue-500/20 dark:text-blue-400"
     },
     {
       title: "Blockchain-Powered Payments",
       description: "Enjoy fast, low-cost transactions beyond borders with cutting-edge blockchain technology.",
       icon: <Layers className="h-6 w-6" />,
-      delay: 0.5
+      delay: 0.5,
+      iconBg: "bg-purple-500/10 text-purple-500 dark:bg-purple-500/20 dark:text-purple-400"
     },
     {
       title: "USSD Accessibility for All",
       description: "Designed to serve both urban and underserved communities with an easy-to-use mobile USSD platform.",
       icon: <Smartphone className="h-6 w-6" />,
-      delay: 0.6
+      delay: 0.6,
+      iconBg: "bg-amber-500/10 text-amber-500 dark:bg-amber-500/20 dark:text-amber-400"
+    },
+    {
+      title: "Data Security & Privacy",
+      description: "Bank-level encryption and security protocols protect your data and transactions at all times.",
+      icon: <Shield className="h-6 w-6" />,
+      delay: 0.7,
+      iconBg: "bg-teal-500/10 text-teal-500 dark:bg-teal-500/20 dark:text-teal-400"
     }
   ];
 
   return (
     <section id="features" className={cn(
       "section relative",
-      isDark ? "bg-gray-950" : "bg-white"
+      isDark ? "bg-gray-950" : "bg-gray-50/50"
     )}>
       <div className="max-w-7xl mx-auto">
         <FadeIn className="text-center mb-16">
-          <Badge className="mb-4 bg-primary/10 hover:bg-primary/20 text-primary border-primary/20 px-3 py-1.5">Features</Badge>
+          <Badge className="mb-4 bg-primary/10 hover:bg-primary/20 text-primary border-primary/20 px-3 py-1.5 rounded-full">Features</Badge>
           <h2 className={cn(
-            "mb-4",
+            "mb-4 text-4xl md:text-5xl font-semibold",
             isDark ? "text-white" : "text-gray-900"
-          )}>Why Choose <span className="text-primary">Kifaa</span>?</h2>
+          )}>Why Choose <span className="text-gradient-primary">Kifaa</span>?</h2>
           <p className={cn(
             "text-lg max-w-2xl mx-auto",
             isDark ? "text-gray-300" : "text-muted-foreground"
@@ -117,14 +135,15 @@ const Features: React.FC = () => {
               description={feature.description}
               icon={feature.icon}
               delay={feature.delay}
+              iconBg={feature.iconBg}
             />
           ))}
         </div>
 
         <FadeIn className="mt-16" delay={0.7}>
           <div className={cn(
-            "p-8 md:p-10 max-w-3xl mx-auto rounded-xl border",
-            isDark ? "bg-gray-800 border-gray-700" : "bg-white border-gray-100"
+            "p-8 md:p-10 max-w-3xl mx-auto rounded-2xl border",
+            isDark ? "bg-gray-800/80 backdrop-blur-sm border-gray-700" : "bg-white border-gray-100"
           )}>
             <h3 className={cn(
               "text-2xl font-semibold mb-4 text-center",
@@ -151,7 +170,7 @@ const Features: React.FC = () => {
               </li>
             </ul>
             <div className="flex justify-center">
-              <Button className="group">
+              <Button className="group rounded-full">
                 Join Kifaa Today
                 <ArrowRight className="ml-2 h-4 w-4 inline group-hover:translate-x-1 transition-transform" />
               </Button>

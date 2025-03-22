@@ -53,7 +53,7 @@ const Index = () => {
     
     handleHashLinkOnLoad();
 
-    // Apply Apple-like smooth scrolling to the entire page
+    // Apply smooth scrolling to the entire page
     document.documentElement.style.scrollBehavior = 'smooth';
 
     return () => {

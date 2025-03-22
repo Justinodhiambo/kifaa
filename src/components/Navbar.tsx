@@ -70,8 +70,7 @@ const Navbar: React.FC = () => {
           }}
         >
           <div className="flex items-center">
-            <div className="h-11 w-11 rounded-xl bg-primary flex items-center justify-center mr-2 shadow-md relative overflow-hidden">
-              <div className="absolute inset-0 bg-gradient-to-br from-blue-500 to-primary opacity-80"></div>
+            <div className="h-11 w-11 rounded-xl bg-gradient-to-br from-primary to-blue-500 flex items-center justify-center mr-3 shadow-md relative overflow-hidden">
               <div className="relative z-10 flex items-center justify-center">
                 <Hexagon className="h-6 w-6 text-white" strokeWidth={1.5} />
                 <Zap className="h-4 w-4 text-white absolute" strokeWidth={2.5} />
@@ -86,16 +85,16 @@ const Navbar: React.FC = () => {
           </div>
         </a>
 
-        {/* Desktop Navigation */}
+        {/* Desktop Navigation - more modern and clean */}
         <nav className="hidden md:flex items-center space-x-8">
           <NavLink href="#features" onClick={() => scrollToSection('features')}>Features</NavLink>
           <NavLink href="#how-it-works" onClick={() => scrollToSection('how-it-works')}>How It Works</NavLink>
           <NavLink href="#testimonials" onClick={() => scrollToSection('testimonials')}>Testimonials</NavLink>
           <Button variant="ghost" className={cn(
-            "ml-4",
+            "ml-4 rounded-full",
             theme === "dark" ? "text-gray-300 hover:text-white" : "text-gray-700 hover:text-gray-900"
           )}>Sign In</Button>
-          <Button className="bg-primary hover:bg-primary/90 text-white shadow-md">Get Started</Button>
+          <Button className="bg-primary hover:bg-primary/90 text-white shadow-md rounded-full">Get Started</Button>
         </nav>
 
         {/* Mobile Menu Button */}
@@ -111,7 +110,7 @@ const Navbar: React.FC = () => {
           )}
         </button>
 
-        {/* Mobile Navigation */}
+        {/* Mobile Navigation - modern full screen approach */}
         <div 
           className={cn(
             "fixed inset-0 backdrop-blur-xl transition-transform duration-300 flex flex-col justify-center items-center md:hidden",
@@ -139,8 +138,8 @@ const Navbar: React.FC = () => {
               Testimonials
             </MobileNavLink>
             <div className="pt-6 flex flex-col space-y-4">
-              <Button variant="outline" className="w-48">Sign In</Button>
-              <Button className="w-48">Get Started</Button>
+              <Button variant="outline" className="w-48 rounded-full">Sign In</Button>
+              <Button className="w-48 rounded-full">Get Started</Button>
             </div>
           </nav>
         </div>
