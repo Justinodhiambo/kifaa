@@ -11,6 +11,8 @@ import {
   Smartphone,
   ArrowRight 
 } from 'lucide-react';
+import { useTheme } from './ThemeProvider';
+import { cn } from '@/lib/utils';
 
 interface FeatureCardProps {
   title: string;
@@ -25,36 +27,51 @@ const FeatureCard: React.FC<FeatureCardProps> = ({
   icon, 
   delay 
 }) => {
+  const { theme } = useTheme();
+  const isDark = theme === "dark";
+  
   return (
     <FadeIn delay={delay} className="hover-lift">
-      <div className="glass-card p-6 md:p-8 h-full flex flex-col">
+      <div className={cn(
+        "p-6 md:p-8 h-full flex flex-col rounded-xl border",
+        isDark ? "bg-gray-800 border-gray-700" : "bg-white border-gray-100"
+      )}>
         <div className="h-12 w-12 bg-primary/10 rounded-xl flex items-center justify-center text-primary mb-6">
           {icon}
         </div>
-        <h3 className="text-xl font-semibold mb-3">{title}</h3>
-        <p className="text-muted-foreground text-sm md:text-base">{description}</p>
+        <h3 className={cn(
+          "text-xl font-semibold mb-3",
+          isDark ? "text-white" : "text-gray-900"
+        )}>{title}</h3>
+        <p className={cn(
+          "text-sm md:text-base",
+          isDark ? "text-gray-300" : "text-muted-foreground"
+        )}>{description}</p>
       </div>
     </FadeIn>
   );
 };
 
 const Features: React.FC = () => {
+  const { theme } = useTheme();
+  const isDark = theme === "dark";
+  
   const features = [
     {
       title: "AI-Based Credit Scoring",
-      description: "Get financing offers tailored to your financial behavior, not just traditional credit scores.",
+      description: "Our proprietary models assess risk based on spending habits and behavioral data—especially for those with limited credit history.",
       icon: <Brain className="h-6 w-6" />,
       delay: 0.2
     },
     {
       title: "Seamless Wallet Integration",
-      description: "Fund your Kifaa wallet through M-Pesa, Airtel Money, bank transfers, or cryptocurrency.",
+      description: "Fund your Kifaa wallet through M-Pesa, Airtel Money, bank transfers, or cryptocurrency for easy transactions.",
       icon: <Wallet className="h-6 w-6" />,
       delay: 0.3
     },
     {
-      title: "Affordable Asset Financing",
-      description: "Gain access to bank-backed financing options with reduced risk and better terms.",
+      title: "Connect to Financial Partners",
+      description: "We connect you to bank-backed financing options with reduced risk and better terms through our partner network.",
       icon: <CreditCard className="h-6 w-6" />,
       delay: 0.4
     },
@@ -78,8 +95,11 @@ const Features: React.FC = () => {
         <FadeIn className="text-center mb-16">
           <Badge className="mb-4 bg-primary/10 hover:bg-primary/20 text-primary border-primary/20 px-3 py-1.5">Features</Badge>
           <h2 className="mb-4">Why Choose <span className="text-primary">Kifaa</span>?</h2>
-          <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-            Our platform combines cutting-edge AI with seamless financial tools to give you unprecedented access to affordable financing.
+          <p className={cn(
+            "text-lg max-w-2xl mx-auto",
+            isDark ? "text-gray-300" : "text-muted-foreground"
+          )}>
+            Our platform connects AI-powered risk assessment with seamless financial tools to give you unprecedented access to affordable financing.
           </p>
         </FadeIn>
 
@@ -96,20 +116,32 @@ const Features: React.FC = () => {
         </div>
 
         <FadeIn className="mt-16" delay={0.7}>
-          <div className="glass-card p-8 md:p-10 max-w-3xl mx-auto">
-            <h3 className="text-2xl font-semibold mb-4 text-center">Who is Kifaa for?</h3>
+          <div className={cn(
+            "p-8 md:p-10 max-w-3xl mx-auto rounded-xl border",
+            isDark ? "bg-gray-800 border-gray-700" : "bg-white border-gray-100"
+          )}>
+            <h3 className={cn(
+              "text-2xl font-semibold mb-4 text-center",
+              isDark ? "text-white" : "text-gray-900"
+            )}>Who is Kifaa for?</h3>
             <ul className="text-left space-y-4 mb-6">
               <li className="flex items-start">
                 <span className="h-6 w-6 rounded-full bg-primary/10 text-primary flex items-center justify-center mr-3 mt-0.5 flex-shrink-0">✓</span>
-                <span>Individuals seeking affordable financing for vehicles, electronics, and business tools.</span>
+                <span className={cn(
+                  isDark ? "text-gray-300" : "text-gray-700"
+                )}>Individuals seeking affordable financing for vehicles, electronics, and business tools.</span>
               </li>
               <li className="flex items-start">
                 <span className="h-6 w-6 rounded-full bg-primary/10 text-primary flex items-center justify-center mr-3 mt-0.5 flex-shrink-0">✓</span>
-                <span>Small businesses & entrepreneurs looking for growth capital and streamlined transactions.</span>
+                <span className={cn(
+                  isDark ? "text-gray-300" : "text-gray-700"
+                )}>Small businesses & entrepreneurs looking for growth capital and streamlined transactions.</span>
               </li>
               <li className="flex items-start">
                 <span className="h-6 w-6 rounded-full bg-primary/10 text-primary flex items-center justify-center mr-3 mt-0.5 flex-shrink-0">✓</span>
-                <span>Enterprises requiring intelligent credit risk assessment for financial decision-making.</span>
+                <span className={cn(
+                  isDark ? "text-gray-300" : "text-gray-700"
+                )}>Enterprises requiring intelligent credit risk assessment for financial decision-making.</span>
               </li>
             </ul>
             <div className="flex justify-center">

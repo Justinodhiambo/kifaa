@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import FadeIn from './FadeIn';
 import AnimatedGradient from './AnimatedGradient';
@@ -83,7 +84,7 @@ const Hero: React.FC = () => {
               "text-lg md:text-xl mb-10 max-w-2xl mx-auto leading-relaxed",
               isDark ? "text-gray-400" : "text-muted-foreground"
             )}>
-              Kifaa empowers you with smarter, faster, and more accessible financial services through AI-powered solutions.
+              Kifaa connects you to affordable financing through our partners, powered by AI-driven data and risk assessment infrastructure.
             </p>
           </FadeIn>
           
@@ -224,7 +225,7 @@ const Hero: React.FC = () => {
             <div className="text-left space-y-6">
               <FadeIn delay={1.1} direction="left" className={cn(
                 "rounded-xl p-7 border shadow-sm",
-                isDark ? "bg-gray-900 border-gray-800" : "bg-white border-gray-100"
+                isDark ? "bg-gray-800 border-gray-700" : "bg-white border-gray-100"
               )}>
                 <h3 className={cn(
                   "text-2xl font-semibold mb-3",
@@ -232,18 +233,18 @@ const Hero: React.FC = () => {
                 )}>Smart Financial Management</h3>
                 <p className={cn(
                   "mb-4",
-                  isDark ? "text-gray-400" : "text-muted-foreground"
-                )}>Experience AI-driven insights that adapt to your spending habits and financial goals.</p>
+                  isDark ? "text-gray-300" : "text-muted-foreground"
+                )}>Experience AI-driven insights that connect you to financing options tailored to your spending habits and financial goals.</p>
                 <div className="space-y-3">
                   {[
-                    "Personalized financial recommendations",
-                    "Real-time transaction monitoring",
+                    "AI-powered risk assessment",
+                    "Connect with financial partners",
                     "Automated saving strategies"
                   ].map((item, index) => (
                     <div key={index} className="flex items-start">
                       <div className={cn(
                         "mt-1 h-5 w-5 rounded-full flex items-center justify-center mr-3 flex-shrink-0",
-                        isDark ? "bg-gray-800 text-primary-400" : "bg-primary-50 text-primary-500"
+                        isDark ? "bg-gray-700 text-primary-400" : "bg-primary-50 text-primary-500"
                       )}>
                         <CheckCircle className="h-3 w-3" />
                       </div>
@@ -259,7 +260,7 @@ const Hero: React.FC = () => {
               <FadeIn delay={1.3} direction="left">
                 <div className={cn(
                   "flex items-center p-4 rounded-xl border",
-                  isDark ? "bg-gray-900 border-gray-800" : "bg-gray-50 border-gray-100"
+                  isDark ? "bg-gray-800 border-gray-700" : "bg-gray-50 border-gray-100"
                 )}>
                   <div className="flex -space-x-3">
                     {[1, 2, 3, 4].map(i => (
@@ -273,7 +274,7 @@ const Hero: React.FC = () => {
                     ))}
                     <div className={cn(
                       "h-10 w-10 rounded-full border-2 border-white flex items-center justify-center text-xs font-medium",
-                      isDark ? "bg-gray-800 text-primary-400" : "bg-primary-50 text-primary-600"
+                      isDark ? "bg-gray-700 text-primary-400" : "bg-primary-50 text-primary-600"
                     )}>
                       +8k
                     </div>
@@ -285,8 +286,8 @@ const Hero: React.FC = () => {
                     )}>Join 10,000+ users</div>
                     <div className={cn(
                       "text-xs",
-                      isDark ? "text-gray-400" : "text-gray-500"
-                    )}>and take control of your finances</div>
+                      isDark ? "text-gray-300" : "text-gray-500"
+                    )}>and access affordable financing</div>
                   </div>
                 </div>
               </FadeIn>
