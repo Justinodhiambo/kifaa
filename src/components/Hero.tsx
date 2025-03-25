@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import FadeIn from './FadeIn';
 import AnimatedGradient from './AnimatedGradient';
@@ -165,7 +166,7 @@ const Hero: React.FC = () => {
                       "mx-auto text-xs px-4 py-1 rounded-full",
                       isDark ? "bg-gray-700 text-gray-300" : "bg-gray-100 text-gray-600"
                     )}>
-                      app.kifaa.finance
+                      kifaa.io
                     </div>
                   </div>
                   
