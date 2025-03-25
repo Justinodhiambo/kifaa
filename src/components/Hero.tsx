@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import FadeIn from './FadeIn';
 import AnimatedGradient from './AnimatedGradient';
@@ -318,12 +317,13 @@ const Hero: React.FC = () => {
                             </div>
                             <div className={cn(
                               "text-sm font-medium",
-                              item.isPositive ? 'text-green-600 dark:text-green-400' : 
-                              isDark ? 'text-white' : 'text-gray-800'
+                              item.isPositive ? 
+                                (isDark ? 'text-green-400' : 'text-green-600') : 
+                                (item.amount ? (isDark ? 'text-red-400' : 'text-red-600') : (isDark ? 'text-emerald-400' : 'text-emerald-600'))
                             )}>
                               {item.amount && (item.isPositive ? '+' : '')}
                               {item.amount && `KES ${item.amount}`}
-                              {!item.amount && <span className="text-emerald-600 dark:text-emerald-400">✓ Complete</span>}
+                              {!item.amount && <span className={isDark ? "text-emerald-400" : "text-emerald-600"}>✓ Complete</span>}
                             </div>
                           </div>
                         ))}
