@@ -1,8 +1,8 @@
-
 import { useState } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { useAuth } from './use-auth';
 import { useToast } from './use-toast';
+import { supabase } from '@/lib/supabase';
 import * as financialService from '@/services/financial-service';
 import { Transaction, Loan } from '@/types/supabase';
 
