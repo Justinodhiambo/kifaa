@@ -19,4 +19,14 @@ if (!supabaseAnonKey || supabaseAnonKey === 'your-anon-key') {
   console.warn('Supabase Anon Key not configured properly. Please set VITE_SUPABASE_ANON_KEY in your environment variables.');
 }
 
-export const supabase = createClient<Database>(supabaseUrl, supabaseAnonKey);
+// Create and export the Supabase client
+export const supabase = createClient<Database>(
+  supabaseUrl, 
+  supabaseAnonKey,
+  {
+    auth: {
+      persistSession: true,
+      autoRefreshToken: true,
+    },
+  }
+);
