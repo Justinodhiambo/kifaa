@@ -9,12 +9,62 @@ import Footer from '@/components/Footer';
 import { ThemeProvider } from '@/components/ThemeProvider';
 import LaptopFrame from '@/components/LaptopFrame';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Wallet, CreditCard, BanknoteIcon, ArrowUpRight, ArrowDownLeft, Clock } from 'lucide-react';
 
 const Index = () => {
   const [laptopVariant, setLaptopVariant] = useState<'macbook' | 'windows'>('macbook');
   
   const toggleLaptopVariant = () => {
     setLaptopVariant(prev => prev === 'macbook' ? 'windows' : 'macbook');
+  };
+
+  // Sample transactions for demo
+  const recentTransactions = [
+    { 
+      id: 1, 
+      description: "Smartphone purchase", 
+      amount: 12500, 
+      currency: "KES", 
+      type: "withdrawal", 
+      created_at: new Date().toISOString() 
+    },
+    { 
+      id: 2, 
+      description: "Wallet deposit", 
+      amount: 5000, 
+      currency: "KES", 
+      type: "deposit", 
+      created_at: new Date(Date.now() - 86400000).toISOString() 
+    },
+    { 
+      id: 3, 
+      description: "Loan payment", 
+      amount: 3000, 
+      currency: "KES", 
+      type: "withdrawal", 
+      created_at: new Date(Date.now() - 172800000).toISOString() 
+    }
+  ];
+
+  // Format currency
+  const formatCurrency = (amount: number, currency: string = 'KES') => {
+    return new Intl.NumberFormat('en-KE', {
+      style: 'currency',
+      currency,
+      minimumFractionDigits: 2
+    }).format(amount);
+  };
+
+  // Get transaction icon based on type
+  const getTransactionIcon = (type: string) => {
+    switch (type) {
+      case 'deposit':
+        return <ArrowDownLeft className="h-4 w-4 text-green-500" />;
+      case 'withdrawal':
+        return <ArrowUpRight className="h-4 w-4 text-red-500" />;
+      default:
+        return <Clock className="h-4 w-4 text-gray-500" />;
+    }
   };
 
   useEffect(() => {
@@ -79,8 +129,8 @@ const Index = () => {
         <main className="flex-1">
           <Hero />
           
-          {/* Demo laptop frame section */}
-          <section className="py-12 bg-muted/50">
+          {/* Demo browser dashboard section */}
+          <section className="py-16 bg-muted/50">
             <div className="container mx-auto px-4">
               <div className="text-center mb-8">
                 <h2 className="text-3xl font-bold mb-2">Experience Our Platform</h2>
@@ -96,58 +146,126 @@ const Index = () => {
               </div>
               
               <LaptopFrame variant={laptopVariant}>
-                <div className="p-4">
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-                    <Card>
-                      <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                        <CardTitle className="text-sm font-medium">Wallet Balance</CardTitle>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-4 w-4 text-muted-foreground">
-                          <path d="M21 12V7H5a2 2 0 0 1 0-4h14v4"></path><path d="M3 5v14a2 2 0 0 0 2 2h16v-5"></path><path d="M18 12a2 2 0 0 0 0 4h4v-4Z"></path>
-                        </svg>
-                      </CardHeader>
-                      <CardContent>
-                        <div className="text-2xl font-bold">KES 45,231.89</div>
-                        <p className="text-xs text-muted-foreground mt-1">
-                          Available for withdrawal
-                        </p>
-                      </CardContent>
-                    </Card>
-                    
-                    <Card>
-                      <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                        <CardTitle className="text-sm font-medium">Active Loans</CardTitle>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-4 w-4 text-muted-foreground">
-                          <rect width="20" height="14" x="2" y="5" rx="2"></rect><line x1="2" x2="22" y1="10" y2="10"></line>
-                        </svg>
-                      </CardHeader>
-                      <CardContent>
-                        <div className="text-2xl font-bold">2</div>
-                        <p className="text-xs text-muted-foreground mt-1">
-                          Current loans
-                        </p>
-                      </CardContent>
-                    </Card>
-                    
-                    <Card>
-                      <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                        <CardTitle className="text-sm font-medium">Credit Score</CardTitle>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-4 w-4 text-muted-foreground">
-                          <rect width="20" height="12" x="2" y="6" rx="2"></rect><path d="M14 2v4"></path><path d="M10 2v4"></path><path d="M22 13c0 4.2-2.8 7-7 7s-7-2.8-7-7 2.8-7 7-7 7 2.8 7 7Z"></path><path d="M19.5 13.5 15 18l-2.5-2.5"></path>
-                        </svg>
-                      </CardHeader>
-                      <CardContent>
-                        <div className="text-2xl font-bold">725</div>
-                        <p className="text-xs text-muted-foreground mt-1">
-                          Good
-                        </p>
-                      </CardContent>
-                    </Card>
+                <div className="h-full">
+                  {/* Browser-style UI */}
+                  <div className="h-10 flex items-center px-3 border-b bg-gray-100 dark:bg-gray-800 border-gray-200 dark:border-gray-700">
+                    <div className="flex space-x-2">
+                      <div className="w-3 h-3 rounded-full bg-red-500"></div>
+                      <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
+                      <div className="w-3 h-3 rounded-full bg-green-500"></div>
+                    </div>
+                    <div className="mx-auto text-xs px-4 py-1 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200">
+                      kifaa.io/dashboard
+                    </div>
                   </div>
                   
-                  <div className="text-center py-4">
-                    <a href="/login" className="px-6 py-2 bg-primary text-white rounded-md inline-block hover:bg-primary/90 transition-colors">
-                      Sign in to access your dashboard
-                    </a>
+                  {/* Dashboard content */}
+                  <div className="p-6 overflow-auto" style={{ maxHeight: 'calc(100% - 2.5rem)' }}>
+                    <header className="flex justify-between items-center mb-6">
+                      <div>
+                        <h1 className="text-2xl font-bold">Kifaa Dashboard</h1>
+                        <p className="text-muted-foreground">Welcome back, John Doe</p>
+                      </div>
+                      <div className="flex items-center">
+                        <div className="h-10 w-10 rounded-full bg-gray-200 dark:bg-gray-700 overflow-hidden">
+                          <img 
+                            src="https://randomuser.me/api/portraits/men/32.jpg" 
+                            alt="User avatar" 
+                            className="h-full w-full object-cover"
+                          />
+                        </div>
+                      </div>
+                    </header>
+                    
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                      <Card>
+                        <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                          <CardTitle className="text-sm font-medium">Wallet Balance</CardTitle>
+                          <Wallet className="h-4 w-4 text-muted-foreground" />
+                        </CardHeader>
+                        <CardContent>
+                          <div className="text-2xl font-bold">KES 45,231.89</div>
+                          <p className="text-xs text-muted-foreground mt-1">
+                            Available for withdrawal
+                          </p>
+                        </CardContent>
+                      </Card>
+                      
+                      <Card>
+                        <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                          <CardTitle className="text-sm font-medium">Active Loans</CardTitle>
+                          <CreditCard className="h-4 w-4 text-muted-foreground" />
+                        </CardHeader>
+                        <CardContent>
+                          <div className="text-2xl font-bold">2</div>
+                          <p className="text-xs text-muted-foreground mt-1">
+                            Current loans
+                          </p>
+                        </CardContent>
+                      </Card>
+                      
+                      <Card>
+                        <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                          <CardTitle className="text-sm font-medium">Credit Score</CardTitle>
+                          <BanknoteIcon className="h-4 w-4 text-muted-foreground" />
+                        </CardHeader>
+                        <CardContent>
+                          <div className="text-2xl font-bold">725</div>
+                          <p className="text-xs text-muted-foreground mt-1">
+                            Good
+                          </p>
+                        </CardContent>
+                      </Card>
+                    </div>
+                    
+                    <Card className="mb-6">
+                      <CardHeader>
+                        <CardTitle>Recent Transactions</CardTitle>
+                        <CardDescription>Your latest financial activity</CardDescription>
+                      </CardHeader>
+                      <CardContent>
+                        <div className="space-y-4">
+                          {recentTransactions.map((transaction) => (
+                            <div key={transaction.id} className="flex items-center justify-between">
+                              <div className="flex items-center gap-3">
+                                <div className="rounded-full p-2 bg-gray-100 dark:bg-gray-800">
+                                  {getTransactionIcon(transaction.type)}
+                                </div>
+                                <div>
+                                  <p className="text-sm font-medium">{transaction.description}</p>
+                                  <p className="text-xs text-muted-foreground">
+                                    {new Date(transaction.created_at).toLocaleDateString('en-US', {
+                                      day: 'numeric',
+                                      month: 'short',
+                                      year: 'numeric'
+                                    })}
+                                  </p>
+                                </div>
+                              </div>
+                              <div className={`text-sm font-medium ${transaction.type === 'deposit' ? 'text-green-500' : 'text-red-500'}`}>
+                                {transaction.type === 'deposit' ? '+' : '-'}
+                                {formatCurrency(transaction.amount, transaction.currency)}
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      </CardContent>
+                    </Card>
+                    
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                      <button className="p-3 text-center rounded-md border border-input bg-background hover:bg-accent hover:text-accent-foreground transition-colors">
+                        Fund Wallet
+                      </button>
+                      <button className="p-3 text-center rounded-md border border-input bg-background hover:bg-accent hover:text-accent-foreground transition-colors">
+                        Apply for Loan
+                      </button>
+                      <button className="p-3 text-center rounded-md border border-input bg-background hover:bg-accent hover:text-accent-foreground transition-colors">
+                        Browse Products
+                      </button>
+                      <button className="p-3 text-center rounded-md border border-input bg-background hover:bg-accent hover:text-accent-foreground transition-colors">
+                        Refer a Friend
+                      </button>
+                    </div>
                   </div>
                 </div>
               </LaptopFrame>

@@ -23,7 +23,7 @@ const LaptopFrame = ({ children, variant = 'macbook' }: LaptopFrameProps) => {
         {/* Screen bezel */}
         <div className={`overflow-hidden rounded-lg border-8 ${variant === 'macbook' ? 'border-gray-700' : 'border-black'}`}>
           {/* Screen content with proper height to ensure visibility */}
-          <div className={`bg-background rounded-sm ${variant === 'macbook' ? 'pt-4' : 'pt-2'}`} style={{ minHeight: '60vh' }}>
+          <div className={`bg-background rounded-sm ${variant === 'macbook' ? 'pt-4' : 'pt-2'}`} style={{ height: '70vh', maxHeight: '600px' }}>
             {children}
           </div>
         </div>
