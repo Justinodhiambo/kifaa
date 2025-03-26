@@ -1,420 +1,275 @@
 
-import { useState } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { useAuth } from './use-auth';
-import { useToast } from './use-toast';
-import { supabase } from '@/lib/supabase';
 import * as financialService from '@/services/financial-service';
-import { Transaction, Loan, Wallet, KYCDocument, Product } from '@/types/supabase';
+import { toast } from 'sonner';
+import { supabase } from '@/lib/supabase';
 
-export function useFinancial() {
-  const { user } = useAuth();
-  const { toast } = useToast();
+// Types
+export type Currency = 'KES' | 'USD' | 'EUR' | 'GBP';
+
+export type Transaction = {
+  id: string;
+  created_at: string;
+  user_id: string;
+  amount: number;
+  currency: Currency;
+  type: 'deposit' | 'withdrawal' | 'transfer' | 'loan_disbursement' | 'loan_repayment';
+  status: 'pending' | 'completed' | 'failed';
+  description: string;
+  recipient_id?: string;
+  reference?: string;
+};
+
+export type Wallet = {
+  id: string;
+  user_id: string;
+  currency: Currency;
+  balance: number;
+  created_at: string;
+  updated_at: string;
+};
+
+export type Product = {
+  id: string;
+  name: string;
+  description: string;
+  min_amount: number;
+  max_amount: number;
+  interest_rate: number;
+  term_min: number;
+  term_max: number;
+  type: 'personal_loan' | 'business_loan' | 'asset_financing';
+  status: 'active' | 'inactive';
+  created_at: string;
+};
+
+export type LoanStatus = 'pending' | 'approved' | 'rejected' | 'disbursed' | 'repaying' | 'paid' | 'defaulted';
+
+export type Loan = {
+  id: string;
+  user_id: string;
+  product_id: string;
+  amount: number;
+  interest_rate: number;
+  term_months: number;
+  monthly_payment: number;
+  total_payment: number;
+  status: LoanStatus;
+  purpose: string;
+  disbursement_date?: string;
+  next_payment_date?: string;
+  remaining_amount: number;
+  created_at: string;
+};
+
+export const useFinancial = () => {
   const queryClient = useQueryClient();
-  const [isLoading, setIsLoading] = useState(false);
+  const { user } = useAuth();
+  const userId = user?.id;
 
-  // Get user profile
-  const userProfile = useQuery({
-    queryKey: ['userProfile', user?.id],
-    queryFn: () => user ? financialService.getUserProfile(user.id) : null,
-    enabled: !!user,
+  // Wallets
+  const { data: wallets, isLoading: isLoadingWallets } = useQuery({
+    queryKey: ['wallets', userId],
+    queryFn: () => financialService.getWallets(userId as string),
+    enabled: !!userId,
   });
 
-  // Get user wallets
-  const userWallets = useQuery({
-    queryKey: ['userWallets', user?.id],
-    queryFn: () => user ? financialService.getUserWallets(user.id) : [],
-    enabled: !!user,
+  // Transactions
+  const { data: transactions, isLoading: isLoadingTransactions } = useQuery({
+    queryKey: ['transactions', userId],
+    queryFn: () => financialService.getTransactions(userId as string),
+    enabled: !!userId,
   });
 
-  // Get wallet balance for a specific currency
-  const getWalletBalance = (currency = 'KES') => {
-    return useQuery({
-      queryKey: ['walletBalance', user?.id, currency],
-      queryFn: () => user ? financialService.getUserBalance(user.id, currency) : 0,
-      enabled: !!user,
+  // Products
+  const { data: products, isLoading: isLoadingProducts } = useQuery({
+    queryKey: ['products'],
+    queryFn: financialService.getProducts,
+  });
+
+  // Loans
+  const { data: loans, isLoading: isLoadingLoans } = useQuery({
+    queryKey: ['loans', userId],
+    queryFn: () => financialService.getLoans(userId as string),
+    enabled: !!userId,
+  });
+
+  // Credit Score
+  const { data: creditScore, isLoading: isLoadingCreditScore } = useQuery({
+    queryKey: ['creditScore', userId],
+    queryFn: () => financialService.getCreditScore(userId as string),
+    enabled: !!userId,
+  });
+
+  // Mutations
+  const depositMutation = useMutation({
+    mutationFn: financialService.deposit,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['wallets', userId] });
+      queryClient.invalidateQueries({ queryKey: ['transactions', userId] });
+      toast.success('Deposit successful');
+    },
+    onError: (error: Error) => {
+      toast.error(`Deposit failed: ${error.message}`);
+    },
+  });
+
+  const withdrawMutation = useMutation({
+    mutationFn: financialService.withdraw,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['wallets', userId] });
+      queryClient.invalidateQueries({ queryKey: ['transactions', userId] });
+      toast.success('Withdrawal successful');
+    },
+    onError: (error: Error) => {
+      toast.error(`Withdrawal failed: ${error.message}`);
+    },
+  });
+
+  const transferMutation = useMutation({
+    mutationFn: financialService.transfer,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['wallets', userId] });
+      queryClient.invalidateQueries({ queryKey: ['transactions', userId] });
+      toast.success('Transfer successful');
+    },
+    onError: (error: Error) => {
+      toast.error(`Transfer failed: ${error.message}`);
+    },
+  });
+
+  const applyLoanMutation = useMutation({
+    mutationFn: financialService.applyLoan,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['loans', userId] });
+      toast.success('Loan application submitted successfully');
+    },
+    onError: (error: Error) => {
+      toast.error(`Loan application failed: ${error.message}`);
+    },
+  });
+
+  // Helper functions
+  const getWalletBalance = (currency: Currency) => {
+    const wallet = wallets?.find(w => w.currency === currency);
+    return wallet?.balance || 0;
+  };
+
+  const getTotalBalance = () => {
+    return wallets?.reduce((total, wallet) => total + wallet.balance, 0) || 0;
+  };
+
+  const deposit = async (amount: number, currency: Currency) => {
+    if (!userId) {
+      toast.error('You must be logged in to make a deposit');
+      return;
+    }
+
+    return depositMutation.mutate({
+      user_id: userId,
+      amount,
+      currency,
     });
   };
 
-  // Get transaction history
-  const transactionHistory = useQuery({
-    queryKey: ['transactions', user?.id],
-    queryFn: () => user ? financialService.getTransactionHistory(user.id) : [],
-    enabled: !!user,
-  });
+  const withdraw = async (amount: number, currency: Currency) => {
+    if (!userId) {
+      toast.error('You must be logged in to make a withdrawal');
+      return;
+    }
 
-  // Get active loans
-  const activeLoans = useQuery({
-    queryKey: ['activeLoans', user?.id],
-    queryFn: () => user ? financialService.getActiveLoans(user.id) : [],
-    enabled: !!user,
-  });
+    const balance = getWalletBalance(currency);
+    if (balance < amount) {
+      toast.error('Insufficient funds');
+      return;
+    }
 
-  // Get loan history
-  const loanHistory = useQuery({
-    queryKey: ['loanHistory', user?.id],
-    queryFn: () => user ? financialService.getLoanHistory(user.id) : [],
-    enabled: !!user,
-  });
+    return withdrawMutation.mutate({
+      user_id: userId,
+      amount,
+      currency,
+    });
+  };
 
-  // Get Kifaa score
-  const kifaaScore = useQuery({
-    queryKey: ['kifaaScore', user?.id],
-    queryFn: () => user ? financialService.calculateKifaaScore(user.id) : 0,
-    enabled: !!user,
-  });
+  const transfer = async (amount: number, currency: Currency, recipientId: string, description: string) => {
+    if (!userId) {
+      toast.error('You must be logged in to make a transfer');
+      return;
+    }
 
-  // Get eligible products
-  const eligibleProducts = useQuery({
-    queryKey: ['eligibleProducts', user?.id],
-    queryFn: () => user ? financialService.getEligibleProducts(user.id) : [],
-    enabled: !!user,
-  });
+    const balance = getWalletBalance(currency);
+    if (balance < amount) {
+      toast.error('Insufficient funds');
+      return;
+    }
 
-  // Get all products
-  const allProducts = useQuery({
-    queryKey: ['products'],
-    queryFn: () => financialService.getAllProducts(),
-  });
+    return transferMutation.mutate({
+      user_id: userId,
+      amount,
+      currency,
+      type: 'transfer',
+      status: 'completed',
+      description,
+      recipient_id: recipientId,
+    });
+  };
 
-  // Get user products
-  const userProducts = useQuery({
-    queryKey: ['userProducts', user?.id],
-    queryFn: () => user ? financialService.getUserProducts(user.id) : [],
-    enabled: !!user,
-  });
+  const applyLoan = async (productId: string, amount: number, termMonths: number, purpose: string) => {
+    if (!userId) {
+      toast.error('You must be logged in to apply for a loan');
+      return;
+    }
 
-  // Get KYC documents
-  const kycDocuments = useQuery({
-    queryKey: ['kycDocuments', user?.id],
-    queryFn: () => user ? financialService.getKYCDocuments(user.id) : [],
-    enabled: !!user,
-  });
+    const product = products?.find(p => p.id === productId);
+    if (!product) {
+      toast.error('Invalid product');
+      return;
+    }
 
-  // Update user profile mutation
-  const updateProfile = useMutation({
-    mutationFn: (updates: any) => {
-      if (!user) throw new Error('User not authenticated');
-      return financialService.updateUserProfile(user.id, updates);
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['userProfile', user?.id] });
-      toast({
-        title: "Profile Updated",
-        description: "Your profile has been successfully updated.",
-      });
-    },
-    onError: (error: any) => {
-      toast({
-        variant: "destructive",
-        title: "Update Failed",
-        description: error.message || "There was a problem updating your profile.",
-      });
-    },
-  });
+    if (amount < product.min_amount || amount > product.max_amount) {
+      toast.error(`Loan amount must be between ${product.min_amount} and ${product.max_amount}`);
+      return;
+    }
 
-  // Upload KYC document
-  const uploadKYCDocument = useMutation({
-    mutationFn: ({ docType, file }: { docType: KYCDocument['document_type'], file: File }) => {
-      if (!user) throw new Error('User not authenticated');
-      return financialService.uploadKYCDocument(user.id, docType, file);
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['kycDocuments', user?.id] });
-      toast({
-        title: "Document Uploaded",
-        description: "Your document has been uploaded for verification.",
-      });
-    },
-    onError: (error: any) => {
-      toast({
-        variant: "destructive",
-        title: "Upload Failed",
-        description: error.message || "There was a problem uploading your document.",
-      });
-    },
-  });
+    if (termMonths < product.term_min || termMonths > product.term_max) {
+      toast.error(`Loan term must be between ${product.term_min} and ${product.term_max} months`);
+      return;
+    }
 
-  // Create wallet
-  const createWallet = useMutation({
-    mutationFn: (currency: Wallet['currency']) => {
-      if (!user) throw new Error('User not authenticated');
-      return financialService.createWallet(user.id, currency);
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['userWallets', user?.id] });
-      toast({
-        title: "Wallet Created",
-        description: "Your new wallet has been created successfully.",
-      });
-    },
-    onError: (error: any) => {
-      toast({
-        variant: "destructive",
-        title: "Wallet Creation Failed",
-        description: error.message || "There was a problem creating your wallet.",
-      });
-    },
-  });
+    // Calculate monthly payment and total payment
+    const interestRate = product.interest_rate;
+    const monthlyInterestRate = interestRate / 12 / 100;
+    const monthlyPayment = (amount * monthlyInterestRate * Math.pow(1 + monthlyInterestRate, termMonths)) / 
+                           (Math.pow(1 + monthlyInterestRate, termMonths) - 1);
+    const totalPayment = monthlyPayment * termMonths;
 
-  // Create transaction mutation
-  const createTransaction = useMutation({
-    mutationFn: (transaction: Omit<Transaction, 'id' | 'created_at' | 'user_id'>) => {
-      if (!user) throw new Error('User not authenticated');
-      return financialService.createTransaction({
-        ...transaction,
-        user_id: user.id,
-      });
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['transactions', user?.id] });
-      queryClient.invalidateQueries({ queryKey: ['userWallets', user?.id] });
-      toast({
-        title: "Transaction Complete",
-        description: "Your transaction has been processed successfully.",
-      });
-    },
-    onError: (error: any) => {
-      toast({
-        variant: "destructive",
-        title: "Transaction Failed",
-        description: error.message || "There was a problem processing your transaction.",
-      });
-    },
-  });
-
-  // Transfer money
-  const transferMoney = useMutation({
-    mutationFn: ({ recipientId, amount, currency, description }: { 
-      recipientId: string, 
-      amount: number, 
-      currency: Transaction['currency'],
-      description?: string
-    }) => {
-      if (!user) throw new Error('User not authenticated');
-      return financialService.createTransaction({
-        amount,
-        currency,
-        type: 'transfer',
-        status: 'completed',
-        description: description || `Transfer to user ${recipientId}`,
-        recipient_id: recipientId
-      });
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['transactions', user?.id] });
-      queryClient.invalidateQueries({ queryKey: ['userWallets', user?.id] });
-      toast({
-        title: "Transfer Complete",
-        description: "Your money transfer has been processed successfully.",
-      });
-    },
-    onError: (error: any) => {
-      toast({
-        variant: "destructive",
-        title: "Transfer Failed",
-        description: error.message || "There was a problem processing your transfer.",
-      });
-    },
-  });
-
-  // Apply for loan mutation
-  const applyForLoan = useMutation({
-    mutationFn: (loan: Omit<Loan, 'id' | 'created_at' | 'user_id'>) => {
-      if (!user) throw new Error('User not authenticated');
-      return financialService.applyForLoan({
-        ...loan,
-        user_id: user.id,
-        status: 'pending',
-      });
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['activeLoans', user?.id] });
-      toast({
-        title: "Loan Application Submitted",
-        description: "Your loan application has been submitted for review.",
-      });
-    },
-    onError: (error: any) => {
-      toast({
-        variant: "destructive",
-        title: "Application Failed",
-        description: error.message || "There was a problem submitting your loan application.",
-      });
-    },
-  });
-
-  // Apply for product financing
-  const applyForProductFinancing = useMutation({
-    mutationFn: ({ productId, loanDetails }: { 
-      productId: string, 
-      loanDetails: Omit<Loan, 'id' | 'created_at' | 'user_id' | 'product_id' | 'amount'> 
-    }) => {
-      if (!user) throw new Error('User not authenticated');
-      return financialService.createLoanForProduct(user.id, productId, loanDetails);
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['activeLoans', user?.id] });
-      queryClient.invalidateQueries({ queryKey: ['userProducts', user?.id] });
-      toast({
-        title: "Financing Application Submitted",
-        description: "Your product financing application has been submitted for review.",
-      });
-    },
-    onError: (error: any) => {
-      toast({
-        variant: "destructive",
-        title: "Application Failed",
-        description: error.message || "There was a problem submitting your financing application.",
-      });
-    },
-  });
-
-  // Approve loan (admin/agent only)
-  const approveLoan = useMutation({
-    mutationFn: ({ loanId }: { loanId: string }) => {
-      if (!user) throw new Error('User not authenticated');
-      return financialService.approveLoan(loanId, user.id);
-    },
-    onSuccess: (data) => {
-      queryClient.invalidateQueries({ queryKey: ['activeLoans'] });
-      queryClient.invalidateQueries({ queryKey: ['transactions'] });
-      queryClient.invalidateQueries({ queryKey: ['userWallets'] });
-      toast({
-        title: "Loan Approved",
-        description: `Loan has been approved and funds disbursed to the borrower.`,
-      });
-    },
-    onError: (error: any) => {
-      toast({
-        variant: "destructive",
-        title: "Approval Failed",
-        description: error.message || "There was a problem approving the loan.",
-      });
-    },
-  });
-
-  // Reject loan (admin/agent only)
-  const rejectLoan = useMutation({
-    mutationFn: ({ loanId, reason }: { loanId: string, reason: string }) => {
-      if (!user) throw new Error('User not authenticated');
-      return financialService.rejectLoan(loanId, reason);
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['activeLoans'] });
-      toast({
-        title: "Loan Rejected",
-        description: "The loan application has been rejected.",
-      });
-    },
-    onError: (error: any) => {
-      toast({
-        variant: "destructive",
-        title: "Rejection Failed",
-        description: error.message || "There was a problem rejecting the loan.",
-      });
-    },
-  });
-
-  // Make loan repayment
-  const makeLoanRepayment = useMutation({
-    mutationFn: ({ 
-      loanId, 
-      amount, 
-      currency, 
-      paymentMethod 
-    }: { 
-      loanId: string, 
-      amount: number, 
-      currency: Transaction['currency'], 
-      paymentMethod: Transaction['payment_method'] 
-    }) => {
-      if (!user) throw new Error('User not authenticated');
-      return financialService.makeLoanRepayment(loanId, user.id, amount, currency, paymentMethod);
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['activeLoans', user?.id] });
-      queryClient.invalidateQueries({ queryKey: ['transactions', user?.id] });
-      queryClient.invalidateQueries({ queryKey: ['userWallets', user?.id] });
-      queryClient.invalidateQueries({ queryKey: ['kifaaScore', user?.id] });
-      
-      toast({
-        title: "Payment Successful",
-        description: "Your loan repayment has been processed.",
-      });
-    },
-    onError: (error: any) => {
-      toast({
-        variant: "destructive",
-        title: "Payment Failed",
-        description: error.message || "There was a problem processing your payment.",
-      });
-    },
-  });
-
-  // Update Kifaa score
-  const updateScore = useMutation({
-    mutationFn: () => {
-      if (!user) throw new Error('User not authenticated');
-      return financialService.updateKifaaScore(user.id);
-    },
-    onSuccess: (score) => {
-      queryClient.invalidateQueries({ queryKey: ['kifaaScore', user?.id] });
-      queryClient.invalidateQueries({ queryKey: ['userProfile', user?.id] });
-      queryClient.invalidateQueries({ queryKey: ['eligibleProducts', user?.id] });
-      
-      toast({
-        title: "Kifaa Score Updated",
-        description: `Your new Kifaa score is ${score}.`,
-      });
-    },
-    onError: (error: any) => {
-      toast({
-        variant: "destructive",
-        title: "Update Failed",
-        description: error.message || "There was a problem updating your score.",
-      });
-    },
-  });
+    return applyLoanMutation.mutate({
+      user_id: userId,
+      product_id: productId,
+      amount,
+      interest_rate: interestRate,
+      term_months: termMonths,
+      monthly_payment: monthlyPayment,
+      total_payment: totalPayment,
+      status: 'pending',
+      purpose,
+      remaining_amount: amount,
+    });
+  };
 
   return {
-    isLoading: isLoading || userProfile.isLoading || userWallets.isLoading,
-    userProfile: userProfile.data,
-    userWallets: userWallets.data,
-    transactionHistory: transactionHistory.data || [],
-    activeLoans: activeLoans.data || [],
-    loanHistory: loanHistory.data || [],
-    kifaaScore: kifaaScore.data,
-    eligibleProducts: eligibleProducts.data || [],
-    allProducts: allProducts.data || [],
-    userProducts: userProducts.data || [],
-    kycDocuments: kycDocuments.data || [],
-    
-    // Mutations
-    updateProfile: updateProfile.mutate,
-    uploadKYCDocument: uploadKYCDocument.mutate,
-    createWallet: createWallet.mutate,
-    createTransaction: createTransaction.mutate,
-    transferMoney: transferMoney.mutate,
-    applyForLoan: applyForLoan.mutate,
-    applyForProductFinancing: applyForProductFinancing.mutate,
-    approveLoan: approveLoan.mutate,
-    rejectLoan: rejectLoan.mutate,
-    makeLoanRepayment: makeLoanRepayment.mutate,
-    updateScore: updateScore.mutate,
-    
-    // Helpers
+    wallets,
+    transactions,
+    products,
+    loans,
+    creditScore,
+    isLoading: isLoadingWallets || isLoadingTransactions || isLoadingProducts || isLoadingLoans || isLoadingCreditScore,
     getWalletBalance,
-    refetchAll: () => {
-      queryClient.invalidateQueries({ queryKey: ['userProfile', user?.id] });
-      queryClient.invalidateQueries({ queryKey: ['userWallets', user?.id] });
-      queryClient.invalidateQueries({ queryKey: ['transactions', user?.id] });
-      queryClient.invalidateQueries({ queryKey: ['activeLoans', user?.id] });
-      queryClient.invalidateQueries({ queryKey: ['loanHistory', user?.id] });
-      queryClient.invalidateQueries({ queryKey: ['kifaaScore', user?.id] });
-      queryClient.invalidateQueries({ queryKey: ['eligibleProducts', user?.id] });
-      queryClient.invalidateQueries({ queryKey: ['userProducts', user?.id] });
-      queryClient.invalidateQueries({ queryKey: ['kycDocuments', user?.id] });
-    }
+    getTotalBalance,
+    deposit,
+    withdraw,
+    transfer,
+    applyLoan,
   };
-}
+};
