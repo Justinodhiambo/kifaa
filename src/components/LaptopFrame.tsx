@@ -10,7 +10,7 @@ const LaptopFrame = ({ children, variant = 'macbook' }: LaptopFrameProps) => {
   return (
     <div className="relative mx-auto my-8 max-w-5xl">
       {/* Laptop lid with screen */}
-      <div className="relative mx-auto rounded-t-xl bg-gray-800 p-2 shadow-lg">
+      <div className={`relative mx-auto rounded-t-xl ${variant === 'macbook' ? 'bg-gray-800' : 'bg-gray-700'} p-2 shadow-lg`}>
         {/* Camera/notch for MacBook */}
         {variant === 'macbook' && (
           <div className="absolute left-1/2 top-0 z-10 -translate-x-1/2 transform">
@@ -22,8 +22,8 @@ const LaptopFrame = ({ children, variant = 'macbook' }: LaptopFrameProps) => {
         
         {/* Screen bezel */}
         <div className={`overflow-hidden rounded-lg border-8 ${variant === 'macbook' ? 'border-gray-700' : 'border-black'}`}>
-          {/* Screen content */}
-          <div className={`bg-background h-full rounded-sm ${variant === 'macbook' ? 'pt-4' : 'pt-2'}`}>
+          {/* Screen content with proper height to ensure visibility */}
+          <div className={`bg-background rounded-sm ${variant === 'macbook' ? 'pt-4' : 'pt-2'}`} style={{ minHeight: '60vh' }}>
             {children}
           </div>
         </div>

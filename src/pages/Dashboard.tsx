@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
@@ -67,6 +66,7 @@ const Dashboard = () => {
       
       <LaptopFrame variant={laptopVariant}>
         <div className="p-4 overflow-auto max-h-[calc(100vh-220px)]">
+          {/* Dashboard content */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
             <Card>
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
