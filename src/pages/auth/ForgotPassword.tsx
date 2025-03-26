@@ -7,11 +7,12 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 import { useAuth } from '@/hooks/use-auth';
-import { MailIcon, RefreshCw } from 'lucide-react';
+import { MailIcon, RefreshCw, ArrowLeft } from 'lucide-react';
 
 const ForgotPassword = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [email, setEmail] = useState('');
   const { forgotPassword } = useAuth();
   
   const { register, handleSubmit, formState: { errors } } = useForm({
@@ -23,6 +24,7 @@ const ForgotPassword = () => {
   const onSubmit = async (data: { email: string }) => {
     try {
       setIsSubmitting(true);
+      setEmail(data.email);
       await forgotPassword(data.email);
       setIsSuccess(true);
       toast.success('Password reset link sent to your email');
@@ -46,16 +48,24 @@ const ForgotPassword = () => {
             </div>
             <CardTitle className="text-2xl text-center">Check Your Email</CardTitle>
             <CardDescription className="text-center">
-              We've sent a password reset link to your email
+              We've sent a password reset link to <span className="font-medium">{email}</span>
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
             <div className="bg-muted p-4 rounded-md text-sm">
               <p className="mb-2">
-                Click the link in your email to reset your password. If you don't see the email, please check your spam folder.
+                Click the link in your email to reset your password. The link will expire after 24 hours.
+              </p>
+              <p>
+                If you don't see the email, please check your spam folder or try another email address.
               </p>
             </div>
-            <Button variant="outline" className="w-full" onClick={() => setIsSuccess(false)}>
+            <Button 
+              variant="outline" 
+              className="w-full flex items-center justify-center gap-2" 
+              onClick={() => setIsSuccess(false)}
+            >
+              <ArrowLeft className="h-4 w-4" />
               Try another email
             </Button>
           </CardContent>
@@ -76,8 +86,13 @@ const ForgotPassword = () => {
     <div className="flex items-center justify-center min-h-screen bg-gray-100 dark:bg-gray-900 p-4">
       <Card className="w-full max-w-md">
         <CardHeader>
-          <CardTitle className="text-2xl">Forgot Password</CardTitle>
-          <CardDescription>Enter your email to reset your password</CardDescription>
+          <div className="flex justify-center mb-2">
+            <div className="rounded-full bg-primary/10 p-3">
+              <MailIcon className="h-6 w-6 text-primary" />
+            </div>
+          </div>
+          <CardTitle className="text-2xl text-center">Forgot Password</CardTitle>
+          <CardDescription className="text-center">Enter your email to reset your password</CardDescription>
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
