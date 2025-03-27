@@ -1,5 +1,6 @@
 
 import React, { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
 import Features from '@/components/Features';
@@ -9,10 +10,13 @@ import Footer from '@/components/Footer';
 import { ThemeProvider } from '@/components/ThemeProvider';
 import LaptopFrame from '@/components/LaptopFrame';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 import { Wallet, CreditCard, BanknoteIcon, ArrowUpRight, ArrowDownLeft, Clock } from 'lucide-react';
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 const Index = () => {
+  const navigate = useNavigate();
+  
   // Sample transactions for demo
   const recentTransactions = [
     { 
@@ -60,6 +64,11 @@ const Index = () => {
       default:
         return <Clock className="h-4 w-4 text-gray-500" />;
     }
+  };
+
+  // Navigation handlers
+  const handleNavigate = (path: string) => {
+    navigate(path);
   };
 
   useEffect(() => {
@@ -242,18 +251,30 @@ const Index = () => {
                     </Card>
                     
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                      <button className="p-3 text-center rounded-md border border-input bg-background hover:bg-accent hover:text-accent-foreground transition-colors">
+                      <Button 
+                        onClick={() => handleNavigate('/wallet')}
+                        className="p-3 text-center rounded-md border border-input bg-background hover:bg-accent hover:text-accent-foreground transition-colors"
+                      >
                         Fund Wallet
-                      </button>
-                      <button className="p-3 text-center rounded-md border border-input bg-background hover:bg-accent hover:text-accent-foreground transition-colors">
+                      </Button>
+                      <Button 
+                        onClick={() => handleNavigate('/loans')}
+                        className="p-3 text-center rounded-md border border-input bg-background hover:bg-accent hover:text-accent-foreground transition-colors"
+                      >
                         Apply for Loan
-                      </button>
-                      <button className="p-3 text-center rounded-md border border-input bg-background hover:bg-accent hover:text-accent-foreground transition-colors">
+                      </Button>
+                      <Button 
+                        onClick={() => handleNavigate('/products')}
+                        className="p-3 text-center rounded-md border border-input bg-background hover:bg-accent hover:text-accent-foreground transition-colors"
+                      >
                         Browse Products
-                      </button>
-                      <button className="p-3 text-center rounded-md border border-input bg-background hover:bg-accent hover:text-accent-foreground transition-colors">
+                      </Button>
+                      <Button 
+                        onClick={() => handleNavigate('/refer')}
+                        className="p-3 text-center rounded-md border border-input bg-background hover:bg-accent hover:text-accent-foreground transition-colors"
+                      >
                         Refer a Friend
-                      </button>
+                      </Button>
                     </div>
                   </div>
                 </div>

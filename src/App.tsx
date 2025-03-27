@@ -17,6 +17,7 @@ import Profile from "./pages/Profile";
 import Wallet from "./pages/Wallet";
 import Loans from "./pages/Loans";
 import Products from "./pages/Products";
+import Refer from "./pages/Refer";
 import AdminDashboard from "./pages/admin/Dashboard";
 import ProtectedRoute from "./components/ProtectedRoute";
 import RoleProtectedRoute from "./components/RoleProtectedRoute";
@@ -63,6 +64,11 @@ const App = () => (
             <Route path="/products" element={
               <ProtectedRoute>
                 <Products />
+              </ProtectedRoute>
+            } />
+            <Route path="/refer" element={
+              <ProtectedRoute>
+                <Refer />
               </ProtectedRoute>
             } />
             
