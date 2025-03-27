@@ -131,10 +131,8 @@ const Index = () => {
       <div className="min-h-screen flex flex-col bg-background text-foreground font-sf">
         <Navbar />
         <main className="flex-1">
-          <Hero />
-          
           {/* Demo browser dashboard section */}
-          <section className="py-16 bg-muted/30">
+          <section className="py-16 bg-muted/30" id="dashboard-demo">
             <div className="container mx-auto px-4">
               <div className="text-center mb-8">
                 <h2 className="text-3xl font-bold mb-2">Experience Our Platform</h2>
