@@ -2,7 +2,6 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
-import Hero from '@/components/Hero';
 import Features from '@/components/Features';
 import HowItWorks from '@/components/HowItWorks';
 import Testimonials from '@/components/Testimonials';
@@ -13,9 +12,15 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Button } from "@/components/ui/button";
 import { Wallet, CreditCard, BanknoteIcon, ArrowUpRight, ArrowDownLeft, Clock } from 'lucide-react';
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import AnimatedGradient from '@/components/AnimatedGradient';
+import FadeIn from '@/components/FadeIn';
+import { cn } from '@/lib/utils';
+import { useTheme } from '@/components/ThemeProvider';
 
 const Index = () => {
   const navigate = useNavigate();
+  const { theme } = useTheme();
+  const isDark = theme === "dark";
   
   // Sample transactions for demo
   const recentTransactions = [
@@ -131,6 +136,123 @@ const Index = () => {
       <div className="min-h-screen flex flex-col bg-background text-foreground font-sf">
         <Navbar />
         <main className="flex-1">
+          {/* New Hero Section */}
+          <section className="py-16 md:py-28 relative overflow-hidden">
+            <AnimatedGradient subtle={true} />
+            <div className="container mx-auto px-4">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+                <FadeIn delay={0.1} duration={0.6} className="text-center lg:text-left">
+                  <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight tracking-tight mb-6">
+                    Affordable Loans. <br className="hidden md:inline" />
+                    Instant Credit Scores. <br className="hidden md:inline" />
+                    <span className="text-gradient-primary">All from Your Phone.</span>
+                  </h1>
+                  
+                  <p className="text-lg md:text-xl mb-10 max-w-2xl mx-auto lg:mx-0 text-muted-foreground">
+                    Get financing for motorbikes, phones, and more — even with no credit history. 
+                    Available via USSD, M-Pesa, Airtel, and crypto.
+                  </p>
+                  
+                  <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
+                    <Button 
+                      className="w-full sm:w-auto text-base group rounded-full py-6" 
+                      size="lg" 
+                      onClick={() => handleNavigate('/credit-score')}
+                    >
+                      Check Your Score
+                      <ArrowUpRight className="ml-2 h-4 w-4 inline group-hover:translate-x-1 transition-transform" />
+                    </Button>
+                    
+                    <Button 
+                      variant="outline" 
+                      className="w-full sm:w-auto text-base rounded-full py-6" 
+                      size="lg"
+                      onClick={() => {
+                        const element = document.getElementById('how-it-works');
+                        if (element) {
+                          element.scrollIntoView({ behavior: 'smooth' });
+                        }
+                      }}
+                    >
+                      How It Works
+                    </Button>
+                  </div>
+                  
+                  <div className="mt-10 flex flex-wrap justify-center lg:justify-start items-center gap-6">
+                    <div className="flex items-center gap-2">
+                      <div className={cn(
+                        "h-8 w-8 rounded-full flex items-center justify-center",
+                        isDark ? "bg-gray-800" : "bg-gray-100"
+                      )}>
+                        <img 
+                          src="https://cdn-icons-png.flaticon.com/512/825/825464.png" 
+                          alt="M-Pesa" 
+                          className="h-5 w-5"
+                        />
+                      </div>
+                      <span className="text-sm font-medium">M-Pesa</span>
+                    </div>
+                    
+                    <div className="flex items-center gap-2">
+                      <div className={cn(
+                        "h-8 w-8 rounded-full flex items-center justify-center",
+                        isDark ? "bg-gray-800" : "bg-gray-100"
+                      )}>
+                        <img 
+                          src="https://cdn-icons-png.flaticon.com/512/5968/5968200.png" 
+                          alt="Airtel Money" 
+                          className="h-5 w-5"
+                        />
+                      </div>
+                      <span className="text-sm font-medium">Airtel Money</span>
+                    </div>
+                    
+                    <div className="flex items-center gap-2">
+                      <div className={cn(
+                        "h-8 w-8 rounded-full flex items-center justify-center",
+                        isDark ? "bg-gray-800" : "bg-gray-100"
+                      )}>
+                        <BanknoteIcon className="h-5 w-5 text-blue-500" />
+                      </div>
+                      <span className="text-sm font-medium">Trusted by Local Banks</span>
+                    </div>
+                    
+                    <div className="flex items-center gap-2">
+                      <div className={cn(
+                        "h-8 w-8 rounded-full flex items-center justify-center",
+                        isDark ? "bg-gray-800" : "bg-gray-100"
+                      )}>
+                        <img 
+                          src="https://cdn-icons-png.flaticon.com/512/5968/5968260.png" 
+                          alt="Crypto-Friendly" 
+                          className="h-5 w-5"
+                        />
+                      </div>
+                      <span className="text-sm font-medium">Crypto-Friendly</span>
+                    </div>
+                  </div>
+                </FadeIn>
+                
+                <FadeIn delay={0.3} duration={0.6} direction="left" className="relative">
+                  <div className="relative mx-auto max-w-md">
+                    <img 
+                      src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158" 
+                      alt="Person using Kifaa on phone" 
+                      className="rounded-2xl shadow-apple object-cover h-[500px] w-full"
+                    />
+                    <div className="absolute top-5 right-5 bg-green-500 text-white font-bold py-2 px-4 rounded-full">
+                      APPROVED
+                    </div>
+                    
+                    {/* Add a decorative element */}
+                    <div className="absolute -bottom-6 -left-6 h-24 w-24 rounded-2xl rotate-12 bg-primary-500/20 backdrop-blur-sm z-[-1]"></div>
+                    <div className="absolute -top-6 -right-6 h-16 w-16 rounded-full bg-blue-500/20 backdrop-blur-sm z-[-1]"></div>
+                  </div>
+                </FadeIn>
+              </div>
+            </div>
+          </section>
+          
           {/* Demo browser dashboard section */}
           <section className="py-16 bg-muted/30" id="dashboard-demo">
             <div className="container mx-auto px-4">
@@ -280,8 +402,8 @@ const Index = () => {
             </div>
           </section>
           
-          <Features />
           <HowItWorks />
+          <Features />
           <Testimonials />
         </main>
         <Footer />
