@@ -1,5 +1,5 @@
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
 import Features from '@/components/Features';
@@ -10,14 +10,9 @@ import { ThemeProvider } from '@/components/ThemeProvider';
 import LaptopFrame from '@/components/LaptopFrame';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Wallet, CreditCard, BanknoteIcon, ArrowUpRight, ArrowDownLeft, Clock } from 'lucide-react';
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 const Index = () => {
-  const [laptopVariant, setLaptopVariant] = useState<'macbook' | 'windows'>('macbook');
-  
-  const toggleLaptopVariant = () => {
-    setLaptopVariant(prev => prev === 'macbook' ? 'windows' : 'macbook');
-  };
-
   // Sample transactions for demo
   const recentTransactions = [
     { 
@@ -123,29 +118,23 @@ const Index = () => {
   }, []);
 
   return (
-    <ThemeProvider defaultTheme="dark">
-      <div className="min-h-screen flex flex-col bg-background text-foreground font-sf dark:bg-gray-950">
+    <ThemeProvider defaultTheme="light">
+      <div className="min-h-screen flex flex-col bg-background text-foreground font-sf">
         <Navbar />
         <main className="flex-1">
           <Hero />
           
           {/* Demo browser dashboard section */}
-          <section className="py-16 bg-muted/50">
+          <section className="py-16 bg-muted/30">
             <div className="container mx-auto px-4">
               <div className="text-center mb-8">
                 <h2 className="text-3xl font-bold mb-2">Experience Our Platform</h2>
                 <p className="text-muted-foreground max-w-2xl mx-auto">
                   Get a preview of our intuitive dashboard interface designed for simplicity and functionality.
                 </p>
-                <button 
-                  onClick={toggleLaptopVariant} 
-                  className="mt-4 px-4 py-2 rounded-md bg-primary text-white text-sm"
-                >
-                  Switch to {laptopVariant === 'macbook' ? 'Windows' : 'MacBook'} Style
-                </button>
               </div>
               
-              <LaptopFrame variant={laptopVariant}>
+              <LaptopFrame>
                 <div className="h-full">
                   {/* Browser-style UI */}
                   <div className="h-10 flex items-center px-3 border-b bg-gray-100 dark:bg-gray-800 border-gray-200 dark:border-gray-700">
@@ -164,16 +153,16 @@ const Index = () => {
                     <header className="flex justify-between items-center mb-6">
                       <div>
                         <h1 className="text-2xl font-bold">Kifaa Dashboard</h1>
-                        <p className="text-muted-foreground">Welcome back, John Doe</p>
+                        <p className="text-muted-foreground">Welcome back, Wanjiku Kamau</p>
                       </div>
                       <div className="flex items-center">
-                        <div className="h-10 w-10 rounded-full bg-gray-200 dark:bg-gray-700 overflow-hidden">
-                          <img 
-                            src="https://randomuser.me/api/portraits/men/32.jpg" 
-                            alt="User avatar" 
-                            className="h-full w-full object-cover"
+                        <Avatar className="h-10 w-10">
+                          <AvatarImage 
+                            src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158" 
+                            alt="Wanjiku Kamau"
                           />
-                        </div>
+                          <AvatarFallback>WK</AvatarFallback>
+                        </Avatar>
                       </div>
                     </header>
                     
