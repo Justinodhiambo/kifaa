@@ -4,6 +4,7 @@ import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { MenuIcon, X, ChevronRight, Hexagon, Zap } from "lucide-react";
 import { useTheme } from './ThemeProvider';
+import { useNavigate } from 'react-router-dom';
 
 interface NavLinkProps {
   href: string;
@@ -15,6 +16,7 @@ const Navbar: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { theme } = useTheme();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -46,6 +48,13 @@ const Navbar: React.FC = () => {
         top: offsetPosition,
         behavior: 'smooth'
       });
+    }
+  };
+
+  const handleNavigation = (path: string) => {
+    navigate(path);
+    if (mobileMenuOpen) {
+      setMobileMenuOpen(false);
     }
   };
 
@@ -90,11 +99,22 @@ const Navbar: React.FC = () => {
           <NavLink href="#features" onClick={() => scrollToSection('features')}>Features</NavLink>
           <NavLink href="#how-it-works" onClick={() => scrollToSection('how-it-works')}>How It Works</NavLink>
           <NavLink href="#testimonials" onClick={() => scrollToSection('testimonials')}>Testimonials</NavLink>
-          <Button variant="ghost" className={cn(
-            "ml-4 rounded-full",
-            theme === "dark" ? "text-gray-300 hover:text-white" : "text-gray-700 hover:text-gray-900"
-          )}>Sign In</Button>
-          <Button className="bg-primary hover:bg-primary/90 text-white shadow-md rounded-full">Get Started</Button>
+          <Button 
+            variant="ghost" 
+            className={cn(
+              "ml-4 rounded-full",
+              theme === "dark" ? "text-gray-300 hover:text-white" : "text-gray-700 hover:text-gray-900"
+            )}
+            onClick={() => handleNavigation('/login')}
+          >
+            Sign In
+          </Button>
+          <Button 
+            className="bg-primary hover:bg-primary/90 text-white shadow-md rounded-full"
+            onClick={() => handleNavigation('/register')}
+          >
+            Get Started
+          </Button>
         </nav>
 
         {/* Mobile Menu Button */}
@@ -138,8 +158,19 @@ const Navbar: React.FC = () => {
               Testimonials
             </MobileNavLink>
             <div className="pt-6 flex flex-col space-y-4">
-              <Button variant="outline" className="w-48 rounded-full">Sign In</Button>
-              <Button className="w-48 rounded-full">Get Started</Button>
+              <Button 
+                variant="outline" 
+                className="w-48 rounded-full"
+                onClick={() => handleNavigation('/login')}
+              >
+                Sign In
+              </Button>
+              <Button 
+                className="w-48 rounded-full"
+                onClick={() => handleNavigation('/register')}
+              >
+                Get Started
+              </Button>
             </div>
           </nav>
         </div>
