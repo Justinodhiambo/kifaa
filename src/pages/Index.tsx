@@ -136,7 +136,7 @@ const Index = () => {
       <div className="min-h-screen flex flex-col bg-background text-foreground font-sf">
         <Navbar />
         <main className="flex-1">
-          {/* New Hero Section */}
+          {/* Hero Section */}
           <section className="py-16 md:py-28 relative overflow-hidden">
             <AnimatedGradient subtle={true} />
             <div className="container mx-auto px-4">
@@ -236,8 +236,8 @@ const Index = () => {
                 <FadeIn delay={0.3} duration={0.6} direction="left" className="relative">
                   <div className="relative mx-auto max-w-md">
                     <img 
-                      src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158" 
-                      alt="Person using Kifaa on phone" 
+                      src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=1200&auto=format" 
+                      alt="Kenyan person using Kifaa on a mobile phone" 
                       className="rounded-2xl shadow-apple object-cover h-[500px] w-full"
                     />
                     <div className="absolute top-5 right-5 bg-green-500 text-white font-bold py-2 px-4 rounded-full">
@@ -287,7 +287,7 @@ const Index = () => {
                       <div className="flex items-center">
                         <Avatar className="h-10 w-10">
                           <AvatarImage 
-                            src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158" 
+                            src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=100&auto=format" 
                             alt="Wanjiku Kamau"
                           />
                           <AvatarFallback>WK</AvatarFallback>
@@ -373,25 +373,29 @@ const Index = () => {
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                       <Button 
                         onClick={() => handleNavigate('/wallet')}
-                        className="p-3 text-center rounded-md border border-input bg-background hover:bg-accent hover:text-accent-foreground transition-colors"
+                        variant="dashboard"
+                        className="p-3 text-center rounded-md"
                       >
                         Fund Wallet
                       </Button>
                       <Button 
                         onClick={() => handleNavigate('/loans')}
-                        className="p-3 text-center rounded-md border border-input bg-background hover:bg-accent hover:text-accent-foreground transition-colors"
+                        variant="dashboard"
+                        className="p-3 text-center rounded-md"
                       >
                         Apply for Loan
                       </Button>
                       <Button 
                         onClick={() => handleNavigate('/products')}
-                        className="p-3 text-center rounded-md border border-input bg-background hover:bg-accent hover:text-accent-foreground transition-colors"
+                        variant="dashboard"
+                        className="p-3 text-center rounded-md"
                       >
                         Browse Products
                       </Button>
                       <Button 
                         onClick={() => handleNavigate('/refer')}
-                        className="p-3 text-center rounded-md border border-input bg-background hover:bg-accent hover:text-accent-foreground transition-colors"
+                        variant="dashboard"
+                        className="p-3 text-center rounded-md"
                       >
                         Refer a Friend
                       </Button>
