@@ -256,8 +256,8 @@ const Register = () => {
           <div className="hidden lg:flex w-full max-w-2xl flex-col items-center">
             <div className="relative rounded-2xl overflow-hidden shadow-2xl">
               <img 
-                src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?q=80&w=1200&auto=format" 
-                alt="Kenyan team discussing financial solutions" 
+                src="https://images.unsplash.com/photo-1605810230434-7631ac76ec81?q=80&w=1200&auto=format" 
+                alt="Local Kenyan team using financial services" 
                 className="object-cover w-full h-[600px]"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex flex-col justify-end p-8">
@@ -270,21 +270,21 @@ const Register = () => {
             <div className="grid grid-cols-3 gap-4 mt-4">
               <div className={cn(
                 "rounded-lg p-4 shadow-md",
-                isDark ? "bg-gray-800/80" : "bg-gray-50"
+                isDark ? "bg-gray-800 text-white" : "bg-white border border-gray-200"
               )}>
                 <h4 className="font-semibold mb-1 text-foreground">No Credit History</h4>
                 <p className="text-sm text-muted-foreground">We approve loans even for first-time borrowers</p>
               </div>
               <div className={cn(
                 "rounded-lg p-4 shadow-md",
-                isDark ? "bg-gray-800/80" : "bg-gray-50"
+                isDark ? "bg-gray-800 text-white" : "bg-white border border-gray-200"
               )}>
                 <h4 className="font-semibold mb-1 text-foreground">Mobile First</h4>
                 <p className="text-sm text-muted-foreground">Manage everything from your phone</p>
               </div>
               <div className={cn(
                 "rounded-lg p-4 shadow-md",
-                isDark ? "bg-gray-800/80" : "bg-gray-50"
+                isDark ? "bg-gray-800 text-white" : "bg-white border border-gray-200"
               )}>
                 <h4 className="font-semibold mb-1 text-foreground">Low Interest</h4>
                 <p className="text-sm text-muted-foreground">Get the best rates in the market</p>
