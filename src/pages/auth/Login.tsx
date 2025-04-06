@@ -67,10 +67,10 @@ const Login = () => {
               <p className="text-muted-foreground text-center lg:text-left">Sign in to access your account and manage your loans</p>
             </div>
             
-            <Card className="border border-border/40 shadow-lg bg-card/60 backdrop-blur-sm animate-fade-in">
-              <CardHeader>
-                <CardTitle className="text-2xl">Sign In</CardTitle>
-                <CardDescription>Enter your credentials to access your account</CardDescription>
+            <Card className="border border-border shadow-lg bg-card backdrop-blur-sm animate-fade-in">
+              <CardHeader className="bg-card">
+                <CardTitle className="text-2xl text-foreground">Sign In</CardTitle>
+                <CardDescription className="text-muted-foreground">Enter your credentials to access your account</CardDescription>
               </CardHeader>
               <CardContent>
                 <Form {...form}>
@@ -80,13 +80,13 @@ const Login = () => {
                       name="email"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Email</FormLabel>
+                          <FormLabel className="text-foreground">Email</FormLabel>
                           <div className="relative">
                             <Mail className="absolute left-3 top-2.5 h-5 w-5 text-muted-foreground" />
                             <FormControl>
                               <Input 
                                 placeholder="you@example.com" 
-                                className="pl-10" 
+                                className="pl-10 bg-background text-foreground" 
                                 type="email"
                                 {...field}
                               />
@@ -101,13 +101,13 @@ const Login = () => {
                       name="password"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Password</FormLabel>
+                          <FormLabel className="text-foreground">Password</FormLabel>
                           <div className="relative">
                             <Lock className="absolute left-3 top-2.5 h-5 w-5 text-muted-foreground" />
                             <FormControl>
                               <Input 
                                 placeholder="••••••••" 
-                                className="pl-10" 
+                                className="pl-10 bg-background text-foreground" 
                                 type="password"
                                 {...field}
                               />
@@ -129,7 +129,7 @@ const Login = () => {
                   </form>
                 </Form>
               </CardContent>
-              <CardFooter className="flex flex-col gap-4">
+              <CardFooter className="flex flex-col gap-4 bg-card">
                 <Link 
                   to="/forgot-password" 
                   className="text-sm text-primary hover:underline underline-offset-4 transition-colors"
@@ -160,27 +160,27 @@ const Login = () => {
                 alt="Kenyans using mobile financial services" 
                 className="object-cover w-full h-[500px]"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex flex-col justify-end p-8">
-                <div className="bg-white/10 backdrop-blur-lg rounded-xl p-4 border border-white/20 shadow-lg max-w-md text-white">
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex flex-col justify-end p-8">
+                <div className="bg-white/20 backdrop-blur-lg rounded-xl p-6 border border-white/30 shadow-lg max-w-md text-white">
                   <h3 className="text-xl font-bold mb-2">Instant loan approvals</h3>
-                  <p className="text-white/90">Check your credit score and get pre-approved for financing in minutes, not days.</p>
+                  <p className="text-white">Check your credit score and get pre-approved for financing in minutes, not days.</p>
                 </div>
               </div>
             </div>
             <div className="grid grid-cols-2 gap-4 mt-4">
               <div className={cn(
-                "rounded-lg p-4 shadow-md",
-                isDark ? "bg-gray-800 text-white" : "bg-white border border-gray-200"
+                "rounded-lg p-6 shadow-md border-2",
+                isDark ? "bg-gray-800 text-white border-gray-700" : "bg-white border-gray-200"
               )}>
-                <h4 className="font-semibold mb-1 text-foreground">Fast Disbursements</h4>
-                <p className="text-sm text-muted-foreground">Get funds directly to your M-Pesa or Airtel Money</p>
+                <h4 className="font-bold mb-2 text-lg">Fast Disbursements</h4>
+                <p className="text-sm">Get funds directly to your M-Pesa or Airtel Money</p>
               </div>
               <div className={cn(
-                "rounded-lg p-4 shadow-md",
-                isDark ? "bg-gray-800 text-white" : "bg-white border border-gray-200"
+                "rounded-lg p-6 shadow-md border-2",
+                isDark ? "bg-gray-800 text-white border-gray-700" : "bg-white border-gray-200"
               )}>
-                <h4 className="font-semibold mb-1 text-foreground">24/7 Support</h4>
-                <p className="text-sm text-muted-foreground">Access customer service anytime via USSD or app</p>
+                <h4 className="font-bold mb-2 text-lg">24/7 Support</h4>
+                <p className="text-sm">Access customer service anytime via USSD or app</p>
               </div>
             </div>
           </div>

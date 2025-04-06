@@ -88,10 +88,10 @@ const Register = () => {
               <p className="text-muted-foreground text-center lg:text-left">Join thousands of Kenyans accessing affordable financial services</p>
             </div>
             
-            <Card className="border border-border/40 shadow-lg bg-card/60 backdrop-blur-sm animate-fade-in">
-              <CardHeader>
-                <CardTitle className="text-2xl">Sign Up</CardTitle>
-                <CardDescription>Fill in your details to create an account</CardDescription>
+            <Card className="border border-border shadow-lg bg-card backdrop-blur-sm animate-fade-in">
+              <CardHeader className="bg-card">
+                <CardTitle className="text-2xl text-foreground">Sign Up</CardTitle>
+                <CardDescription className="text-muted-foreground">Fill in your details to create an account</CardDescription>
               </CardHeader>
               <CardContent>
                 <Form {...form}>
@@ -102,13 +102,13 @@ const Register = () => {
                         name="firstName"
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel>First Name</FormLabel>
+                            <FormLabel className="text-foreground">First Name</FormLabel>
                             <div className="relative">
                               <User className="absolute left-3 top-2.5 h-5 w-5 text-muted-foreground" />
                               <FormControl>
                                 <Input 
                                   placeholder="John" 
-                                  className="pl-10" 
+                                  className="pl-10 bg-background text-foreground"
                                   {...field}
                                 />
                               </FormControl>
@@ -122,10 +122,11 @@ const Register = () => {
                         name="lastName"
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel>Last Name</FormLabel>
+                            <FormLabel className="text-foreground">Last Name</FormLabel>
                             <FormControl>
                               <Input 
-                                placeholder="Doe" 
+                                placeholder="Doe"
+                                className="bg-background text-foreground"
                                 {...field}
                               />
                             </FormControl>
@@ -140,13 +141,13 @@ const Register = () => {
                       name="email"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Email</FormLabel>
+                          <FormLabel className="text-foreground">Email</FormLabel>
                           <div className="relative">
                             <Mail className="absolute left-3 top-2.5 h-5 w-5 text-muted-foreground" />
                             <FormControl>
                               <Input 
                                 placeholder="you@example.com" 
-                                className="pl-10" 
+                                className="pl-10 bg-background text-foreground" 
                                 type="email"
                                 {...field}
                               />
@@ -162,19 +163,19 @@ const Register = () => {
                       name="phoneNumber"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Phone Number</FormLabel>
+                          <FormLabel className="text-foreground">Phone Number</FormLabel>
                           <div className="relative">
                             <Phone className="absolute left-3 top-2.5 h-5 w-5 text-muted-foreground" />
                             <FormControl>
                               <Input 
                                 placeholder="+254 7XX XXX XXX" 
-                                className="pl-10" 
+                                className="pl-10 bg-background text-foreground" 
                                 type="tel"
                                 {...field}
                               />
                             </FormControl>
                           </div>
-                          <FormDescription>
+                          <FormDescription className="text-muted-foreground">
                             We'll use this for loan disbursements via M-Pesa or Airtel Money
                           </FormDescription>
                           <FormMessage />
@@ -187,13 +188,13 @@ const Register = () => {
                       name="password"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Password</FormLabel>
+                          <FormLabel className="text-foreground">Password</FormLabel>
                           <div className="relative">
                             <Lock className="absolute left-3 top-2.5 h-5 w-5 text-muted-foreground" />
                             <FormControl>
                               <Input 
                                 placeholder="••••••••" 
-                                className="pl-10" 
+                                className="pl-10 bg-background text-foreground" 
                                 type="password"
                                 {...field}
                               />
@@ -209,13 +210,13 @@ const Register = () => {
                       name="confirmPassword"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Confirm Password</FormLabel>
+                          <FormLabel className="text-foreground">Confirm Password</FormLabel>
                           <div className="relative">
                             <Lock className="absolute left-3 top-2.5 h-5 w-5 text-muted-foreground" />
                             <FormControl>
                               <Input 
                                 placeholder="••••••••" 
-                                className="pl-10" 
+                                className="pl-10 bg-background text-foreground" 
                                 type="password"
                                 {...field}
                               />
@@ -238,7 +239,7 @@ const Register = () => {
                   </form>
                 </Form>
               </CardContent>
-              <CardFooter className="flex justify-center">
+              <CardFooter className="flex justify-center bg-card">
                 <div className="flex items-center gap-2">
                   <Link 
                     to="/login" 
@@ -260,34 +261,34 @@ const Register = () => {
                 alt="Local Kenyan team using financial services" 
                 className="object-cover w-full h-[600px]"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex flex-col justify-end p-8">
-                <div className="bg-white/10 backdrop-blur-lg rounded-xl p-4 border border-white/20 shadow-lg max-w-md text-white">
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex flex-col justify-end p-8">
+                <div className="bg-white/20 backdrop-blur-lg rounded-xl p-6 border border-white/30 shadow-lg max-w-md text-white">
                   <h3 className="text-xl font-bold mb-2">Join our financial community</h3>
-                  <p className="text-white/90">Get access to loans, build credit history, and improve your financial future.</p>
+                  <p className="text-white">Get access to loans, build credit history, and improve your financial future.</p>
                 </div>
               </div>
             </div>
             <div className="grid grid-cols-3 gap-4 mt-4">
               <div className={cn(
-                "rounded-lg p-4 shadow-md",
-                isDark ? "bg-gray-800 text-white" : "bg-white border border-gray-200"
+                "rounded-lg p-6 shadow-md border-2",
+                isDark ? "bg-gray-800 text-white border-gray-700" : "bg-white border-gray-200"
               )}>
-                <h4 className="font-semibold mb-1 text-foreground">No Credit History</h4>
-                <p className="text-sm text-muted-foreground">We approve loans even for first-time borrowers</p>
+                <h4 className="font-bold mb-2 text-lg">No Credit History</h4>
+                <p className="text-sm">We approve loans even for first-time borrowers</p>
               </div>
               <div className={cn(
-                "rounded-lg p-4 shadow-md",
-                isDark ? "bg-gray-800 text-white" : "bg-white border border-gray-200"
+                "rounded-lg p-6 shadow-md border-2",
+                isDark ? "bg-gray-800 text-white border-gray-700" : "bg-white border-gray-200"
               )}>
-                <h4 className="font-semibold mb-1 text-foreground">Mobile First</h4>
-                <p className="text-sm text-muted-foreground">Manage everything from your phone</p>
+                <h4 className="font-bold mb-2 text-lg">Mobile First</h4>
+                <p className="text-sm">Manage everything from your phone</p>
               </div>
               <div className={cn(
-                "rounded-lg p-4 shadow-md",
-                isDark ? "bg-gray-800 text-white" : "bg-white border border-gray-200"
+                "rounded-lg p-6 shadow-md border-2",
+                isDark ? "bg-gray-800 text-white border-gray-700" : "bg-white border-gray-200"
               )}>
-                <h4 className="font-semibold mb-1 text-foreground">Low Interest</h4>
-                <p className="text-sm text-muted-foreground">Get the best rates in the market</p>
+                <h4 className="font-bold mb-2 text-lg">Low Interest</h4>
+                <p className="text-sm">Get the best rates in the market</p>
               </div>
             </div>
           </div>
