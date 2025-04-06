@@ -156,8 +156,8 @@ const Login = () => {
           <div className="hidden lg:flex w-full max-w-2xl flex-col items-center">
             <div className="relative rounded-2xl overflow-hidden shadow-2xl">
               <img 
-                src="https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?q=80&w=1200&auto=format" 
-                alt="Person using Kifaa platform" 
+                src="https://images.unsplash.com/photo-1556742502-ec7c0e9f34b1?q=80&w=1200&auto=format" 
+                alt="Person using mobile financial services in Kenya" 
                 className="object-cover w-full h-[500px]"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex flex-col justify-end p-8">
@@ -172,14 +172,14 @@ const Login = () => {
                 "rounded-lg p-4 shadow-md",
                 isDark ? "bg-gray-800/80" : "bg-gray-50"
               )}>
-                <h4 className="font-semibold mb-1">Fast Disbursements</h4>
+                <h4 className="font-semibold mb-1 text-foreground">Fast Disbursements</h4>
                 <p className="text-sm text-muted-foreground">Get funds directly to your M-Pesa or Airtel Money</p>
               </div>
               <div className={cn(
                 "rounded-lg p-4 shadow-md",
                 isDark ? "bg-gray-800/80" : "bg-gray-50"
               )}>
-                <h4 className="font-semibold mb-1">24/7 Support</h4>
+                <h4 className="font-semibold mb-1 text-foreground">24/7 Support</h4>
                 <p className="text-sm text-muted-foreground">Access customer service anytime via USSD or app</p>
               </div>
             </div>

@@ -1,4 +1,3 @@
-
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
@@ -236,8 +235,8 @@ const Index = () => {
                 <FadeIn delay={0.3} duration={0.6} direction="left" className="relative">
                   <div className="relative mx-auto max-w-md">
                     <img 
-                      src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=1200&auto=format" 
-                      alt="Kenyan person using Kifaa on a mobile phone" 
+                      src="https://images.unsplash.com/photo-1531482615713-2afd69097998?q=80&w=1200&auto=format" 
+                      alt="Kenyan entrepreneurs using mobile financial services" 
                       className="rounded-2xl shadow-apple object-cover h-[500px] w-full"
                     />
                     <div className="absolute top-5 right-5 bg-green-500 text-white font-bold py-2 px-4 rounded-full">
@@ -287,7 +286,7 @@ const Index = () => {
                       <div className="flex items-center">
                         <Avatar className="h-10 w-10">
                           <AvatarImage 
-                            src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=100&auto=format" 
+                            src="https://images.unsplash.com/photo-1531482615713-2afd69097998?q=80&w=100&auto=format" 
                             alt="Wanjiku Kamau"
                           />
                           <AvatarFallback>WK</AvatarFallback>
@@ -373,29 +372,25 @@ const Index = () => {
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                       <Button 
                         onClick={() => handleNavigate('/wallet')}
-                        variant="dashboard"
-                        className="p-3 text-center rounded-md"
+                        className="p-3 text-center rounded-md bg-primary hover:bg-primary/90 text-white"
                       >
                         Fund Wallet
                       </Button>
                       <Button 
                         onClick={() => handleNavigate('/loans')}
-                        variant="dashboard"
-                        className="p-3 text-center rounded-md"
+                        className="p-3 text-center rounded-md bg-primary hover:bg-primary/90 text-white"
                       >
                         Apply for Loan
                       </Button>
                       <Button 
                         onClick={() => handleNavigate('/products')}
-                        variant="dashboard"
-                        className="p-3 text-center rounded-md"
+                        className="p-3 text-center rounded-md bg-primary hover:bg-primary/90 text-white"
                       >
                         Browse Products
                       </Button>
                       <Button 
                         onClick={() => handleNavigate('/refer')}
-                        variant="dashboard"
-                        className="p-3 text-center rounded-md"
+                        className="p-3 text-center rounded-md bg-primary hover:bg-primary/90 text-white"
                       >
                         Refer a Friend
                       </Button>
