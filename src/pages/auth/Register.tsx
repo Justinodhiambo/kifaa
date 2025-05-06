@@ -257,8 +257,8 @@ const Register = () => {
           <div className="hidden lg:flex w-full max-w-2xl flex-col items-center">
             <div className="relative rounded-2xl overflow-hidden shadow-2xl">
               <img 
-                src="https://images.unsplash.com/photo-1605810230434-7631ac76ec81?q=80&w=1200&auto=format" 
-                alt="Local Kenyan team using financial services" 
+                src="https://images.unsplash.com/photo-1563013544-824ae1b704d3?q=80&w=1200&auto=format" 
+                alt="People collaborating on financial planning" 
                 className="object-cover w-full h-[600px]"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex flex-col justify-end p-8">
