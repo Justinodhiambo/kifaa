@@ -5,6 +5,7 @@ import { cn } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
 import { ChevronLeft, ChevronRight, Star, Quote } from 'lucide-react';
 import { useTheme } from './ThemeProvider';
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 
 interface Testimonial {
   quote: string;
@@ -62,7 +63,7 @@ const Testimonials: React.FC = () => {
     },
     {
       quote: "Kifaa walinisaidia kupata freezer kwa duka yangu. Sasa mboga haziharibiki haraka na wateja wanafurahia. Kulipa kidogo kidogo ni rahisi, na sina wasiwasi kama pesa haitoshi siku moja.",
-      author: "Jane Nyambura",
+      author: "Jane",
       role: "Mama Mboga",
       location: "Mombasa",
       avatar: "JN",
@@ -126,12 +127,14 @@ const Testimonials: React.FC = () => {
               >
                 <div className="flex flex-col items-center text-center">
                   <div className="mb-8">
-                    <div className={cn(
-                      "h-16 w-16 rounded-full flex items-center justify-center text-xl font-bold",
-                      isDark ? "bg-primary-800/30 text-primary-400" : "bg-primary/10 text-primary"
-                    )}>
-                      {testimonial.avatar}
-                    </div>
+                    <Avatar className="h-16 w-16">
+                      <AvatarFallback className={cn(
+                        "text-xl font-bold",
+                        isDark ? "bg-primary-800/30 text-primary-400" : "bg-primary/10 text-primary"
+                      )}>
+                        {testimonial.avatar}
+                      </AvatarFallback>
+                    </Avatar>
                   </div>
                   
                   <div className="flex mb-6">
@@ -172,7 +175,14 @@ const Testimonials: React.FC = () => {
             <div className="opacity-0 pointer-events-none">
               <div className="flex flex-col items-center text-center">
                 <div className="mb-8">
-                  <div className="h-16 w-16 rounded-full"></div>
+                  <Avatar className="h-16 w-16">
+                    <AvatarFallback className={cn(
+                      "text-xl font-bold",
+                      isDark ? "bg-primary-800/30 text-primary-400" : "bg-primary/10 text-primary"
+                    )}>
+                      {testimonials[activeIndex].avatar}
+                    </AvatarFallback>
+                  </Avatar>
                 </div>
                 <div className="flex mb-6">
                   {[...Array(5)].map((_, i) => (
