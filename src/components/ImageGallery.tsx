@@ -12,7 +12,7 @@ interface GalleryImage {
   category: ImageCategory;
 }
 
-// Our gallery of images
+// Our gallery of images - using only the specified categories of images
 const galleryImages: GalleryImage[] = [
   {
     src: "/lovable-uploads/29429bf4-4ba8-4306-83bd-297c2b454e09.png",
@@ -34,15 +34,15 @@ const galleryImages: GalleryImage[] = [
     alt: "Man using mobile banking",
     category: 'financial'
   },
-  // Default stock images we also want to provide
+  // Using approved types of images that match your guidelines
   {
-    src: "https://images.unsplash.com/photo-1649972904349-6e44c42644a7",
-    alt: "Woman using laptop",
+    src: "https://images.unsplash.com/photo-1604313999064-583842191885",
+    alt: "Kenyan market vendor with smartphone",
     category: 'general'
   },
   {
-    src: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b",
-    alt: "Laptop computer",
+    src: "https://images.unsplash.com/photo-1531482615713-2afd69097998",
+    alt: "Young entrepreneurs collaborating",
     category: 'general'
   }
 ];
