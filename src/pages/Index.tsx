@@ -1,3 +1,4 @@
+
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
@@ -177,20 +178,22 @@ const Index = () => {
                 <div className="mt-10 flex flex-wrap justify-center lg:justify-start items-center gap-6">
                   <div className="flex items-center gap-2">
                     <div className="h-8 w-8 rounded-full flex items-center justify-center bg-green-100">
-                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 190 190" className="h-6 w-6">
-                        <path fill="#42B549" d="M94.6,0C42.3,0,0,42.4,0,94.6s42.4,94.6,94.6,94.6s94.6-42.4,94.6-94.6S146.9,0,94.6,0z M94.6,167.8c-40.4,0-73.1-32.7-73.1-73.1s32.7-73.1,73.1-73.1s73.1,32.7,73.1,73.1S135,167.8,94.6,167.8z"/>
-                        <path fill="#42B549" d="M127.1,102.3l-4.8-3c-7.3-4.8-9.6-8.7-9.6-14.5v-2.1c2.1-2.1,4.1-5.3,5.3-8.9c2.7-0.4,4.8-2.7,4.8-5.5v-7.1c0-2-1.1-3.9-2.7-4.8v-10c0.1-0.9,0.5-6.8-3.7-11.7c-3.7-4.3-9.8-6.6-18.1-6.6c-8.3,0-14.4,2.3-18.1,6.6c-4.3,4.9-3.9,10.8-3.7,11.7v10c-1.6,1-2.7,2.8-2.7,4.8v7.1c0,2,1.1,3.9,2.7,4.8c1.4,5.3,4.4,9.2,5.3,9.8v2c0,5.4-2,9-9.7,14.2l-4.8,3.2c-7.8,5.4-12.6,10.5-12.6,22.5h85.5C139.8,112.7,134.9,107.6,127.1,102.3z"/>
-                      </svg>
+                      <img 
+                        src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/15/M-PESA_LOGO-01.svg/1200px-M-PESA_LOGO-01.svg.png"
+                        alt="M-Pesa Logo"
+                        className="h-6 w-6 object-contain"
+                      />
                     </div>
                     <span className="text-sm font-medium">M-Pesa</span>
                   </div>
                   
                   <div className="flex items-center gap-2">
                     <div className="h-8 w-8 rounded-full flex items-center justify-center bg-red-100">
-                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 150 150" className="h-6 w-6">
-                        <path fill="#E40613" d="M75,0C33.6,0,0,33.6,0,75s33.6,75,75,75s75-33.6,75-75S116.4,0,75,0z M75,130c-30.4,0-55-24.6-55-55s24.6-55,55-55s55,24.6,55,55S105.4,130,75,130z"/>
-                        <path fill="#E40613" d="M87.5,50H62.5c-6.9,0-12.5,5.6-12.5,12.5v25c0,6.9,5.6,12.5,12.5,12.5h25c6.9,0,12.5-5.6,12.5-12.5v-25C100,55.6,94.4,50,87.5,50z M75,90c-8.3,0-15-6.7-15-15s6.7-15,15-15s15,6.7,15,15S83.3,90,75,90z"/>
-                      </svg>
+                      <img 
+                        src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/75/Airtel_logo.svg/1024px-Airtel_logo.svg.png"
+                        alt="Airtel Money Logo"
+                        className="h-6 w-6 object-contain"
+                      />
                     </div>
                     <span className="text-sm font-medium">Airtel Money</span>
                   </div>
@@ -268,10 +271,6 @@ const Index = () => {
                     </div>
                     <div className="flex items-center">
                       <Avatar className="h-10 w-10">
-                        <AvatarImage 
-                          src="/lovable-uploads/92c8ab6b-e20f-4189-b055-bfea5ce6e47a.png" 
-                          alt="Wanjiku Kamau"
-                        />
                         <AvatarFallback>WK</AvatarFallback>
                       </Avatar>
                     </div>
@@ -462,4 +461,23 @@ const Index = () => {
                     </svg>
                   ))}
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-gray-300" viewBox="0 0 20 20" fill="currentColor">
-                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034
+                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                  </svg>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        
+        {/* Add Features, HowItWorks, and Testimonials components */}
+        <Features />
+        <HowItWorks />
+        <Testimonials />
+        
+        <Footer />
+      </main>
+    </div>
+  );
+};
+
+export default Index;
