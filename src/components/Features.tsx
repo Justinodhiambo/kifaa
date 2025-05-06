@@ -14,6 +14,7 @@ import {
 } from 'lucide-react';
 import { useTheme } from './ThemeProvider';
 import { cn } from '@/lib/utils';
+import { useNavigate } from 'react-router-dom';
 
 interface FeatureCardProps {
   title: string;
@@ -61,6 +62,7 @@ const FeatureCard: React.FC<FeatureCardProps> = ({
 const Features: React.FC = () => {
   const { theme } = useTheme();
   const isDark = theme === "dark";
+  const navigate = useNavigate();
   
   const features = [
     {
@@ -170,7 +172,10 @@ const Features: React.FC = () => {
               </li>
             </ul>
             <div className="flex justify-center">
-              <Button className="group rounded-full">
+              <Button 
+                className="group rounded-full"
+                onClick={() => navigate('/register')}
+              >
                 Join Kifaa Today
                 <ArrowRight className="ml-2 h-4 w-4 inline group-hover:translate-x-1 transition-transform" />
               </Button>

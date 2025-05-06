@@ -1,3 +1,4 @@
+
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
@@ -148,7 +149,7 @@ const Index = () => {
                   </h1>
                   
                   <p className="text-lg md:text-xl mb-10 max-w-2xl mx-auto lg:mx-0 text-muted-foreground">
-                    Get financing for motorbikes, phones, and more — even with no credit history. 
+                    Get connected to financing for motorbikes, phones, and more — even with no credit history. 
                     Available via USSD, M-Pesa, Airtel, and crypto.
                   </p>
                   
@@ -235,12 +236,12 @@ const Index = () => {
                 <FadeIn delay={0.3} duration={0.6} direction="left" className="relative">
                   <div className="relative mx-auto max-w-md">
                     <img 
-                      src="https://images.unsplash.com/photo-1531482615713-2afd69097998?q=80&w=1200&auto=format" 
+                      src="https://images.unsplash.com/photo-1604313525622-c2f6b4729a0c?q=80&w=1200&auto=format" 
                       alt="Kenyan entrepreneurs using mobile financial services" 
                       className="rounded-2xl shadow-apple object-cover h-[500px] w-full"
                     />
                     <div className="absolute top-5 right-5 bg-green-500 text-white font-bold py-2 px-4 rounded-full">
-                      APPROVED
+                      CONNECTED
                     </div>
                     
                     {/* Add a decorative element */}
@@ -277,7 +278,7 @@ const Index = () => {
                   </div>
                   
                   {/* Dashboard content */}
-                  <div className="p-6 overflow-auto" style={{ maxHeight: 'calc(100% - 2.5rem)' }}>
+                  <div className="p-6 overflow-auto bg-white dark:bg-gray-900" style={{ maxHeight: 'calc(100% - 2.5rem)' }}>
                     <header className="flex justify-between items-center mb-6">
                       <div>
                         <h1 className="text-2xl font-bold">Kifaa Dashboard</h1>
@@ -286,7 +287,7 @@ const Index = () => {
                       <div className="flex items-center">
                         <Avatar className="h-10 w-10">
                           <AvatarImage 
-                            src="https://images.unsplash.com/photo-1531482615713-2afd69097998?q=80&w=100&auto=format" 
+                            src="https://images.unsplash.com/photo-1604313525622-c2f6b4729a0c?q=80&w=100&auto=format" 
                             alt="Wanjiku Kamau"
                           />
                           <AvatarFallback>WK</AvatarFallback>
@@ -295,36 +296,36 @@ const Index = () => {
                     </header>
                     
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-                      <Card>
+                      <Card className="border-2 shadow-md">
                         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                           <CardTitle className="text-sm font-medium">Wallet Balance</CardTitle>
-                          <Wallet className="h-4 w-4 text-muted-foreground" />
+                          <Wallet className="h-4 w-4 text-primary" />
                         </CardHeader>
                         <CardContent>
                           <div className="text-2xl font-bold">KES 45,231.89</div>
                           <p className="text-xs text-muted-foreground mt-1">
-                            Available for withdrawal
+                            Available for transactions
                           </p>
                         </CardContent>
                       </Card>
                       
-                      <Card>
+                      <Card className="border-2 shadow-md">
                         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                           <CardTitle className="text-sm font-medium">Active Loans</CardTitle>
-                          <CreditCard className="h-4 w-4 text-muted-foreground" />
+                          <CreditCard className="h-4 w-4 text-primary" />
                         </CardHeader>
                         <CardContent>
                           <div className="text-2xl font-bold">2</div>
                           <p className="text-xs text-muted-foreground mt-1">
-                            Current loans
+                            Current connected loans
                           </p>
                         </CardContent>
                       </Card>
                       
-                      <Card>
+                      <Card className="border-2 shadow-md">
                         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                           <CardTitle className="text-sm font-medium">Credit Score</CardTitle>
-                          <BanknoteIcon className="h-4 w-4 text-muted-foreground" />
+                          <BanknoteIcon className="h-4 w-4 text-primary" />
                         </CardHeader>
                         <CardContent>
                           <div className="text-2xl font-bold">725</div>
@@ -335,7 +336,7 @@ const Index = () => {
                       </Card>
                     </div>
                     
-                    <Card className="mb-6">
+                    <Card className="mb-6 border-2 shadow-md">
                       <CardHeader>
                         <CardTitle>Recent Transactions</CardTitle>
                         <CardDescription>Your latest financial activity</CardDescription>
