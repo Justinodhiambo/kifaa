@@ -1,4 +1,3 @@
-
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
@@ -177,23 +176,21 @@ const Index = () => {
                 
                 <div className="mt-10 flex flex-wrap justify-center lg:justify-start items-center gap-6">
                   <div className="flex items-center gap-2">
-                    <div className="h-8 w-8 rounded-full flex items-center justify-center bg-gray-100">
-                      <img 
-                        src="https://cdn-icons-png.flaticon.com/512/825/825464.png" 
-                        alt="M-Pesa" 
-                        className="h-5 w-5"
-                      />
+                    <div className="h-8 w-8 rounded-full flex items-center justify-center bg-green-100">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 190 190" className="h-6 w-6">
+                        <path fill="#42B549" d="M94.6,0C42.3,0,0,42.4,0,94.6s42.4,94.6,94.6,94.6s94.6-42.4,94.6-94.6S146.9,0,94.6,0z M94.6,167.8c-40.4,0-73.1-32.7-73.1-73.1s32.7-73.1,73.1-73.1s73.1,32.7,73.1,73.1S135,167.8,94.6,167.8z"/>
+                        <path fill="#42B549" d="M127.1,102.3l-4.8-3c-7.3-4.8-9.6-8.7-9.6-14.5v-2.1c2.1-2.1,4.1-5.3,5.3-8.9c2.7-0.4,4.8-2.7,4.8-5.5v-7.1c0-2-1.1-3.9-2.7-4.8v-10c0.1-0.9,0.5-6.8-3.7-11.7c-3.7-4.3-9.8-6.6-18.1-6.6c-8.3,0-14.4,2.3-18.1,6.6c-4.3,4.9-3.9,10.8-3.7,11.7v10c-1.6,1-2.7,2.8-2.7,4.8v7.1c0,2,1.1,3.9,2.7,4.8c1.4,5.3,4.4,9.2,5.3,9.8v2c0,5.4-2,9-9.7,14.2l-4.8,3.2c-7.8,5.4-12.6,10.5-12.6,22.5h85.5C139.8,112.7,134.9,107.6,127.1,102.3z"/>
+                      </svg>
                     </div>
                     <span className="text-sm font-medium">M-Pesa</span>
                   </div>
                   
                   <div className="flex items-center gap-2">
-                    <div className="h-8 w-8 rounded-full flex items-center justify-center bg-gray-100">
-                      <img 
-                        src="https://cdn-icons-png.flaticon.com/512/5968/5968200.png" 
-                        alt="Airtel Money" 
-                        className="h-5 w-5"
-                      />
+                    <div className="h-8 w-8 rounded-full flex items-center justify-center bg-red-100">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 150 150" className="h-6 w-6">
+                        <path fill="#E40613" d="M75,0C33.6,0,0,33.6,0,75s33.6,75,75,75s75-33.6,75-75S116.4,0,75,0z M75,130c-30.4,0-55-24.6-55-55s24.6-55,55-55s55,24.6,55,55S105.4,130,75,130z"/>
+                        <path fill="#E40613" d="M87.5,50H62.5c-6.9,0-12.5,5.6-12.5,12.5v25c0,6.9,5.6,12.5,12.5,12.5h25c6.9,0,12.5-5.6,12.5-12.5v-25C100,55.6,94.4,50,87.5,50z M75,90c-8.3,0-15-6.7-15-15s6.7-15,15-15s15,6.7,15,15S83.3,90,75,90z"/>
+                      </svg>
                     </div>
                     <span className="text-sm font-medium">Airtel Money</span>
                   </div>
@@ -207,11 +204,9 @@ const Index = () => {
                   
                   <div className="flex items-center gap-2">
                     <div className="h-8 w-8 rounded-full flex items-center justify-center bg-gray-100">
-                      <img 
-                        src="https://cdn-icons-png.flaticon.com/512/5968/5968260.png" 
-                        alt="Crypto-Friendly" 
-                        className="h-5 w-5"
-                      />
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="h-5 w-5" fill="#F7931A">
+                        <path d="M23.638 14.904c-1.602 6.425-8.113 10.342-14.542 8.736C2.67 22.05-1.244 15.525.362 9.105 1.962 2.67 8.475-1.243 14.9.358c6.43 1.605 10.342 8.115 8.738 14.548v-.002zm-6.35-4.613c.24-1.59-.974-2.45-2.64-3.03l.54-2.153-1.315-.33-.525 2.107c-.345-.087-.705-.167-1.064-.25l.526-2.127-1.32-.33-.54 2.165c-.285-.067-.565-.132-.84-.2l-1.815-.45-.35 1.407s.975.225.955.236c.535.136.63.495.615.78l-1.477 5.92c-.075.18-.24.45-.614.35.015.02-.96-.24-.96-.24l-.66 1.51 1.71.426.93.242-.54 2.19 1.32.327.54-2.17c.36.1.705.19 1.05.273l-.54 2.14 1.32.33.54-2.18c2.24.427 3.93.257 4.64-1.774.57-1.637-.03-2.58-1.217-3.196.854-.193 1.5-.76 1.68-1.93h.01zm-3.01 4.22c-.404 1.64-3.157.75-4.05.53l.72-2.9c.896.23 3.757.67 3.33 2.37zm.41-4.24c-.37 1.49-2.662.735-3.405.55l.654-2.64c.744.18 3.137.52 2.75 2.084v.006z"/>
+                      </svg>
                     </div>
                     <span className="text-sm font-medium">Crypto-Friendly</span>
                   </div>
@@ -389,7 +384,7 @@ const Index = () => {
           </div>
         </section>
         
-        {/* Testimonial Section with new images */}
+        {/* Testimonial Section without images */}
         <section className="py-16 md:py-24 bg-white relative overflow-hidden">
           <div className="container mx-auto px-4">
             <div className="text-center mb-12">
@@ -403,11 +398,9 @@ const Index = () => {
               {/* Testimonial 1 */}
               <div className="bg-white rounded-xl shadow-sm border p-6 transition hover:shadow-md">
                 <div className="flex items-center mb-4">
-                  <img 
-                    src="/lovable-uploads/29429bf4-4ba8-4306-83bd-297c2b454e09.png"
-                    alt="John from Nairobi" 
-                    className="w-16 h-16 rounded-full object-cover mr-4"
-                  />
+                  <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mr-4">
+                    <span className="font-semibold text-xl text-primary">JM</span>
+                  </div>
                   <div>
                     <h4 className="font-semibold text-lg">James Mwangi</h4>
                     <p className="text-sm text-gray-500">Small Business Owner, Nairobi</p>
@@ -428,11 +421,9 @@ const Index = () => {
               {/* Testimonial 2 */}
               <div className="bg-white rounded-xl shadow-sm border p-6 transition hover:shadow-md">
                 <div className="flex items-center mb-4">
-                  <img 
-                    src="/lovable-uploads/92c8ab6b-e20f-4189-b055-bfea5ce6e47a.png"
-                    alt="Sarah from Kisumu" 
-                    className="w-16 h-16 rounded-full object-cover mr-4"
-                  />
+                  <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mr-4">
+                    <span className="font-semibold text-xl text-primary">FW</span>
+                  </div>
                   <div>
                     <h4 className="font-semibold text-lg">Faith Wambui</h4>
                     <p className="text-sm text-gray-500">Entrepreneur, Nakuru</p>
@@ -453,11 +444,9 @@ const Index = () => {
               {/* Testimonial 3 */}
               <div className="bg-white rounded-xl shadow-sm border p-6 transition hover:shadow-md">
                 <div className="flex items-center mb-4">
-                  <img 
-                    src="/lovable-uploads/469f84d9-2724-4370-8329-ea06835f5ebc.png"
-                    alt="Michael from Mombasa" 
-                    className="w-16 h-16 rounded-full object-cover mr-4"
-                  />
+                  <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mr-4">
+                    <span className="font-semibold text-xl text-primary">PO</span>
+                  </div>
                   <div>
                     <h4 className="font-semibold text-lg">Peter Odhiambo</h4>
                     <p className="text-sm text-gray-500">Teacher, Mombasa</p>
@@ -473,21 +462,4 @@ const Index = () => {
                     </svg>
                   ))}
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-gray-300" viewBox="0 0 20 20" fill="currentColor">
-                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                  </svg>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-        
-        <HowItWorks />
-        <Features />
-        <Testimonials />
-      </main>
-      <Footer />
-    </div>
-  );
-};
-
-export default Index;
+                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034

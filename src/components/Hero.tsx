@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import FadeIn from './FadeIn';
 import AnimatedGradient from './AnimatedGradient';
@@ -166,12 +165,8 @@ const Hero: React.FC = () => {
                         </span>
                       </div>
                       <div className="h-8 w-8 rounded-full bg-gray-100">
-                        <div className="h-full w-full rounded-full flex items-center justify-center">
-                          <img 
-                            src="/lovable-uploads/92c8ab6b-e20f-4189-b055-bfea5ce6e47a.png" 
-                            alt="User avatar" 
-                            className="h-full w-full object-cover rounded-full"
-                          />
+                        <div className="h-full w-full rounded-full flex items-center justify-center text-gray-500 text-xs font-medium">
+                          WK
                         </div>
                       </div>
                     </div>
