@@ -33,17 +33,6 @@ const galleryImages: GalleryImage[] = [
     src: "/lovable-uploads/469f84d9-2724-4370-8329-ea06835f5ebc.png",
     alt: "Man using mobile banking",
     category: 'financial'
-  },
-  // Using approved types of images that match your guidelines
-  {
-    src: "https://images.unsplash.com/photo-1604313999064-583842191885",
-    alt: "Kenyan market vendor with smartphone",
-    category: 'general'
-  },
-  {
-    src: "https://images.unsplash.com/photo-1531482615713-2afd69097998",
-    alt: "Young entrepreneurs collaborating",
-    category: 'general'
   }
 ];
 

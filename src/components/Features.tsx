@@ -1,4 +1,3 @@
-
 import React from 'react';
 import FadeIn from './FadeIn';
 import { Badge } from "@/components/ui/badge";
@@ -20,7 +19,6 @@ import {
 import { useTheme } from './ThemeProvider';
 import { cn } from '@/lib/utils';
 import { useNavigate } from 'react-router-dom';
-import { Switch } from "@/components/ui/switch";
 
 interface FeatureCardProps {
   title: string;
@@ -66,7 +64,7 @@ const FeatureCard: React.FC<FeatureCardProps> = ({
 };
 
 const Features: React.FC = () => {
-  const { theme, setTheme, autoTheme, setAutoTheme } = useTheme();
+  const { theme, setTheme } = useTheme();
   const isDark = theme === "dark";
   const navigate = useNavigate();
   
@@ -115,58 +113,13 @@ const Features: React.FC = () => {
     }
   ];
 
-  // Handle theme toggle manually (when auto is off)
-  const handleToggleTheme = () => {
-    if (!autoTheme) {
-      setTheme(isDark ? "light" : "dark");
-    }
-  };
-
-  // Handle auto theme toggle
-  const handleToggleAutoTheme = (checked: boolean) => {
-    setAutoTheme(checked);
-  };
-
   return (
     <section id="features" className={cn(
       "section relative",
       isDark ? "bg-gray-950" : "bg-gray-50/50"
     )}>
       <div className="max-w-7xl mx-auto">
-        {/* Theme Toggle */}
-        <div className="flex justify-end mb-8">
-          <div className={cn(
-            "flex items-center gap-2 py-2 px-4 rounded-full",
-            isDark ? "bg-gray-800 border border-gray-700" : "bg-white border border-gray-200"
-          )}>
-            <span className={cn(
-              "text-sm",
-              isDark ? "text-gray-300" : "text-gray-700"
-            )}>
-              Auto Theme
-            </span>
-            <Switch 
-              checked={autoTheme}
-              onCheckedChange={handleToggleAutoTheme}
-            />
-            <Button 
-              variant="ghost" 
-              size="icon" 
-              className={cn(
-                "ml-2 rounded-full h-8 w-8",
-                !autoTheme ? "opacity-100" : "opacity-50 pointer-events-none"
-              )}
-              disabled={autoTheme}
-              onClick={handleToggleTheme}
-            >
-              {isDark ? (
-                <span className="text-yellow-400">☀️</span>
-              ) : (
-                <span className="text-blue-400">🌙</span>
-              )}
-            </Button>
-          </div>
-        </div>
+        {/* Theme Toggle section removed */}
 
         <FadeIn className="text-center mb-16">
           <Badge className="mb-4 bg-primary/10 hover:bg-primary/20 text-primary border-primary/20 px-3 py-1.5 rounded-full">Features</Badge>
