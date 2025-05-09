@@ -154,13 +154,10 @@ const Index = () => {
                     className="w-full sm:w-auto text-base group rounded-full py-6" 
                     size="lg" 
                     onClick={() => {
-                      const heroSection = document.querySelector('section');
-                      if (heroSection) {
-                        window.scrollTo({
-                          top: 0,
-                          behavior: 'smooth'
-                        });
-                      }
+                      window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                      });
                     }}
                   >
                     Check Your Score
@@ -185,22 +182,24 @@ const Index = () => {
                 <div className="mt-10 flex flex-wrap justify-center lg:justify-start items-center gap-6">
                   <div className="flex items-center gap-2">
                     <div className="h-8 w-8 rounded-full flex items-center justify-center bg-green-100">
-                      {/* Official M-Pesa logo */}
-                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" className="h-6 w-6">
-                        <path fill="#42B549" d="M256 64C150 64 64 150 64 256s86 192 192 192 192-86 192-192S362 64 256 64zm0 353.6c-89 0-161.6-72.6-161.6-161.6S167 94.4 256 94.4 417.6 167 417.6 256 345 417.6 256 417.6z"/>
-                        <path fill="#42B549" d="M350.6 251.4c-7.8-8.7-19.6-13.1-35-13.1h-16.3c.7-2.2 1.1-4.6 1.1-7 0-12.3-10-22.3-22.3-22.3h-44.1c-12.3 0-22.3 10-22.3 22.3 0 2.4.4 4.8 1.1 7h-16.3c-15.5 0-27.3 4.4-35 13.1-8.7 9.8-11.6 24.5-8.5 42.9 3.1 18.5 10.5 33.4 21.8 44.2 10.2 9.8 23 14.7 37.8 14.7h87.1c14.9 0 27.6-4.9 37.8-14.7 11.3-10.8 18.7-25.7 21.8-44.2 3-18.5.1-33.2-8.7-42.9zm-35 75.6c-6.7 6.4-15.3 9.6-25.8 9.6h-67.6c-10.5 0-19.1-3.2-25.8-9.6-8-7.7-13.3-19-15.7-33.5-2-12.1-.6-21.4 4.2-27 5.4-6.1 15.3-8.9 29.3-8.9h22.5c4.3 4.9 10.7 8.1 17.7 8.1h3.2c7.1 0 13.4-3.1 17.7-8.1h22.5c14 0 23.9 2.8 29.3 8.9 4.8 5.4 6.2 14.9 4.2 27-2.4 14.5-7.7 25.8-15.7 33.5z"/>
-                      </svg>
+                      {/* Updated M-Pesa logo */}
+                      <img 
+                        src="/lovable-uploads/ccf90591-f749-477b-aa5a-d612bdccc998.png" 
+                        alt="M-Pesa" 
+                        className="h-6 w-6 object-contain" 
+                      />
                     </div>
                     <span className="text-sm font-medium">M-Pesa</span>
                   </div>
                   
                   <div className="flex items-center gap-2">
                     <div className="h-8 w-8 rounded-full flex items-center justify-center bg-red-100">
-                      {/* Official Airtel logo */}
-                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" className="h-6 w-6">
-                        <path fill="#FF0000" d="M256 0C114.6 0 0 114.6 0 256s114.6 256 256 256 256-114.6 256-256S397.4 0 256 0zm0 450c-107 0-194-87-194-194s87-194 194-194 194 87 194 194-87 194-194 194z"/>
-                        <path fill="#FF0000" d="M256 136c-66.3 0-120 53.7-120 120s53.7 120 120 120 120-53.7 120-120-53.7-120-120-120zm0 180c-33.1 0-60-26.9-60-60s26.9-60 60-60 60 26.9 60 60-26.9 60-60 60z"/>
-                      </svg>
+                      {/* Updated Airtel Money logo */}
+                      <img 
+                        src="/lovable-uploads/05ea75fe-a96a-4aaf-9bb1-fe9fa59ffec2.png" 
+                        alt="Airtel Money" 
+                        className="h-6 w-6 object-contain" 
+                      />
                     </div>
                     <span className="text-sm font-medium">Airtel Money</span>
                   </div>

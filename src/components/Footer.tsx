@@ -61,19 +61,19 @@ const Footer: React.FC = () => {
             </div>
           </div>
           
-          <div>
+          <div className="mt-2">
             <h4 className="font-display font-semibold text-lg mb-6">Product</h4>
-            <nav className="flex flex-col space-y-4">
-              <FooterLink onClick={() => scrollToSection('features')}>Features</FooterLink>
+            <nav className="flex flex-col space-y-5">
+              <FooterLink to="#features" onClick={() => scrollToSection('features')}>Features</FooterLink>
               <FooterLink to="/pricing">Pricing</FooterLink>
               <FooterLink to="/integration">Integrations</FooterLink>
               <FooterLink to="/faq">FAQ</FooterLink>
             </nav>
           </div>
           
-          <div>
+          <div className="mt-2">
             <h4 className="font-display font-semibold text-lg mb-6">Company</h4>
-            <nav className="flex flex-col space-y-4">
+            <nav className="flex flex-col space-y-5">
               <FooterLink to="/about">About Us</FooterLink>
               <FooterLink to="/about#careers">Careers</FooterLink>
               <FooterLink to="/about#blog">Blog</FooterLink>
@@ -81,9 +81,9 @@ const Footer: React.FC = () => {
             </nav>
           </div>
           
-          <div>
+          <div className="mt-2">
             <h4 className="font-display font-semibold text-lg mb-6">Legal</h4>
-            <nav className="flex flex-col space-y-4">
+            <nav className="flex flex-col space-y-5">
               <FooterLink to="/legal#privacy">Privacy Policy</FooterLink>
               <FooterLink to="/legal#terms">Terms of Service</FooterLink>
               <FooterLink to="/legal#security">Security</FooterLink>
@@ -132,20 +132,21 @@ const SocialLink: React.FC<SocialLinkProps> = ({ href, label, children }) => {
 };
 
 interface FooterLinkProps {
-  to?: string;
+  to: string;
   onClick?: () => void;
   children: React.ReactNode;
 }
 
 const FooterLink: React.FC<FooterLinkProps> = ({ to, onClick, children }) => {
-  if (onClick) {
+  // Handle internal navigation with smooth scrolling for sections
+  if (to.startsWith('#')) {
     return (
       <a
-        href="#"
+        href={to}
         className="text-muted-foreground hover:text-foreground transition-colors group flex items-center"
         onClick={(e) => {
           e.preventDefault();
-          onClick();
+          if (onClick) onClick();
         }}
       >
         {children}
@@ -154,9 +155,10 @@ const FooterLink: React.FC<FooterLinkProps> = ({ to, onClick, children }) => {
     );
   }
 
+  // Regular router Link for pages
   return (
     <Link
-      to={to || "#"}
+      to={to}
       className="text-muted-foreground hover:text-foreground transition-colors group flex items-center"
     >
       {children}
