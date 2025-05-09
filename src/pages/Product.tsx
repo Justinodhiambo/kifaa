@@ -4,7 +4,6 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { ArrowRight, Check, Shield, Smartphone, BanknoteIcon, LineChart, Zap, UserCircle } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
 import AnimatedGradient from '@/components/AnimatedGradient';
 import FadeIn from '@/components/FadeIn';
 
@@ -171,12 +170,6 @@ const Product = () => {
                   </CardContent>
                 </Card>
               </FadeIn>
-            </div>
-            
-            <div className="mt-12 text-center">
-              <Button className="rounded-full" size="lg" asChild>
-                <a href="/register">Get Started <ArrowRight className="ml-2 h-4 w-4" /></a>
-              </Button>
             </div>
           </div>
         </section>
