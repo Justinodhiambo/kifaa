@@ -26,7 +26,7 @@ const PricingCard = ({
   buttonVariant?: "link" | "default" | "destructive" | "outline" | "secondary" | "ghost" | "dashboard";
 }) => {
   return (
-    <Card className={`relative flex flex-col ${isPopular ? 'border-primary shadow-lg' : 'border-border'}`}>
+    <Card className={`relative flex flex-col h-full ${isPopular ? 'border-primary shadow-lg' : 'border-border'}`}>
       {isPopular && (
         <div className="absolute -top-3 left-0 right-0 flex justify-center">
           <span className="bg-primary text-white text-xs font-medium px-3 py-1 rounded-full">
@@ -38,7 +38,7 @@ const PricingCard = ({
         <CardTitle>{title}</CardTitle>
         <CardDescription>{description}</CardDescription>
       </CardHeader>
-      <CardContent className="flex-grow">
+      <CardContent className="flex-1">
         <div className="mb-4">
           <span className="text-4xl font-bold">{price}</span>
           {price !== "Custom" && <span className="text-muted-foreground"> /month</span>}
@@ -52,7 +52,7 @@ const PricingCard = ({
           ))}
         </ul>
       </CardContent>
-      <CardFooter className="pt-4 mt-auto">
+      <CardFooter className="mt-auto pt-4">
         <Button className="w-full" variant={buttonVariant} asChild>
           <a href="/register">{buttonText} <ArrowRight className="ml-1.5 h-4 w-4" /></a>
         </Button>
