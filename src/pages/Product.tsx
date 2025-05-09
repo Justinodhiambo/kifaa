@@ -2,7 +2,7 @@
 import React from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-import { ArrowRight, Check, Shield, Smartphone, BanknoteIcon, LineChart, Zap } from 'lucide-react';
+import { ArrowRight, Check, Shield, Smartphone, BanknoteIcon, LineChart, Zap, UserCircle } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import AnimatedGradient from '@/components/AnimatedGradient';
@@ -144,7 +144,7 @@ const Product = () => {
                 <Card className="h-full">
                   <CardHeader>
                     <div className="h-12 w-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
-                      <User className="h-6 w-6 text-primary" />
+                      <UserCircle className="h-6 w-6 text-primary" />
                     </div>
                     <CardTitle>Digital KYC & Onboarding</CardTitle>
                   </CardHeader>

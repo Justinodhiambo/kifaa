@@ -16,6 +16,14 @@ const PricingCard = ({
   isPopular = false,
   buttonText = "Get Started",
   buttonVariant = "default"
+}: {
+  title: string;
+  price: string;
+  description: string;
+  features: string[];
+  isPopular?: boolean;
+  buttonText?: string;
+  buttonVariant?: "link" | "default" | "destructive" | "outline" | "secondary" | "ghost" | "dashboard";
 }) => {
   return (
     <Card className={`relative ${isPopular ? 'border-primary shadow-lg' : 'border-border'}`}>
