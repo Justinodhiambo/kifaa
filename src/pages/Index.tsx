@@ -100,7 +100,10 @@ const Index = () => {
       const { hash } = window.location;
       if (hash) {
         setTimeout(() => {
-          const element = document.getElementById(hash.slice(1));
+          // Special handling for how-it-works section
+          const elementId = hash.slice(1) === 'how-it-works' ? 'how-it-works-anchor' : hash.slice(1);
+          const element = document.getElementById(elementId);
+          
           if (element) {
             const headerHeight = 80; // Approximate navbar height
             const elementPosition = element.getBoundingClientRect().top;
@@ -169,9 +172,16 @@ const Index = () => {
                     className="w-full sm:w-auto text-base rounded-full py-6" 
                     size="lg"
                     onClick={() => {
-                      const element = document.getElementById('how-it-works');
+                      const element = document.getElementById('how-it-works-anchor');
                       if (element) {
-                        element.scrollIntoView({ behavior: 'smooth' });
+                        const headerHeight = 80; // Approximate navbar height
+                        const elementPosition = element.getBoundingClientRect().top;
+                        const offsetPosition = elementPosition + window.pageYOffset - headerHeight;
+                        
+                        window.scrollTo({
+                          top: offsetPosition,
+                          behavior: 'smooth'
+                        });
                       }
                     }}
                   >

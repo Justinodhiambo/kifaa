@@ -32,7 +32,10 @@ const Navbar: React.FC = () => {
   }, []);
 
   const scrollToSection = (sectionId: string) => {
-    const element = document.getElementById(sectionId);
+    // For the how-it-works section specifically, use the anchor element
+    const actualElementId = sectionId === 'how-it-works' ? 'how-it-works-anchor' : sectionId;
+    const element = document.getElementById(actualElementId);
+    
     if (element) {
       // Close mobile menu if open
       if (mobileMenuOpen) {

@@ -123,6 +123,9 @@ const HowItWorks: React.FC = () => {
       "section relative py-20 px-6",
       isDark ? "bg-gray-900/80 backdrop-blur-sm" : "bg-white"
     )}>
+      {/* Add an invisible anchor element at the top of the section for better scroll targeting */}
+      <div id="how-it-works-anchor" className="absolute" style={{ top: '-100px' }}></div>
+      
       <div className="max-w-7xl mx-auto">
         <FadeIn className="text-center mb-16">
           <Badge className="mb-4 bg-primary/10 hover:bg-primary/20 text-primary border-primary/20 px-3 py-1.5 rounded-full">Process</Badge>

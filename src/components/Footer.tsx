@@ -64,7 +64,7 @@ const Footer: React.FC = () => {
           <div className="mt-2">
             <h4 className="font-display font-semibold text-lg mb-6">Product</h4>
             <nav className="flex flex-col space-y-5">
-              <Link to="/#features" className="text-muted-foreground hover:text-foreground transition-colors group flex items-center">
+              <Link to="/features" className="text-muted-foreground hover:text-foreground transition-colors group flex items-center">
                 Features
                 <ArrowUpRight className="h-3.5 w-3.5 ml-1 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
               </Link>
