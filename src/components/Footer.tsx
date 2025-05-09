@@ -4,18 +4,11 @@ import { ArrowUpRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const Footer: React.FC = () => {
-  const scrollToSection = (sectionId: string) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      const headerHeight = 80; // Approximate navbar height
-      const elementPosition = element.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.pageYOffset - headerHeight;
-
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: 'smooth'
-      });
-    }
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
   };
 
   return (
@@ -28,7 +21,7 @@ const Footer: React.FC = () => {
               className="inline-block mb-6"
               onClick={(e) => {
                 e.preventDefault();
-                window.scrollTo({ top: 0, behavior: 'smooth' });
+                scrollToTop();
               }}
             >
               <span className="text-2xl font-display font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary-300 to-primary">
@@ -64,19 +57,35 @@ const Footer: React.FC = () => {
           <div className="mt-2">
             <h4 className="font-display font-semibold text-lg mb-6">Product</h4>
             <nav className="flex flex-col space-y-5">
-              <Link to="/features" className="text-muted-foreground hover:text-foreground transition-colors group flex items-center">
+              <Link 
+                to="/features" 
+                className="text-muted-foreground hover:text-foreground transition-colors group flex items-center"
+                onClick={scrollToTop}
+              >
                 Features
                 <ArrowUpRight className="h-3.5 w-3.5 ml-1 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
               </Link>
-              <Link to="/pricing" className="text-muted-foreground hover:text-foreground transition-colors group flex items-center">
+              <Link 
+                to="/pricing" 
+                className="text-muted-foreground hover:text-foreground transition-colors group flex items-center"
+                onClick={scrollToTop}
+              >
                 Pricing
                 <ArrowUpRight className="h-3.5 w-3.5 ml-1 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
               </Link>
-              <Link to="/integration" className="text-muted-foreground hover:text-foreground transition-colors group flex items-center">
+              <Link 
+                to="/integration" 
+                className="text-muted-foreground hover:text-foreground transition-colors group flex items-center"
+                onClick={scrollToTop}
+              >
                 Integrations
                 <ArrowUpRight className="h-3.5 w-3.5 ml-1 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
               </Link>
-              <Link to="/faq" className="text-muted-foreground hover:text-foreground transition-colors group flex items-center">
+              <Link 
+                to="/faq" 
+                className="text-muted-foreground hover:text-foreground transition-colors group flex items-center"
+                onClick={scrollToTop}
+              >
                 FAQ
                 <ArrowUpRight className="h-3.5 w-3.5 ml-1 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
               </Link>
@@ -86,20 +95,20 @@ const Footer: React.FC = () => {
           <div className="mt-2">
             <h4 className="font-display font-semibold text-lg mb-6">Company</h4>
             <nav className="flex flex-col space-y-5">
-              <FooterLink to="/about">About Us</FooterLink>
-              <FooterLink to="/about#careers">Careers</FooterLink>
-              <FooterLink to="/about#blog">Blog</FooterLink>
-              <FooterLink to="/about#press">Press</FooterLink>
+              <FooterLink to="/about" onClick={scrollToTop}>About Us</FooterLink>
+              <FooterLink to="/about#careers" onClick={scrollToTop}>Careers</FooterLink>
+              <FooterLink to="/about#blog" onClick={scrollToTop}>Blog</FooterLink>
+              <FooterLink to="/about#press" onClick={scrollToTop}>Press</FooterLink>
             </nav>
           </div>
           
           <div className="mt-2">
             <h4 className="font-display font-semibold text-lg mb-6">Legal</h4>
             <nav className="flex flex-col space-y-5">
-              <FooterLink to="/legal#privacy">Privacy Policy</FooterLink>
-              <FooterLink to="/legal#terms">Terms of Service</FooterLink>
-              <FooterLink to="/legal#security">Security</FooterLink>
-              <FooterLink to="/legal#compliance">Compliance</FooterLink>
+              <FooterLink to="/legal#privacy" onClick={scrollToTop}>Privacy Policy</FooterLink>
+              <FooterLink to="/legal#terms" onClick={scrollToTop}>Terms of Service</FooterLink>
+              <FooterLink to="/legal#security" onClick={scrollToTop}>Security</FooterLink>
+              <FooterLink to="/legal#compliance" onClick={scrollToTop}>Compliance</FooterLink>
             </nav>
           </div>
         </div>
@@ -109,13 +118,25 @@ const Footer: React.FC = () => {
             © {new Date().getFullYear()} Kifaa. All rights reserved.
           </p>
           <div className="flex flex-wrap justify-center md:justify-end gap-x-8 gap-y-4">
-            <Link to="/legal#privacy" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+            <Link 
+              to="/legal#privacy" 
+              className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+              onClick={scrollToTop}
+            >
               Privacy Policy
             </Link>
-            <Link to="/legal#terms" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+            <Link 
+              to="/legal#terms" 
+              className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+              onClick={scrollToTop}
+            >
               Terms of Service
             </Link>
-            <Link to="/contact" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+            <Link 
+              to="/contact" 
+              className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+              onClick={scrollToTop}
+            >
               Contact Us
             </Link>
           </div>
@@ -132,11 +153,22 @@ interface SocialLinkProps {
 }
 
 const SocialLink: React.FC<SocialLinkProps> = ({ href, label, children }) => {
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  };
+
   return (
     <a
       href={href}
       aria-label={label}
       className="h-10 w-10 rounded-full bg-accent/50 flex items-center justify-center text-muted-foreground hover:bg-accent hover:text-foreground transition-colors"
+      onClick={(e) => {
+        e.preventDefault();
+        scrollToTop();
+      }}
     >
       {children}
     </a>
