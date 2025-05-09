@@ -10,8 +10,8 @@ import Footer from '@/components/Footer';
 import LaptopFrame from '@/components/LaptopFrame';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Wallet, CreditCard, BanknoteIcon, ArrowUpRight, ArrowDownLeft, Clock } from 'lucide-react';
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Wallet, CreditCard, BanknoteIcon, ArrowUpRight, ArrowDownLeft, Clock, User } from 'lucide-react';
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import AnimatedGradient from '@/components/AnimatedGradient';
 import FadeIn from '@/components/FadeIn';
 import { cn } from '@/lib/utils';
@@ -154,7 +154,7 @@ const Index = () => {
                   <Button 
                     className="w-full sm:w-auto text-base group rounded-full py-6" 
                     size="lg" 
-                    onClick={() => handleNavigate('/credit-score')}
+                    onClick={() => handleNavigate('/product')}
                   >
                     Check Your Score
                     <ArrowUpRight className="ml-2 h-4 w-4 inline group-hover:translate-x-1 transition-transform" />
@@ -178,22 +178,20 @@ const Index = () => {
                 <div className="mt-10 flex flex-wrap justify-center lg:justify-start items-center gap-6">
                   <div className="flex items-center gap-2">
                     <div className="h-8 w-8 rounded-full flex items-center justify-center bg-green-100">
-                      <img 
-                        src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/15/M-PESA_LOGO-01.svg/1200px-M-PESA_LOGO-01.svg.png"
-                        alt="M-Pesa Logo"
-                        className="h-6 w-6 object-contain"
-                      />
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 190 190" className="h-6 w-6">
+                        <path fill="#42B549" d="M94.6,0C42.3,0,0,42.4,0,94.6s42.4,94.6,94.6,94.6s94.6-42.4,94.6-94.6S146.9,0,94.6,0z M94.6,167.8c-40.4,0-73.1-32.7-73.1-73.1s32.7-73.1,73.1-73.1s73.1,32.7,73.1,73.1S135,167.8,94.6,167.8z"/>
+                        <path fill="#42B549" d="M127.1,102.3l-4.8-3c-7.3-4.8-9.6-8.7-9.6-14.5v-2.1c2.1-2.1,4.1-5.3,5.3-8.9c2.7-0.4,4.8-2.7,4.8-5.5v-7.1c0-2-1.1-3.9-2.7-4.8v-10c0.1-0.9,0.5-6.8-3.7-11.7c-3.7-4.3-9.8-6.6-18.1-6.6c-8.3,0-14.4,2.3-18.1,6.6c-4.3,4.9-3.9,10.8-3.7,11.7v10c-1.6,1-2.7,2.8-2.7,4.8v7.1c0,2,1.1,3.9,2.7,4.8c1.4,5.3,4.4,9.2,5.3,9.8v2c0,5.4-2,9-9.7,14.2l-4.8,3.2c-7.8,5.4-12.6,10.5-12.6,22.5h85.5C139.8,112.7,134.9,107.6,127.1,102.3z"/>
+                      </svg>
                     </div>
                     <span className="text-sm font-medium">M-Pesa</span>
                   </div>
                   
                   <div className="flex items-center gap-2">
                     <div className="h-8 w-8 rounded-full flex items-center justify-center bg-red-100">
-                      <img 
-                        src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/75/Airtel_logo.svg/1024px-Airtel_logo.svg.png"
-                        alt="Airtel Money Logo"
-                        className="h-6 w-6 object-contain"
-                      />
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" className="h-6 w-6">
+                        <path fill="#E40613" d="M60 10c27.6 0 50 22.4 50 50s-22.4 50-50 50S10 87.6 10 60 32.4 10 60 10M60 0C26.9 0 0 26.9 0 60s26.9 60 60 60 60-26.9 60-60S93.1 0 60 0z"/>
+                        <path fill="#E40613" d="M80.4 53.8c-1.4-1.4-3.2-2.1-5.1-2.1h-.2c-.9-1.4-2.4-2.2-4.1-2.2h-5.2c-1.7-2.8-4.7-4.7-8.2-4.7h-14c-5.3 0-9.6 4.3-9.6 9.6V70c0 5.3 4.3 9.6 9.6 9.6h14c2.2 0 4.3-.8 6-2.1 1.6 1.3 3.6 2.1 5.8 2.1h5.2c1 0 1.9-.3 2.7-.7.9.5 2 .7 3.1.7 3.7 0 6.6-3 6.6-6.6v-14c0-2-.8-3.8-2.1-5.2zM57.7 75.4h-14c-3 0-5.5-2.5-5.5-5.5V54.4c0-3 2.5-5.5 5.5-5.5h14c3 0 5.5 2.5 5.5 5.5v15.5c0 3-2.5 5.5-5.5 5.5zm14.6 0h-5.2c-1.5 0-2.7-1.2-2.7-2.7v-3.9h7.8v3.9c.1 1.5-1.1 2.7-2.6 2.7h.1zm0-10.7h-7.8v-7.4c0-1.5 1.2-2.7 2.7-2.7h5.2c1.5 0 2.7 1.2 2.7 2.7v4.7c-.1 1.5-1.3 2.7-2.8 2.7zm8.6 7c0 1.4-1.1 2.5-2.5 2.5-.5 0-1-.2-1.5-.5v-5.5c0-1.2-1-2.2-2.2-2.2h-3v-1.3h6.6c1.4 0 2.5 1.1 2.5 2.5v4.5z"/>
+                      </svg>
                     </div>
                     <span className="text-sm font-medium">Airtel Money</span>
                   </div>

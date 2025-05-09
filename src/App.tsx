@@ -23,6 +23,15 @@ import AdminDashboard from "./pages/admin/Dashboard";
 import ProtectedRoute from "./components/ProtectedRoute";
 import RoleProtectedRoute from "./components/RoleProtectedRoute";
 
+// New pages
+import Product from "./pages/Product";
+import About from "./pages/About";
+import Pricing from "./pages/Pricing";
+import Integration from "./pages/Integration";
+import FAQ from "./pages/FAQ";
+import Legal from "./pages/Legal";
+import Contact from "./pages/Contact";
+
 const queryClient = new QueryClient();
 
 const App = () => (
@@ -41,6 +50,15 @@ const App = () => (
               <Route path="/forgot-password" element={<ForgotPassword />} />
               <Route path="/reset-password" element={<ResetPassword />} />
               <Route path="/verify-email" element={<VerifyEmail />} />
+              
+              {/* New public pages */}
+              <Route path="/product" element={<Product />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/pricing" element={<Pricing />} />
+              <Route path="/integration" element={<Integration />} />
+              <Route path="/faq" element={<FAQ />} />
+              <Route path="/legal" element={<Legal />} />
+              <Route path="/contact" element={<Contact />} />
               
               {/* Protected routes (require authentication) */}
               <Route path="/dashboard" element={
