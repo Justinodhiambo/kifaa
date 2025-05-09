@@ -1,14 +1,36 @@
 
 import React from 'react';
 import { ArrowUpRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const Footer: React.FC = () => {
+  const scrollToSection = (sectionId: string) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      const headerHeight = 80; // Approximate navbar height
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - headerHeight;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
+    }
+  };
+
   return (
     <footer className="bg-secondary pt-16 pb-8">
       <div className="container mx-auto px-6">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-16">
           <div>
-            <a href="#" className="inline-block mb-6">
+            <a 
+              href="#" 
+              className="inline-block mb-6"
+              onClick={(e) => {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }}
+            >
               <span className="text-2xl font-display font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary-300 to-primary">
                 <span className="text-primary">K</span>ifaa
               </span>
@@ -42,30 +64,30 @@ const Footer: React.FC = () => {
           <div>
             <h4 className="font-display font-semibold text-lg mb-6">Product</h4>
             <nav className="flex flex-col space-y-4">
-              <FooterLink href="#">Features</FooterLink>
-              <FooterLink href="#">Pricing</FooterLink>
-              <FooterLink href="#">Integrations</FooterLink>
-              <FooterLink href="#">FAQ</FooterLink>
+              <FooterLink onClick={() => scrollToSection('features')}>Features</FooterLink>
+              <FooterLink to="/pricing">Pricing</FooterLink>
+              <FooterLink to="/integration">Integrations</FooterLink>
+              <FooterLink to="/faq">FAQ</FooterLink>
             </nav>
           </div>
           
           <div>
             <h4 className="font-display font-semibold text-lg mb-6">Company</h4>
             <nav className="flex flex-col space-y-4">
-              <FooterLink href="#">About Us</FooterLink>
-              <FooterLink href="#">Careers</FooterLink>
-              <FooterLink href="#">Blog</FooterLink>
-              <FooterLink href="#">Press</FooterLink>
+              <FooterLink to="/about">About Us</FooterLink>
+              <FooterLink to="/about#careers">Careers</FooterLink>
+              <FooterLink to="/about#blog">Blog</FooterLink>
+              <FooterLink to="/about#press">Press</FooterLink>
             </nav>
           </div>
           
           <div>
             <h4 className="font-display font-semibold text-lg mb-6">Legal</h4>
             <nav className="flex flex-col space-y-4">
-              <FooterLink href="#">Privacy Policy</FooterLink>
-              <FooterLink href="#">Terms of Service</FooterLink>
-              <FooterLink href="#">Security</FooterLink>
-              <FooterLink href="#">Compliance</FooterLink>
+              <FooterLink to="/legal#privacy">Privacy Policy</FooterLink>
+              <FooterLink to="/legal#terms">Terms of Service</FooterLink>
+              <FooterLink to="/legal#security">Security</FooterLink>
+              <FooterLink to="/legal#compliance">Compliance</FooterLink>
             </nav>
           </div>
         </div>
@@ -75,15 +97,15 @@ const Footer: React.FC = () => {
             © {new Date().getFullYear()} Kifaa. All rights reserved.
           </p>
           <div className="flex flex-wrap justify-center md:justify-end gap-x-8 gap-y-4">
-            <a href="#" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+            <Link to="/legal#privacy" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
               Privacy Policy
-            </a>
-            <a href="#" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+            </Link>
+            <Link to="/legal#terms" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
               Terms of Service
-            </a>
-            <a href="#" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+            </Link>
+            <Link to="/contact" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
               Contact Us
-            </a>
+            </Link>
           </div>
         </div>
       </div>
@@ -110,19 +132,36 @@ const SocialLink: React.FC<SocialLinkProps> = ({ href, label, children }) => {
 };
 
 interface FooterLinkProps {
-  href: string;
+  to?: string;
+  onClick?: () => void;
   children: React.ReactNode;
 }
 
-const FooterLink: React.FC<FooterLinkProps> = ({ href, children }) => {
+const FooterLink: React.FC<FooterLinkProps> = ({ to, onClick, children }) => {
+  if (onClick) {
+    return (
+      <a
+        href="#"
+        className="text-muted-foreground hover:text-foreground transition-colors group flex items-center"
+        onClick={(e) => {
+          e.preventDefault();
+          onClick();
+        }}
+      >
+        {children}
+        <ArrowUpRight className="h-3.5 w-3.5 ml-1 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
+      </a>
+    );
+  }
+
   return (
-    <a
-      href={href}
+    <Link
+      to={to || "#"}
       className="text-muted-foreground hover:text-foreground transition-colors group flex items-center"
     >
       {children}
       <ArrowUpRight className="h-3.5 w-3.5 ml-1 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
-    </a>
+    </Link>
   );
 };
 
