@@ -184,7 +184,7 @@ const Index = () => {
                     <div className="h-8 w-8 rounded-full flex items-center justify-center bg-green-100">
                       {/* Updated M-Pesa logo */}
                       <img 
-                        src="/lovable-uploads/ccf90591-f749-477b-aa5a-d612bdccc998.png" 
+                        src="/lovable-uploads/16acf6aa-1204-4b7c-ac3a-ac96f897eca4.png" 
                         alt="M-Pesa" 
                         className="h-6 w-6 object-contain" 
                       />
@@ -196,7 +196,7 @@ const Index = () => {
                     <div className="h-8 w-8 rounded-full flex items-center justify-center bg-red-100">
                       {/* Updated Airtel Money logo */}
                       <img 
-                        src="/lovable-uploads/05ea75fe-a96a-4aaf-9bb1-fe9fa59ffec2.png" 
+                        src="/lovable-uploads/a629ea9e-91d3-4ffd-8877-0873a94269c5.png" 
                         alt="Airtel Money" 
                         className="h-6 w-6 object-contain" 
                       />

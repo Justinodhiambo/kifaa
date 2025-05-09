@@ -5,7 +5,7 @@ import Footer from '@/components/Footer';
 import AnimatedGradient from '@/components/AnimatedGradient';
 import FadeIn from '@/components/FadeIn';
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Smartphone, Link, CreditCard, Zap, Phone } from 'lucide-react';
+import { ArrowRight, Smartphone, Link, CreditCard, Zap, Phone, CheckCircle2 } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 
 const Integration = () => {
@@ -42,11 +42,12 @@ const Integration = () => {
                   <h2 className="text-2xl font-bold mb-4">Mobile Money</h2>
                   <div className="space-y-4">
                     <div className="flex items-center p-4 rounded-lg bg-card border">
-                      <div className="h-10 w-10 rounded-full flex items-center justify-center bg-green-100 mr-4">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 190 190" className="h-7 w-7">
-                          <path fill="#42B549" d="M94.6,0C42.3,0,0,42.4,0,94.6s42.4,94.6,94.6,94.6s94.6-42.4,94.6-94.6S146.9,0,94.6,0z M94.6,167.8c-40.4,0-73.1-32.7-73.1-73.1s32.7-73.1,73.1-73.1s73.1,32.7,73.1,73.1S135,167.8,94.6,167.8z"/>
-                          <path fill="#42B549" d="M127.1,102.3l-4.8-3c-7.3-4.8-9.6-8.7-9.6-14.5v-2.1c2.1-2.1,4.1-5.3,5.3-8.9c2.7-0.4,4.8-2.7,4.8-5.5v-7.1c0-2-1.1-3.9-2.7-4.8v-10c0.1-0.9,0.5-6.8-3.7-11.7c-3.7-4.3-9.8-6.6-18.1-6.6c-8.3,0-14.4,2.3-18.1,6.6c-4.3,4.9-3.9,10.8-3.7,11.7v10c-1.6,1-2.7,2.8-2.7,4.8v7.1c0,2,1.1,3.9,2.7,4.8c1.4,5.3,4.4,9.2,5.3,9.8v2c0,5.4-2,9-9.7,14.2l-4.8,3.2c-7.8,5.4-12.6,10.5-12.6,22.5h85.5C139.8,112.7,134.9,107.6,127.1,102.3z"/>
-                        </svg>
+                      <div className="h-10 w-10 rounded-full flex items-center justify-center mr-4">
+                        <img 
+                          src="/lovable-uploads/16acf6aa-1204-4b7c-ac3a-ac96f897eca4.png" 
+                          alt="M-Pesa" 
+                          className="h-10 w-10 object-contain" 
+                        />
                       </div>
                       <div>
                         <h3 className="font-medium">M-Pesa</h3>
@@ -55,11 +56,12 @@ const Integration = () => {
                     </div>
                     
                     <div className="flex items-center p-4 rounded-lg bg-card border">
-                      <div className="h-10 w-10 rounded-full flex items-center justify-center bg-red-100 mr-4">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 150 150" className="h-7 w-7">
-                          <path fill="#E40613" d="M75,0C33.6,0,0,33.6,0,75s33.6,75,75,75s75-33.6,75-75S116.4,0,75,0z M75,130c-30.4,0-55-24.6-55-55s24.6-55,55-55s55,24.6,55,55S105.4,130,75,130z"/>
-                          <path fill="#E40613" d="M87.5,50H62.5c-6.9,0-12.5,5.6-12.5,12.5v25c0,6.9,5.6,12.5,12.5,12.5h25c6.9,0,12.5-5.6,12.5-12.5v-25C100,55.6,94.4,50,87.5,50z M75,90c-8.3,0-15-6.7-15-15s6.7-15,15-15s15,6.7,15,15S83.3,90,75,90z"/>
-                        </svg>
+                      <div className="h-10 w-10 rounded-full flex items-center justify-center mr-4">
+                        <img 
+                          src="/lovable-uploads/a629ea9e-91d3-4ffd-8877-0873a94269c5.png" 
+                          alt="Airtel Money" 
+                          className="h-10 w-10 object-contain" 
+                        />
                       </div>
                       <div>
                         <h3 className="font-medium">Airtel Money</h3>
@@ -86,19 +88,40 @@ const Integration = () => {
                     <Link className="h-7 w-7 text-primary" />
                   </div>
                   <h2 className="text-2xl font-bold mb-4">Banking APIs</h2>
-                  <div className="prose text-foreground max-w-none">
-                    <p>Our platform seamlessly integrates with banking systems for:</p>
-                    <ul>
-                      <li>Loan disbursement</li>
-                      <li>Payment reconciliation</li>
-                      <li>Automated repayment tracking</li>
-                      <li>Real-time account activity</li>
-                      <li>KYC verification</li>
-                    </ul>
-                    <p>
-                      Kifaa's banking API connects with all major Kenyan banks and financial institutions, providing a secure and compliant integration layer.
-                    </p>
-                  </div>
+                  
+                  <Card className="mb-6">
+                    <CardHeader>
+                      <CardTitle className="text-lg">Integration Features</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <ul className="space-y-2">
+                        <li className="flex items-start">
+                          <CheckCircle2 className="h-5 w-5 text-primary mr-2 mt-0.5 flex-shrink-0" />
+                          <span>Loan disbursement directly to customer accounts</span>
+                        </li>
+                        <li className="flex items-start">
+                          <CheckCircle2 className="h-5 w-5 text-primary mr-2 mt-0.5 flex-shrink-0" />
+                          <span>Real-time payment reconciliation with webhooks</span>
+                        </li>
+                        <li className="flex items-start">
+                          <CheckCircle2 className="h-5 w-5 text-primary mr-2 mt-0.5 flex-shrink-0" />
+                          <span>Automated repayment tracking and notifications</span>
+                        </li>
+                        <li className="flex items-start">
+                          <CheckCircle2 className="h-5 w-5 text-primary mr-2 mt-0.5 flex-shrink-0" />
+                          <span>Real-time account activity monitoring</span>
+                        </li>
+                        <li className="flex items-start">
+                          <CheckCircle2 className="h-5 w-5 text-primary mr-2 mt-0.5 flex-shrink-0" />
+                          <span>KYC verification through banking partners</span>
+                        </li>
+                      </ul>
+                    </CardContent>
+                  </Card>
+                  
+                  <p className="text-sm text-muted-foreground">
+                    Kifaa's banking API connects with all major Kenyan banks and financial institutions, providing a secure and compliant integration layer.
+                  </p>
                 </div>
               </FadeIn>
             </div>

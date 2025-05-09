@@ -139,17 +139,6 @@ const Pricing = () => {
                 />
               </FadeIn>
             </div>
-            
-            <div className="max-w-4xl mx-auto mt-16">
-              <FadeIn>
-                <div className="bg-muted/50 rounded-lg p-6 border">
-                  <h3 className="text-lg font-medium mb-2">Note about lending</h3>
-                  <p className="text-muted-foreground">
-                    Kifaa does not lend directly to consumers. Loan pricing and terms are set by our financial institution partners. The prices above apply to enterprise clients utilizing our platform.
-                  </p>
-                </div>
-              </FadeIn>
-            </div>
           </div>
         </section>
       </main>

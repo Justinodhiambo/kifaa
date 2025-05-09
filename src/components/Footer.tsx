@@ -64,10 +64,22 @@ const Footer: React.FC = () => {
           <div className="mt-2">
             <h4 className="font-display font-semibold text-lg mb-6">Product</h4>
             <nav className="flex flex-col space-y-5">
-              <FooterLink to="#features" onClick={() => scrollToSection('features')}>Features</FooterLink>
-              <FooterLink to="/pricing">Pricing</FooterLink>
-              <FooterLink to="/integration">Integrations</FooterLink>
-              <FooterLink to="/faq">FAQ</FooterLink>
+              <Link to="/#features" className="text-muted-foreground hover:text-foreground transition-colors group flex items-center">
+                Features
+                <ArrowUpRight className="h-3.5 w-3.5 ml-1 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
+              </Link>
+              <Link to="/pricing" className="text-muted-foreground hover:text-foreground transition-colors group flex items-center">
+                Pricing
+                <ArrowUpRight className="h-3.5 w-3.5 ml-1 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
+              </Link>
+              <Link to="/integration" className="text-muted-foreground hover:text-foreground transition-colors group flex items-center">
+                Integrations
+                <ArrowUpRight className="h-3.5 w-3.5 ml-1 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
+              </Link>
+              <Link to="/faq" className="text-muted-foreground hover:text-foreground transition-colors group flex items-center">
+                FAQ
+                <ArrowUpRight className="h-3.5 w-3.5 ml-1 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
+              </Link>
             </nav>
           </div>
           
@@ -138,28 +150,11 @@ interface FooterLinkProps {
 }
 
 const FooterLink: React.FC<FooterLinkProps> = ({ to, onClick, children }) => {
-  // Handle internal navigation with smooth scrolling for sections
-  if (to.startsWith('#')) {
-    return (
-      <a
-        href={to}
-        className="text-muted-foreground hover:text-foreground transition-colors group flex items-center"
-        onClick={(e) => {
-          e.preventDefault();
-          if (onClick) onClick();
-        }}
-      >
-        {children}
-        <ArrowUpRight className="h-3.5 w-3.5 ml-1 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
-      </a>
-    );
-  }
-
-  // Regular router Link for pages
   return (
     <Link
       to={to}
       className="text-muted-foreground hover:text-foreground transition-colors group flex items-center"
+      onClick={onClick}
     >
       {children}
       <ArrowUpRight className="h-3.5 w-3.5 ml-1 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />

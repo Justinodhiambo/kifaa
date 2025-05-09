@@ -4,8 +4,9 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import AnimatedGradient from '@/components/AnimatedGradient';
 import FadeIn from '@/components/FadeIn';
-import { Shield, FileText } from 'lucide-react';
+import { Shield, FileText, CheckCircle2 } from 'lucide-react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 const Legal = () => {
   return (
@@ -36,7 +37,7 @@ const Legal = () => {
         <section className="py-12 bg-background">
           <div className="container mx-auto px-4">
             <div className="max-w-4xl mx-auto">
-              <Tabs defaultValue="privacy">
+              <Tabs defaultValue="privacy" id="privacy">
                 <div className="flex justify-center mb-8">
                   <TabsList className="grid grid-cols-3 w-full max-w-md">
                     <TabsTrigger value="privacy">Privacy Policy</TabsTrigger>
@@ -54,54 +55,109 @@ const Legal = () => {
                       <h2 className="text-2xl font-bold">Privacy Policy</h2>
                     </div>
                     
-                    <div className="prose prose-lg max-w-none text-foreground">
-                      <p>
-                        Kifaa is committed to protecting your data. We do not sell personal information to third parties. All user data is encrypted, and access is limited to authorized systems.
-                      </p>
-                      
-                      <h3>Data Collection and Usage</h3>
-                      <p>
-                        We collect information to provide and improve our services. The types of information we collect depend on how you use our platform:
-                      </p>
-                      <ul>
-                        <li>Account information (name, email, phone number)</li>
-                        <li>Transaction data (for credit scoring purposes)</li>
-                        <li>Device and usage information</li>
-                        <li>Information from third-party integrations (with your permission)</li>
-                      </ul>
-                      
-                      <h3>Data Protection Measures</h3>
-                      <p>
-                        Kifaa implements multiple layers of data protection:
-                      </p>
-                      <ul>
-                        <li>Data encryption in transit and at rest</li>
-                        <li>Secure access controls and authentication</li>
-                        <li>Regular security audits and penetration testing</li>
-                        <li>Employee training on data protection</li>
-                        <li>Data minimization practices</li>
-                      </ul>
-                      
-                      <h3>Your Rights</h3>
-                      <p>
-                        You have the right to:
-                      </p>
-                      <ul>
-                        <li>Access your personal data</li>
-                        <li>Correct inaccurate information</li>
-                        <li>Delete your data (with certain limitations)</li>
-                        <li>Withdraw consent for data processing</li>
-                        <li>Lodge complaints with regulatory authorities</li>
-                      </ul>
-                      
-                      <p>
-                        For the complete privacy policy, please visit <a href="https://kifaa.com/privacy-policy" className="text-primary underline">kifaa.com/privacy-policy</a>.
-                      </p>
-                    </div>
+                    <Card className="mb-6">
+                      <CardHeader>
+                        <CardTitle className="text-lg">Data Collection and Usage</CardTitle>
+                      </CardHeader>
+                      <CardContent>
+                        <p className="mb-4">
+                          We collect information to provide and improve our services. The types of information we collect depend on how you use our platform:
+                        </p>
+                        <ul className="space-y-2">
+                          <li className="flex items-start">
+                            <CheckCircle2 className="h-5 w-5 text-primary mr-2 mt-0.5 flex-shrink-0" />
+                            <span>Account information (name, email, phone number)</span>
+                          </li>
+                          <li className="flex items-start">
+                            <CheckCircle2 className="h-5 w-5 text-primary mr-2 mt-0.5 flex-shrink-0" />
+                            <span>Transaction data (for credit scoring purposes)</span>
+                          </li>
+                          <li className="flex items-start">
+                            <CheckCircle2 className="h-5 w-5 text-primary mr-2 mt-0.5 flex-shrink-0" />
+                            <span>Device and usage information</span>
+                          </li>
+                          <li className="flex items-start">
+                            <CheckCircle2 className="h-5 w-5 text-primary mr-2 mt-0.5 flex-shrink-0" />
+                            <span>Information from third-party integrations (with your permission)</span>
+                          </li>
+                        </ul>
+                      </CardContent>
+                    </Card>
+                    
+                    <Card className="mb-6">
+                      <CardHeader>
+                        <CardTitle className="text-lg">Data Protection Measures</CardTitle>
+                      </CardHeader>
+                      <CardContent>
+                        <p className="mb-4">
+                          Kifaa implements multiple layers of data protection:
+                        </p>
+                        <ul className="space-y-2">
+                          <li className="flex items-start">
+                            <CheckCircle2 className="h-5 w-5 text-primary mr-2 mt-0.5 flex-shrink-0" />
+                            <span>Data encryption in transit and at rest</span>
+                          </li>
+                          <li className="flex items-start">
+                            <CheckCircle2 className="h-5 w-5 text-primary mr-2 mt-0.5 flex-shrink-0" />
+                            <span>Secure access controls and authentication</span>
+                          </li>
+                          <li className="flex items-start">
+                            <CheckCircle2 className="h-5 w-5 text-primary mr-2 mt-0.5 flex-shrink-0" />
+                            <span>Regular security audits and penetration testing</span>
+                          </li>
+                          <li className="flex items-start">
+                            <CheckCircle2 className="h-5 w-5 text-primary mr-2 mt-0.5 flex-shrink-0" />
+                            <span>Employee training on data protection</span>
+                          </li>
+                          <li className="flex items-start">
+                            <CheckCircle2 className="h-5 w-5 text-primary mr-2 mt-0.5 flex-shrink-0" />
+                            <span>Data minimization practices</span>
+                          </li>
+                        </ul>
+                      </CardContent>
+                    </Card>
+                    
+                    <Card>
+                      <CardHeader>
+                        <CardTitle className="text-lg">Your Rights</CardTitle>
+                      </CardHeader>
+                      <CardContent>
+                        <p className="mb-4">
+                          You have the right to:
+                        </p>
+                        <ul className="space-y-2">
+                          <li className="flex items-start">
+                            <CheckCircle2 className="h-5 w-5 text-primary mr-2 mt-0.5 flex-shrink-0" />
+                            <span>Access your personal data</span>
+                          </li>
+                          <li className="flex items-start">
+                            <CheckCircle2 className="h-5 w-5 text-primary mr-2 mt-0.5 flex-shrink-0" />
+                            <span>Correct inaccurate information</span>
+                          </li>
+                          <li className="flex items-start">
+                            <CheckCircle2 className="h-5 w-5 text-primary mr-2 mt-0.5 flex-shrink-0" />
+                            <span>Delete your data (with certain limitations)</span>
+                          </li>
+                          <li className="flex items-start">
+                            <CheckCircle2 className="h-5 w-5 text-primary mr-2 mt-0.5 flex-shrink-0" />
+                            <span>Withdraw consent for data processing</span>
+                          </li>
+                          <li className="flex items-start">
+                            <CheckCircle2 className="h-5 w-5 text-primary mr-2 mt-0.5 flex-shrink-0" />
+                            <span>Lodge complaints with regulatory authorities</span>
+                          </li>
+                        </ul>
+                        <div className="mt-6 text-center">
+                          <a href="https://kifaa.com/privacy-policy" className="text-primary underline">
+                            View Complete Privacy Policy
+                          </a>
+                        </div>
+                      </CardContent>
+                    </Card>
                   </FadeIn>
                 </TabsContent>
                 
-                <TabsContent value="terms" className="bg-card rounded-lg border p-6">
+                <TabsContent value="terms" className="bg-card rounded-lg border p-6" id="terms">
                   <FadeIn>
                     <div className="flex items-center mb-6">
                       <div className="h-10 w-10 rounded-lg bg-primary/10 flex items-center justify-center mr-4">
@@ -110,47 +166,83 @@ const Legal = () => {
                       <h2 className="text-2xl font-bold">Terms of Service</h2>
                     </div>
                     
-                    <div className="prose prose-lg max-w-none text-foreground">
-                      <p>
-                        By using Kifaa, you agree to our Terms of Service, which outline usage policies, liability limitations, and user obligations.
-                      </p>
-                      
-                      <h3>Platform Usage</h3>
-                      <p>
-                        Users agree to:
-                      </p>
-                      <ul>
-                        <li>Provide accurate and complete information</li>
-                        <li>Maintain the security of account credentials</li>
-                        <li>Use the platform for lawful purposes only</li>
-                        <li>Not attempt to reverse-engineer the service</li>
-                        <li>Comply with all applicable laws and regulations</li>
-                      </ul>
-                      
-                      <h3>Service Limitations</h3>
-                      <p>
-                        Kifaa reserves the right to:
-                      </p>
-                      <ul>
-                        <li>Modify, suspend, or discontinue services</li>
-                        <li>Update terms with reasonable notice</li>
-                        <li>Remove content that violates our policies</li>
-                        <li>Terminate accounts for policy violations</li>
-                      </ul>
-                      
-                      <h3>Disclaimers and Limitations</h3>
-                      <p>
+                    <Card className="mb-6">
+                      <CardHeader>
+                        <CardTitle className="text-lg">Platform Usage</CardTitle>
+                      </CardHeader>
+                      <CardContent>
+                        <p className="mb-4">
+                          Users agree to:
+                        </p>
+                        <ul className="space-y-2">
+                          <li className="flex items-start">
+                            <CheckCircle2 className="h-5 w-5 text-primary mr-2 mt-0.5 flex-shrink-0" />
+                            <span>Provide accurate and complete information</span>
+                          </li>
+                          <li className="flex items-start">
+                            <CheckCircle2 className="h-5 w-5 text-primary mr-2 mt-0.5 flex-shrink-0" />
+                            <span>Maintain the security of account credentials</span>
+                          </li>
+                          <li className="flex items-start">
+                            <CheckCircle2 className="h-5 w-5 text-primary mr-2 mt-0.5 flex-shrink-0" />
+                            <span>Use the platform for lawful purposes only</span>
+                          </li>
+                          <li className="flex items-start">
+                            <CheckCircle2 className="h-5 w-5 text-primary mr-2 mt-0.5 flex-shrink-0" />
+                            <span>Not attempt to reverse-engineer the service</span>
+                          </li>
+                          <li className="flex items-start">
+                            <CheckCircle2 className="h-5 w-5 text-primary mr-2 mt-0.5 flex-shrink-0" />
+                            <span>Comply with all applicable laws and regulations</span>
+                          </li>
+                        </ul>
+                      </CardContent>
+                    </Card>
+                    
+                    <Card className="mb-6">
+                      <CardHeader>
+                        <CardTitle className="text-lg">Service Limitations</CardTitle>
+                      </CardHeader>
+                      <CardContent>
+                        <p className="mb-4">
+                          Kifaa reserves the right to:
+                        </p>
+                        <ul className="space-y-2">
+                          <li className="flex items-start">
+                            <CheckCircle2 className="h-5 w-5 text-primary mr-2 mt-0.5 flex-shrink-0" />
+                            <span>Modify, suspend, or discontinue services</span>
+                          </li>
+                          <li className="flex items-start">
+                            <CheckCircle2 className="h-5 w-5 text-primary mr-2 mt-0.5 flex-shrink-0" />
+                            <span>Update terms with reasonable notice</span>
+                          </li>
+                          <li className="flex items-start">
+                            <CheckCircle2 className="h-5 w-5 text-primary mr-2 mt-0.5 flex-shrink-0" />
+                            <span>Remove content that violates our policies</span>
+                          </li>
+                          <li className="flex items-start">
+                            <CheckCircle2 className="h-5 w-5 text-primary mr-2 mt-0.5 flex-shrink-0" />
+                            <span>Terminate accounts for policy violations</span>
+                          </li>
+                        </ul>
+                      </CardContent>
+                    </Card>
+                    
+                    <div className="p-6 border rounded-lg bg-muted/30">
+                      <h3 className="font-semibold mb-2">Disclaimers and Limitations</h3>
+                      <p className="text-muted-foreground mb-4">
                         The platform is provided "as is" without warranties of any kind. Kifaa shall not be liable for indirect, incidental, or consequential damages arising from platform use.
                       </p>
-                      
-                      <p>
-                        For the complete terms of service, please visit <a href="https://kifaa.com/terms" className="text-primary underline">kifaa.com/terms</a>.
-                      </p>
+                      <div className="text-center">
+                        <a href="https://kifaa.com/terms" className="text-primary underline">
+                          View Complete Terms of Service
+                        </a>
+                      </div>
                     </div>
                   </FadeIn>
                 </TabsContent>
                 
-                <TabsContent value="compliance" className="bg-card rounded-lg border p-6">
+                <TabsContent value="compliance" className="bg-card rounded-lg border p-6" id="compliance">
                   <FadeIn>
                     <div className="flex items-center mb-6">
                       <div className="h-10 w-10 rounded-lg bg-primary/10 flex items-center justify-center mr-4">
@@ -159,45 +251,96 @@ const Legal = () => {
                       <h2 className="text-2xl font-bold">Compliance</h2>
                     </div>
                     
-                    <div className="prose prose-lg max-w-none text-foreground">
-                      <p>
-                        Kifaa is fully compliant with relevant financial and data protection regulations.
-                      </p>
-                      
-                      <h3>Regulatory Compliance</h3>
-                      <p>
-                        Our platform complies with:
-                      </p>
-                      <ul>
-                        <li>Kenya's Data Protection Act</li>
-                        <li>GDPR for applicable users</li>
-                        <li>CBK fintech sandbox requirements</li>
-                        <li>Anti-Money Laundering (AML) regulations</li>
-                        <li>Know Your Customer (KYC) requirements</li>
-                      </ul>
-                      
-                      <h3>Security Implementations</h3>
-                      <p>
-                        Kifaa implements industry best practices for security:
-                      </p>
-                      <ul>
-                        <li>AES-256 encryption for data storage</li>
-                        <li>TLS protocols for data transmission</li>
-                        <li>Multi-factor authentication</li>
-                        <li>Regular security audits and penetration testing</li>
-                        <li>Secure development practices</li>
-                      </ul>
-                      
-                      <h3>Certifications and Partnerships</h3>
-                      <p>
-                        Kifaa maintains certifications and partnerships that demonstrate our commitment to compliance:
-                      </p>
-                      <ul>
-                        <li>Central Bank of Kenya Fintech Sandbox participant</li>
-                        <li>ISO 27001 certification (in progress)</li>
-                        <li>Partnership with licensed financial institutions</li>
-                      </ul>
-                    </div>
+                    <Card className="mb-6">
+                      <CardHeader>
+                        <CardTitle className="text-lg">Regulatory Compliance</CardTitle>
+                      </CardHeader>
+                      <CardContent>
+                        <p className="mb-4">
+                          Our platform complies with:
+                        </p>
+                        <ul className="space-y-2">
+                          <li className="flex items-start">
+                            <CheckCircle2 className="h-5 w-5 text-primary mr-2 mt-0.5 flex-shrink-0" />
+                            <span>Kenya's Data Protection Act</span>
+                          </li>
+                          <li className="flex items-start">
+                            <CheckCircle2 className="h-5 w-5 text-primary mr-2 mt-0.5 flex-shrink-0" />
+                            <span>GDPR for applicable users</span>
+                          </li>
+                          <li className="flex items-start">
+                            <CheckCircle2 className="h-5 w-5 text-primary mr-2 mt-0.5 flex-shrink-0" />
+                            <span>CBK fintech sandbox requirements</span>
+                          </li>
+                          <li className="flex items-start">
+                            <CheckCircle2 className="h-5 w-5 text-primary mr-2 mt-0.5 flex-shrink-0" />
+                            <span>Anti-Money Laundering (AML) regulations</span>
+                          </li>
+                          <li className="flex items-start">
+                            <CheckCircle2 className="h-5 w-5 text-primary mr-2 mt-0.5 flex-shrink-0" />
+                            <span>Know Your Customer (KYC) requirements</span>
+                          </li>
+                        </ul>
+                      </CardContent>
+                    </Card>
+                    
+                    <Card className="mb-6">
+                      <CardHeader>
+                        <CardTitle className="text-lg">Security Implementations</CardTitle>
+                      </CardHeader>
+                      <CardContent>
+                        <p className="mb-4">
+                          Kifaa implements industry best practices for security:
+                        </p>
+                        <ul className="space-y-2">
+                          <li className="flex items-start">
+                            <CheckCircle2 className="h-5 w-5 text-primary mr-2 mt-0.5 flex-shrink-0" />
+                            <span>AES-256 encryption for data storage</span>
+                          </li>
+                          <li className="flex items-start">
+                            <CheckCircle2 className="h-5 w-5 text-primary mr-2 mt-0.5 flex-shrink-0" />
+                            <span>TLS protocols for data transmission</span>
+                          </li>
+                          <li className="flex items-start">
+                            <CheckCircle2 className="h-5 w-5 text-primary mr-2 mt-0.5 flex-shrink-0" />
+                            <span>Multi-factor authentication</span>
+                          </li>
+                          <li className="flex items-start">
+                            <CheckCircle2 className="h-5 w-5 text-primary mr-2 mt-0.5 flex-shrink-0" />
+                            <span>Regular security audits and penetration testing</span>
+                          </li>
+                          <li className="flex items-start">
+                            <CheckCircle2 className="h-5 w-5 text-primary mr-2 mt-0.5 flex-shrink-0" />
+                            <span>Secure development practices</span>
+                          </li>
+                        </ul>
+                      </CardContent>
+                    </Card>
+                    
+                    <Card>
+                      <CardHeader>
+                        <CardTitle className="text-lg">Certifications and Partnerships</CardTitle>
+                      </CardHeader>
+                      <CardContent>
+                        <p className="mb-4">
+                          Kifaa maintains certifications and partnerships that demonstrate our commitment to compliance:
+                        </p>
+                        <ul className="space-y-2">
+                          <li className="flex items-start">
+                            <CheckCircle2 className="h-5 w-5 text-primary mr-2 mt-0.5 flex-shrink-0" />
+                            <span>Central Bank of Kenya Fintech Sandbox participant</span>
+                          </li>
+                          <li className="flex items-start">
+                            <CheckCircle2 className="h-5 w-5 text-primary mr-2 mt-0.5 flex-shrink-0" />
+                            <span>ISO 27001 certification (in progress)</span>
+                          </li>
+                          <li className="flex items-start">
+                            <CheckCircle2 className="h-5 w-5 text-primary mr-2 mt-0.5 flex-shrink-0" />
+                            <span>Partnership with licensed financial institutions</span>
+                          </li>
+                        </ul>
+                      </CardContent>
+                    </Card>
                   </FadeIn>
                 </TabsContent>
               </Tabs>
@@ -206,25 +349,41 @@ const Legal = () => {
         </section>
         
         {/* General Legal Info */}
-        <section className="py-12 bg-muted/50">
+        <section className="py-12 bg-muted/50" id="security">
           <div className="container mx-auto px-4">
             <div className="max-w-4xl mx-auto">
               <FadeIn>
-                <h2 className="text-2xl md:text-3xl font-bold mb-6">Legal Summary</h2>
-                <div className="prose prose-lg max-w-none text-foreground">
-                  <p>
-                    Kifaa complies with local and international laws, including:
-                  </p>
-                  <ul>
-                    <li>The Kenya Data Protection Act</li>
-                    <li>The General Data Protection Regulation (GDPR)</li>
-                    <li>Applicable AML/KYC standards</li>
-                    <li>Central Bank of Kenya's fintech sandbox rules</li>
-                  </ul>
-                  <p>
-                    All users and partners must accept our terms before using the platform. API usage is governed by specific licensing terms.
-                  </p>
-                </div>
+                <Card className="border-2">
+                  <CardHeader>
+                    <CardTitle className="text-2xl md:text-3xl font-bold">Legal Summary</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="mb-4">
+                      Kifaa complies with local and international laws, including:
+                    </p>
+                    <ul className="space-y-2 mb-6">
+                      <li className="flex items-start">
+                        <CheckCircle2 className="h-5 w-5 text-primary mr-2 mt-0.5 flex-shrink-0" />
+                        <span>The Kenya Data Protection Act</span>
+                      </li>
+                      <li className="flex items-start">
+                        <CheckCircle2 className="h-5 w-5 text-primary mr-2 mt-0.5 flex-shrink-0" />
+                        <span>The General Data Protection Regulation (GDPR)</span>
+                      </li>
+                      <li className="flex items-start">
+                        <CheckCircle2 className="h-5 w-5 text-primary mr-2 mt-0.5 flex-shrink-0" />
+                        <span>Applicable AML/KYC standards</span>
+                      </li>
+                      <li className="flex items-start">
+                        <CheckCircle2 className="h-5 w-5 text-primary mr-2 mt-0.5 flex-shrink-0" />
+                        <span>Central Bank of Kenya's fintech sandbox rules</span>
+                      </li>
+                    </ul>
+                    <p>
+                      All users and partners must accept our terms before using the platform. API usage is governed by specific licensing terms.
+                    </p>
+                  </CardContent>
+                </Card>
               </FadeIn>
             </div>
           </div>
