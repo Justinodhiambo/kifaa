@@ -7,6 +7,12 @@ import FadeIn from '@/components/FadeIn';
 import { Shield, FileText, CheckCircle2 } from 'lucide-react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { 
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger
+} from "@/components/ui/accordion";
 
 const Legal = () => {
   return (
@@ -33,323 +39,8 @@ const Legal = () => {
           </div>
         </section>
         
-        {/* Legal Tabs */}
-        <section className="py-12 bg-background">
-          <div className="container mx-auto px-4">
-            <div className="max-w-4xl mx-auto">
-              <Tabs defaultValue="privacy" id="privacy">
-                <div className="flex justify-center mb-8">
-                  <TabsList className="grid grid-cols-3 w-full max-w-md">
-                    <TabsTrigger value="privacy">Privacy Policy</TabsTrigger>
-                    <TabsTrigger value="terms">Terms of Service</TabsTrigger>
-                    <TabsTrigger value="compliance">Compliance</TabsTrigger>
-                  </TabsList>
-                </div>
-                
-                <TabsContent value="privacy" className="bg-card rounded-lg border p-6">
-                  <FadeIn>
-                    <div className="flex items-center mb-6">
-                      <div className="h-10 w-10 rounded-lg bg-primary/10 flex items-center justify-center mr-4">
-                        <Shield className="h-5 w-5 text-primary" />
-                      </div>
-                      <h2 className="text-2xl font-bold">Privacy Policy</h2>
-                    </div>
-                    
-                    <Card className="mb-6">
-                      <CardHeader>
-                        <CardTitle className="text-lg">Data Collection and Usage</CardTitle>
-                      </CardHeader>
-                      <CardContent>
-                        <p className="mb-4">
-                          We collect information to provide and improve our services. The types of information we collect depend on how you use our platform:
-                        </p>
-                        <ul className="space-y-2">
-                          <li className="flex items-start">
-                            <CheckCircle2 className="h-5 w-5 text-primary mr-2 mt-0.5 flex-shrink-0" />
-                            <span>Account information (name, email, phone number)</span>
-                          </li>
-                          <li className="flex items-start">
-                            <CheckCircle2 className="h-5 w-5 text-primary mr-2 mt-0.5 flex-shrink-0" />
-                            <span>Transaction data (for credit scoring purposes)</span>
-                          </li>
-                          <li className="flex items-start">
-                            <CheckCircle2 className="h-5 w-5 text-primary mr-2 mt-0.5 flex-shrink-0" />
-                            <span>Device and usage information</span>
-                          </li>
-                          <li className="flex items-start">
-                            <CheckCircle2 className="h-5 w-5 text-primary mr-2 mt-0.5 flex-shrink-0" />
-                            <span>Information from third-party integrations (with your permission)</span>
-                          </li>
-                        </ul>
-                      </CardContent>
-                    </Card>
-                    
-                    <Card className="mb-6">
-                      <CardHeader>
-                        <CardTitle className="text-lg">Data Protection Measures</CardTitle>
-                      </CardHeader>
-                      <CardContent>
-                        <p className="mb-4">
-                          Kifaa implements multiple layers of data protection:
-                        </p>
-                        <ul className="space-y-2">
-                          <li className="flex items-start">
-                            <CheckCircle2 className="h-5 w-5 text-primary mr-2 mt-0.5 flex-shrink-0" />
-                            <span>Data encryption in transit and at rest</span>
-                          </li>
-                          <li className="flex items-start">
-                            <CheckCircle2 className="h-5 w-5 text-primary mr-2 mt-0.5 flex-shrink-0" />
-                            <span>Secure access controls and authentication</span>
-                          </li>
-                          <li className="flex items-start">
-                            <CheckCircle2 className="h-5 w-5 text-primary mr-2 mt-0.5 flex-shrink-0" />
-                            <span>Regular security audits and penetration testing</span>
-                          </li>
-                          <li className="flex items-start">
-                            <CheckCircle2 className="h-5 w-5 text-primary mr-2 mt-0.5 flex-shrink-0" />
-                            <span>Employee training on data protection</span>
-                          </li>
-                          <li className="flex items-start">
-                            <CheckCircle2 className="h-5 w-5 text-primary mr-2 mt-0.5 flex-shrink-0" />
-                            <span>Data minimization practices</span>
-                          </li>
-                        </ul>
-                      </CardContent>
-                    </Card>
-                    
-                    <Card>
-                      <CardHeader>
-                        <CardTitle className="text-lg">Your Rights</CardTitle>
-                      </CardHeader>
-                      <CardContent>
-                        <p className="mb-4">
-                          You have the right to:
-                        </p>
-                        <ul className="space-y-2">
-                          <li className="flex items-start">
-                            <CheckCircle2 className="h-5 w-5 text-primary mr-2 mt-0.5 flex-shrink-0" />
-                            <span>Access your personal data</span>
-                          </li>
-                          <li className="flex items-start">
-                            <CheckCircle2 className="h-5 w-5 text-primary mr-2 mt-0.5 flex-shrink-0" />
-                            <span>Correct inaccurate information</span>
-                          </li>
-                          <li className="flex items-start">
-                            <CheckCircle2 className="h-5 w-5 text-primary mr-2 mt-0.5 flex-shrink-0" />
-                            <span>Delete your data (with certain limitations)</span>
-                          </li>
-                          <li className="flex items-start">
-                            <CheckCircle2 className="h-5 w-5 text-primary mr-2 mt-0.5 flex-shrink-0" />
-                            <span>Withdraw consent for data processing</span>
-                          </li>
-                          <li className="flex items-start">
-                            <CheckCircle2 className="h-5 w-5 text-primary mr-2 mt-0.5 flex-shrink-0" />
-                            <span>Lodge complaints with regulatory authorities</span>
-                          </li>
-                        </ul>
-                        <div className="mt-6 text-center">
-                          <a href="https://kifaa.com/privacy-policy" className="text-primary underline">
-                            View Complete Privacy Policy
-                          </a>
-                        </div>
-                      </CardContent>
-                    </Card>
-                  </FadeIn>
-                </TabsContent>
-                
-                <TabsContent value="terms" className="bg-card rounded-lg border p-6" id="terms">
-                  <FadeIn>
-                    <div className="flex items-center mb-6">
-                      <div className="h-10 w-10 rounded-lg bg-primary/10 flex items-center justify-center mr-4">
-                        <FileText className="h-5 w-5 text-primary" />
-                      </div>
-                      <h2 className="text-2xl font-bold">Terms of Service</h2>
-                    </div>
-                    
-                    <Card className="mb-6">
-                      <CardHeader>
-                        <CardTitle className="text-lg">Platform Usage</CardTitle>
-                      </CardHeader>
-                      <CardContent>
-                        <p className="mb-4">
-                          Users agree to:
-                        </p>
-                        <ul className="space-y-2">
-                          <li className="flex items-start">
-                            <CheckCircle2 className="h-5 w-5 text-primary mr-2 mt-0.5 flex-shrink-0" />
-                            <span>Provide accurate and complete information</span>
-                          </li>
-                          <li className="flex items-start">
-                            <CheckCircle2 className="h-5 w-5 text-primary mr-2 mt-0.5 flex-shrink-0" />
-                            <span>Maintain the security of account credentials</span>
-                          </li>
-                          <li className="flex items-start">
-                            <CheckCircle2 className="h-5 w-5 text-primary mr-2 mt-0.5 flex-shrink-0" />
-                            <span>Use the platform for lawful purposes only</span>
-                          </li>
-                          <li className="flex items-start">
-                            <CheckCircle2 className="h-5 w-5 text-primary mr-2 mt-0.5 flex-shrink-0" />
-                            <span>Not attempt to reverse-engineer the service</span>
-                          </li>
-                          <li className="flex items-start">
-                            <CheckCircle2 className="h-5 w-5 text-primary mr-2 mt-0.5 flex-shrink-0" />
-                            <span>Comply with all applicable laws and regulations</span>
-                          </li>
-                        </ul>
-                      </CardContent>
-                    </Card>
-                    
-                    <Card className="mb-6">
-                      <CardHeader>
-                        <CardTitle className="text-lg">Service Limitations</CardTitle>
-                      </CardHeader>
-                      <CardContent>
-                        <p className="mb-4">
-                          Kifaa reserves the right to:
-                        </p>
-                        <ul className="space-y-2">
-                          <li className="flex items-start">
-                            <CheckCircle2 className="h-5 w-5 text-primary mr-2 mt-0.5 flex-shrink-0" />
-                            <span>Modify, suspend, or discontinue services</span>
-                          </li>
-                          <li className="flex items-start">
-                            <CheckCircle2 className="h-5 w-5 text-primary mr-2 mt-0.5 flex-shrink-0" />
-                            <span>Update terms with reasonable notice</span>
-                          </li>
-                          <li className="flex items-start">
-                            <CheckCircle2 className="h-5 w-5 text-primary mr-2 mt-0.5 flex-shrink-0" />
-                            <span>Remove content that violates our policies</span>
-                          </li>
-                          <li className="flex items-start">
-                            <CheckCircle2 className="h-5 w-5 text-primary mr-2 mt-0.5 flex-shrink-0" />
-                            <span>Terminate accounts for policy violations</span>
-                          </li>
-                        </ul>
-                      </CardContent>
-                    </Card>
-                    
-                    <div className="p-6 border rounded-lg bg-muted/30">
-                      <h3 className="font-semibold mb-2">Disclaimers and Limitations</h3>
-                      <p className="text-muted-foreground mb-4">
-                        The platform is provided "as is" without warranties of any kind. Kifaa shall not be liable for indirect, incidental, or consequential damages arising from platform use.
-                      </p>
-                      <div className="text-center">
-                        <a href="https://kifaa.com/terms" className="text-primary underline">
-                          View Complete Terms of Service
-                        </a>
-                      </div>
-                    </div>
-                  </FadeIn>
-                </TabsContent>
-                
-                <TabsContent value="compliance" className="bg-card rounded-lg border p-6" id="compliance">
-                  <FadeIn>
-                    <div className="flex items-center mb-6">
-                      <div className="h-10 w-10 rounded-lg bg-primary/10 flex items-center justify-center mr-4">
-                        <Shield className="h-5 w-5 text-primary" />
-                      </div>
-                      <h2 className="text-2xl font-bold">Compliance</h2>
-                    </div>
-                    
-                    <Card className="mb-6">
-                      <CardHeader>
-                        <CardTitle className="text-lg">Regulatory Compliance</CardTitle>
-                      </CardHeader>
-                      <CardContent>
-                        <p className="mb-4">
-                          Our platform complies with:
-                        </p>
-                        <ul className="space-y-2">
-                          <li className="flex items-start">
-                            <CheckCircle2 className="h-5 w-5 text-primary mr-2 mt-0.5 flex-shrink-0" />
-                            <span>Kenya's Data Protection Act</span>
-                          </li>
-                          <li className="flex items-start">
-                            <CheckCircle2 className="h-5 w-5 text-primary mr-2 mt-0.5 flex-shrink-0" />
-                            <span>GDPR for applicable users</span>
-                          </li>
-                          <li className="flex items-start">
-                            <CheckCircle2 className="h-5 w-5 text-primary mr-2 mt-0.5 flex-shrink-0" />
-                            <span>CBK fintech sandbox requirements</span>
-                          </li>
-                          <li className="flex items-start">
-                            <CheckCircle2 className="h-5 w-5 text-primary mr-2 mt-0.5 flex-shrink-0" />
-                            <span>Anti-Money Laundering (AML) regulations</span>
-                          </li>
-                          <li className="flex items-start">
-                            <CheckCircle2 className="h-5 w-5 text-primary mr-2 mt-0.5 flex-shrink-0" />
-                            <span>Know Your Customer (KYC) requirements</span>
-                          </li>
-                        </ul>
-                      </CardContent>
-                    </Card>
-                    
-                    <Card className="mb-6">
-                      <CardHeader>
-                        <CardTitle className="text-lg">Security Implementations</CardTitle>
-                      </CardHeader>
-                      <CardContent>
-                        <p className="mb-4">
-                          Kifaa implements industry best practices for security:
-                        </p>
-                        <ul className="space-y-2">
-                          <li className="flex items-start">
-                            <CheckCircle2 className="h-5 w-5 text-primary mr-2 mt-0.5 flex-shrink-0" />
-                            <span>AES-256 encryption for data storage</span>
-                          </li>
-                          <li className="flex items-start">
-                            <CheckCircle2 className="h-5 w-5 text-primary mr-2 mt-0.5 flex-shrink-0" />
-                            <span>TLS protocols for data transmission</span>
-                          </li>
-                          <li className="flex items-start">
-                            <CheckCircle2 className="h-5 w-5 text-primary mr-2 mt-0.5 flex-shrink-0" />
-                            <span>Multi-factor authentication</span>
-                          </li>
-                          <li className="flex items-start">
-                            <CheckCircle2 className="h-5 w-5 text-primary mr-2 mt-0.5 flex-shrink-0" />
-                            <span>Regular security audits and penetration testing</span>
-                          </li>
-                          <li className="flex items-start">
-                            <CheckCircle2 className="h-5 w-5 text-primary mr-2 mt-0.5 flex-shrink-0" />
-                            <span>Secure development practices</span>
-                          </li>
-                        </ul>
-                      </CardContent>
-                    </Card>
-                    
-                    <Card>
-                      <CardHeader>
-                        <CardTitle className="text-lg">Certifications and Partnerships</CardTitle>
-                      </CardHeader>
-                      <CardContent>
-                        <p className="mb-4">
-                          Kifaa maintains certifications and partnerships that demonstrate our commitment to compliance:
-                        </p>
-                        <ul className="space-y-2">
-                          <li className="flex items-start">
-                            <CheckCircle2 className="h-5 w-5 text-primary mr-2 mt-0.5 flex-shrink-0" />
-                            <span>Central Bank of Kenya Fintech Sandbox participant</span>
-                          </li>
-                          <li className="flex items-start">
-                            <CheckCircle2 className="h-5 w-5 text-primary mr-2 mt-0.5 flex-shrink-0" />
-                            <span>ISO 27001 certification (in progress)</span>
-                          </li>
-                          <li className="flex items-start">
-                            <CheckCircle2 className="h-5 w-5 text-primary mr-2 mt-0.5 flex-shrink-0" />
-                            <span>Partnership with licensed financial institutions</span>
-                          </li>
-                        </ul>
-                      </CardContent>
-                    </Card>
-                  </FadeIn>
-                </TabsContent>
-              </Tabs>
-            </div>
-          </div>
-        </section>
-        
-        {/* General Legal Info */}
-        <section className="py-12 bg-muted/50" id="security">
+        {/* Legal Summary Section - Shown only once at the top */}
+        <section className="py-8 bg-muted/50" id="summary">
           <div className="container mx-auto px-4">
             <div className="max-w-4xl mx-auto">
               <FadeIn>
@@ -385,6 +76,331 @@ const Legal = () => {
                   </CardContent>
                 </Card>
               </FadeIn>
+            </div>
+          </div>
+        </section>
+        
+        {/* Legal Tabs */}
+        <section className="py-12 bg-background">
+          <div className="container mx-auto px-4">
+            <div className="max-w-4xl mx-auto">
+              <Tabs defaultValue="privacy" id="privacy">
+                <div className="flex justify-center mb-8">
+                  <TabsList className="grid grid-cols-3 w-full max-w-md">
+                    <TabsTrigger value="privacy">Privacy Policy</TabsTrigger>
+                    <TabsTrigger value="terms">Terms of Service</TabsTrigger>
+                    <TabsTrigger value="compliance">Compliance</TabsTrigger>
+                  </TabsList>
+                </div>
+                
+                <TabsContent value="privacy" className="bg-card rounded-lg border p-6">
+                  <FadeIn>
+                    <div className="flex items-center mb-6">
+                      <div className="h-10 w-10 rounded-lg bg-primary/10 flex items-center justify-center mr-4">
+                        <Shield className="h-5 w-5 text-primary" />
+                      </div>
+                      <h2 className="text-2xl font-bold">Privacy Policy</h2>
+                    </div>
+                    
+                    <Accordion type="single" collapsible className="w-full">
+                      <AccordionItem value="data-collection">
+                        <AccordionTrigger className="text-lg font-medium">
+                          Data Collection and Usage
+                        </AccordionTrigger>
+                        <AccordionContent>
+                          <p className="mb-4">
+                            We collect information to provide and improve our services. The types of information we collect depend on how you use our platform:
+                          </p>
+                          <ul className="space-y-2">
+                            <li className="flex items-start">
+                              <CheckCircle2 className="h-5 w-5 text-primary mr-2 mt-0.5 flex-shrink-0" />
+                              <span>Account information (name, email, phone number)</span>
+                            </li>
+                            <li className="flex items-start">
+                              <CheckCircle2 className="h-5 w-5 text-primary mr-2 mt-0.5 flex-shrink-0" />
+                              <span>Transaction data (for credit scoring purposes)</span>
+                            </li>
+                            <li className="flex items-start">
+                              <CheckCircle2 className="h-5 w-5 text-primary mr-2 mt-0.5 flex-shrink-0" />
+                              <span>Device and usage information</span>
+                            </li>
+                            <li className="flex items-start">
+                              <CheckCircle2 className="h-5 w-5 text-primary mr-2 mt-0.5 flex-shrink-0" />
+                              <span>Information from third-party integrations (with your permission)</span>
+                            </li>
+                          </ul>
+                        </AccordionContent>
+                      </AccordionItem>
+
+                      <AccordionItem value="data-protection">
+                        <AccordionTrigger className="text-lg font-medium">
+                          Data Protection Measures
+                        </AccordionTrigger>
+                        <AccordionContent>
+                          <p className="mb-4">
+                            Kifaa implements multiple layers of data protection:
+                          </p>
+                          <ul className="space-y-2">
+                            <li className="flex items-start">
+                              <CheckCircle2 className="h-5 w-5 text-primary mr-2 mt-0.5 flex-shrink-0" />
+                              <span>Data encryption in transit and at rest</span>
+                            </li>
+                            <li className="flex items-start">
+                              <CheckCircle2 className="h-5 w-5 text-primary mr-2 mt-0.5 flex-shrink-0" />
+                              <span>Secure access controls and authentication</span>
+                            </li>
+                            <li className="flex items-start">
+                              <CheckCircle2 className="h-5 w-5 text-primary mr-2 mt-0.5 flex-shrink-0" />
+                              <span>Regular security audits and penetration testing</span>
+                            </li>
+                            <li className="flex items-start">
+                              <CheckCircle2 className="h-5 w-5 text-primary mr-2 mt-0.5 flex-shrink-0" />
+                              <span>Employee training on data protection</span>
+                            </li>
+                            <li className="flex items-start">
+                              <CheckCircle2 className="h-5 w-5 text-primary mr-2 mt-0.5 flex-shrink-0" />
+                              <span>Data minimization practices</span>
+                            </li>
+                          </ul>
+                        </AccordionContent>
+                      </AccordionItem>
+
+                      <AccordionItem value="user-rights">
+                        <AccordionTrigger className="text-lg font-medium">
+                          Your Rights
+                        </AccordionTrigger>
+                        <AccordionContent>
+                          <p className="mb-4">
+                            You have the right to:
+                          </p>
+                          <ul className="space-y-2">
+                            <li className="flex items-start">
+                              <CheckCircle2 className="h-5 w-5 text-primary mr-2 mt-0.5 flex-shrink-0" />
+                              <span>Access your personal data</span>
+                            </li>
+                            <li className="flex items-start">
+                              <CheckCircle2 className="h-5 w-5 text-primary mr-2 mt-0.5 flex-shrink-0" />
+                              <span>Correct inaccurate information</span>
+                            </li>
+                            <li className="flex items-start">
+                              <CheckCircle2 className="h-5 w-5 text-primary mr-2 mt-0.5 flex-shrink-0" />
+                              <span>Delete your data (with certain limitations)</span>
+                            </li>
+                            <li className="flex items-start">
+                              <CheckCircle2 className="h-5 w-5 text-primary mr-2 mt-0.5 flex-shrink-0" />
+                              <span>Withdraw consent for data processing</span>
+                            </li>
+                            <li className="flex items-start">
+                              <CheckCircle2 className="h-5 w-5 text-primary mr-2 mt-0.5 flex-shrink-0" />
+                              <span>Lodge complaints with regulatory authorities</span>
+                            </li>
+                          </ul>
+                          <div className="mt-6 text-center">
+                            <a href="https://kifaa.com/privacy-policy" className="text-primary underline">
+                              View Complete Privacy Policy
+                            </a>
+                          </div>
+                        </AccordionContent>
+                      </AccordionItem>
+                    </Accordion>
+                  </FadeIn>
+                </TabsContent>
+                
+                <TabsContent value="terms" className="bg-card rounded-lg border p-6" id="terms">
+                  <FadeIn>
+                    <div className="flex items-center mb-6">
+                      <div className="h-10 w-10 rounded-lg bg-primary/10 flex items-center justify-center mr-4">
+                        <FileText className="h-5 w-5 text-primary" />
+                      </div>
+                      <h2 className="text-2xl font-bold">Terms of Service</h2>
+                    </div>
+                    
+                    <Accordion type="single" collapsible className="w-full">
+                      <AccordionItem value="platform-usage">
+                        <AccordionTrigger className="text-lg font-medium">
+                          Platform Usage
+                        </AccordionTrigger>
+                        <AccordionContent>
+                          <p className="mb-4">
+                            Users agree to:
+                          </p>
+                          <ul className="space-y-2">
+                            <li className="flex items-start">
+                              <CheckCircle2 className="h-5 w-5 text-primary mr-2 mt-0.5 flex-shrink-0" />
+                              <span>Provide accurate and complete information</span>
+                            </li>
+                            <li className="flex items-start">
+                              <CheckCircle2 className="h-5 w-5 text-primary mr-2 mt-0.5 flex-shrink-0" />
+                              <span>Maintain the security of account credentials</span>
+                            </li>
+                            <li className="flex items-start">
+                              <CheckCircle2 className="h-5 w-5 text-primary mr-2 mt-0.5 flex-shrink-0" />
+                              <span>Use the platform for lawful purposes only</span>
+                            </li>
+                            <li className="flex items-start">
+                              <CheckCircle2 className="h-5 w-5 text-primary mr-2 mt-0.5 flex-shrink-0" />
+                              <span>Not attempt to reverse-engineer the service</span>
+                            </li>
+                            <li className="flex items-start">
+                              <CheckCircle2 className="h-5 w-5 text-primary mr-2 mt-0.5 flex-shrink-0" />
+                              <span>Comply with all applicable laws and regulations</span>
+                            </li>
+                          </ul>
+                        </AccordionContent>
+                      </AccordionItem>
+
+                      <AccordionItem value="service-limitations">
+                        <AccordionTrigger className="text-lg font-medium">
+                          Service Limitations
+                        </AccordionTrigger>
+                        <AccordionContent>
+                          <p className="mb-4">
+                            Kifaa reserves the right to:
+                          </p>
+                          <ul className="space-y-2">
+                            <li className="flex items-start">
+                              <CheckCircle2 className="h-5 w-5 text-primary mr-2 mt-0.5 flex-shrink-0" />
+                              <span>Modify, suspend, or discontinue services</span>
+                            </li>
+                            <li className="flex items-start">
+                              <CheckCircle2 className="h-5 w-5 text-primary mr-2 mt-0.5 flex-shrink-0" />
+                              <span>Update terms with reasonable notice</span>
+                            </li>
+                            <li className="flex items-start">
+                              <CheckCircle2 className="h-5 w-5 text-primary mr-2 mt-0.5 flex-shrink-0" />
+                              <span>Remove content that violates our policies</span>
+                            </li>
+                            <li className="flex items-start">
+                              <CheckCircle2 className="h-5 w-5 text-primary mr-2 mt-0.5 flex-shrink-0" />
+                              <span>Terminate accounts for policy violations</span>
+                            </li>
+                          </ul>
+                        </AccordionContent>
+                      </AccordionItem>
+
+                      <AccordionItem value="disclaimers">
+                        <AccordionTrigger className="text-lg font-medium">
+                          Disclaimers and Limitations
+                        </AccordionTrigger>
+                        <AccordionContent>
+                          <p className="text-muted-foreground mb-4">
+                            The platform is provided "as is" without warranties of any kind. Kifaa shall not be liable for indirect, incidental, or consequential damages arising from platform use.
+                          </p>
+                          <div className="text-center">
+                            <a href="https://kifaa.com/terms" className="text-primary underline">
+                              View Complete Terms of Service
+                            </a>
+                          </div>
+                        </AccordionContent>
+                      </AccordionItem>
+                    </Accordion>
+                  </FadeIn>
+                </TabsContent>
+                
+                <TabsContent value="compliance" className="bg-card rounded-lg border p-6" id="compliance">
+                  <FadeIn>
+                    <div className="flex items-center mb-6">
+                      <div className="h-10 w-10 rounded-lg bg-primary/10 flex items-center justify-center mr-4">
+                        <Shield className="h-5 w-5 text-primary" />
+                      </div>
+                      <h2 className="text-2xl font-bold">Compliance</h2>
+                    </div>
+                    
+                    <Accordion type="single" collapsible className="w-full">
+                      <AccordionItem value="regulatory-compliance">
+                        <AccordionTrigger className="text-lg font-medium">
+                          Regulatory Compliance
+                        </AccordionTrigger>
+                        <AccordionContent>
+                          <p className="mb-4">
+                            Our platform complies with:
+                          </p>
+                          <ul className="space-y-2">
+                            <li className="flex items-start">
+                              <CheckCircle2 className="h-5 w-5 text-primary mr-2 mt-0.5 flex-shrink-0" />
+                              <span>Kenya's Data Protection Act</span>
+                            </li>
+                            <li className="flex items-start">
+                              <CheckCircle2 className="h-5 w-5 text-primary mr-2 mt-0.5 flex-shrink-0" />
+                              <span>GDPR for applicable users</span>
+                            </li>
+                            <li className="flex items-start">
+                              <CheckCircle2 className="h-5 w-5 text-primary mr-2 mt-0.5 flex-shrink-0" />
+                              <span>CBK fintech sandbox requirements</span>
+                            </li>
+                            <li className="flex items-start">
+                              <CheckCircle2 className="h-5 w-5 text-primary mr-2 mt-0.5 flex-shrink-0" />
+                              <span>Anti-Money Laundering (AML) regulations</span>
+                            </li>
+                            <li className="flex items-start">
+                              <CheckCircle2 className="h-5 w-5 text-primary mr-2 mt-0.5 flex-shrink-0" />
+                              <span>Know Your Customer (KYC) requirements</span>
+                            </li>
+                          </ul>
+                        </AccordionContent>
+                      </AccordionItem>
+
+                      <AccordionItem value="security-implementations">
+                        <AccordionTrigger className="text-lg font-medium">
+                          Security Implementations
+                        </AccordionTrigger>
+                        <AccordionContent>
+                          <p className="mb-4">
+                            Kifaa implements industry best practices for security:
+                          </p>
+                          <ul className="space-y-2">
+                            <li className="flex items-start">
+                              <CheckCircle2 className="h-5 w-5 text-primary mr-2 mt-0.5 flex-shrink-0" />
+                              <span>AES-256 encryption for data storage</span>
+                            </li>
+                            <li className="flex items-start">
+                              <CheckCircle2 className="h-5 w-5 text-primary mr-2 mt-0.5 flex-shrink-0" />
+                              <span>TLS protocols for data transmission</span>
+                            </li>
+                            <li className="flex items-start">
+                              <CheckCircle2 className="h-5 w-5 text-primary mr-2 mt-0.5 flex-shrink-0" />
+                              <span>Multi-factor authentication</span>
+                            </li>
+                            <li className="flex items-start">
+                              <CheckCircle2 className="h-5 w-5 text-primary mr-2 mt-0.5 flex-shrink-0" />
+                              <span>Regular security audits and penetration testing</span>
+                            </li>
+                            <li className="flex items-start">
+                              <CheckCircle2 className="h-5 w-5 text-primary mr-2 mt-0.5 flex-shrink-0" />
+                              <span>Secure development practices</span>
+                            </li>
+                          </ul>
+                        </AccordionContent>
+                      </AccordionItem>
+
+                      <AccordionItem value="certifications">
+                        <AccordionTrigger className="text-lg font-medium">
+                          Certifications and Partnerships
+                        </AccordionTrigger>
+                        <AccordionContent>
+                          <p className="mb-4">
+                            Kifaa maintains certifications and partnerships that demonstrate our commitment to compliance:
+                          </p>
+                          <ul className="space-y-2">
+                            <li className="flex items-start">
+                              <CheckCircle2 className="h-5 w-5 text-primary mr-2 mt-0.5 flex-shrink-0" />
+                              <span>Central Bank of Kenya Fintech Sandbox participant</span>
+                            </li>
+                            <li className="flex items-start">
+                              <CheckCircle2 className="h-5 w-5 text-primary mr-2 mt-0.5 flex-shrink-0" />
+                              <span>ISO 27001 certification (in progress)</span>
+                            </li>
+                            <li className="flex items-start">
+                              <CheckCircle2 className="h-5 w-5 text-primary mr-2 mt-0.5 flex-shrink-0" />
+                              <span>Partnership with licensed financial institutions</span>
+                            </li>
+                          </ul>
+                        </AccordionContent>
+                      </AccordionItem>
+                    </Accordion>
+                  </FadeIn>
+                </TabsContent>
+              </Tabs>
             </div>
           </div>
         </section>
