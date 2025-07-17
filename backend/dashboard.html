@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kifaa Admin Dashboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .header h1 {
+            font-size: 2rem;
+            font-weight: 300;
+        }
+
+        .header .subtitle {
+            opacity: 0.9;
+            margin-top: 0.5rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .card {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.2s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-2px);
+        }
+
+        .card h3 {
+            color: #667eea;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .stat-card {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #667eea;
+            margin: 0.5rem 0;
+        }
+
+        .stat-label {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: #555;
+        }
+
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid #e1e5e9;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: border-color 0.2s ease;
+        }
+
+        .form-group input:focus, .form-group select:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: opacity 0.2s ease;
+        }
+
+        .btn:hover {
+            opacity: 0.9;
+        }
+
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .btn-secondary {
+            background: #6c757d;
+        }
+
+        .btn-danger {
+            background: #dc3545;
+        }
+
+        .result-card {
+            margin-top: 1rem;
+            padding: 1rem;
+            border-radius: 5px;
+            border-left: 4px solid #667eea;
+            background: #f8f9fa;
+        }
+
+        .result-card.success {
+            border-left-color: #28a745;
+            background: #d4edda;
+        }
+
+        .result-card.error {
+            border-left-color: #dc3545;
+            background: #f8d7da;
+        }
+
+        .logs-container {
+            max-height: 400px;
+            overflow-y: auto;
+            background: #1e1e1e;
+            color: #f8f8f2;
+            padding: 1rem;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+
+        .log-entry {
+            margin-bottom: 0.5rem;
+            padding: 0.25rem 0;
+        }
+
+        .log-entry.error {
+            color: #ff6b6b;
+        }
+
+        .log-entry.warning {
+            color: #ffd93d;
+        }
+
+        .log-entry.info {
+            color: #6bcf7f;
+        }
+
+        .tabs {
+            display: flex;
+            margin-bottom: 1rem;
+            border-bottom: 2px solid #e1e5e9;
+        }
+
+        .tab {
+            padding: 0.75rem 1.5rem;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            transition: all 0.2s ease;
+        }
+
+        .tab.active {
+            border-bottom-color: #667eea;
+            color: #667eea;
+            font-weight: 500;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #667eea;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .api-key-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem;
+            margin-bottom: 0.5rem;
+            background: #f8f9fa;
+            border-radius: 5px;
+            border: 1px solid #e1e5e9;
+        }
+
+        .api-key-info {
+            flex-grow: 1;
+        }
+
+        .api-key-name {
+            font-weight: 500;
+            color: #333;
+        }
+
+        .api-key-permissions {
+            font-size: 0.8rem;
+            color: #666;
+            margin-top: 0.25rem;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 1rem;
+            }
+            
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .header {
+                padding: 1rem;
+            }
+            
+            .header h1 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Kifaa Admin Dashboard</h1>
+        <div class="subtitle">AI-Powered Credit Scoring Platform Management</div>
+    </div>
+
+    <div class="container">
+        <!-- Statistics Cards -->
+        <div class="dashboard-grid">
+            <div class="card stat-card">
+                <h3>Total Scores</h3>
+                <div class="stat-number" id="totalScores">-</div>
+                <div class="stat-label">Credit scores processed</div>
+            </div>
+            
+            <div class="card stat-card">
+                <h3>Active Sessions</h3>
+                <div class="stat-number" id="activeSessions">-</div>
+                <div class="stat-label">Current USSD sessions</div>
+            </div>
+            
+            <div class="card stat-card">
+                <h3>API Health</h3>
+                <div class="stat-number" id="apiHealth">-</div>
+                <div class="stat-label">System status</div>
+            </div>
+            
+            <div class="card stat-card">
+                <h3>Model Version</h3>
+                <div class="stat-number" id="modelVersion">-</div>
+                <div class="stat-label">Current ML model</div>
+            </div>
+        </div>
+
+        <!-- Main Content Tabs -->
+        <div class="card">
+            <div class="tabs">
+                <div class="tab active" onclick="showTab('scoring')">Credit Scoring</div>
+                <div class="tab" onclick="showTab('logs')">System Logs</div>
+                <div class="tab" onclick="showTab('api-keys')">API Keys</div>
+                <div class="tab" onclick="showTab('model')">Model Management</div>
+            </div>
+
+            <!-- Credit Scoring Tab -->
+            <div id="scoring" class="tab-content active">
+                <h3>Test Credit Scoring</h3>
+                <form id="scoringForm">
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem;">
+                        <div class="form-group">
+                            <label for="userId">User ID</label>
+                            <input type="text" id="userId" name="user_id" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="age">Age</label>
+                            <input type="number" id="age" name="age" min="18" max="100" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="income">Annual Income</label>
+                            <input type="number" id="income" name="income" min="0" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="creditHistory">Credit History (years)</label>
+                            <input type="number" id="creditHistory" name="credit_history_length" min="0" step="0.1">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="debtRatio">Debt-to-Income Ratio</label>
+                            <input type="number" id="debtRatio" name="debt_to_income_ratio" min="0" max="1" step="0.01">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="region">Region</label>
+                            <select id="region" name="region">
+                                <option value="urban">Urban</option>
+                                <option value="rural">Rural</option>
+                                <option value="suburban">Suburban</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="btn">Calculate Credit Score</button>
+                </form>
+                
+                <div id="scoringResult"></div>
+            </div>
+
+            <!-- System Logs Tab -->
+            <div id="logs" class="tab-content">
+                <h3>System Logs</h3>
+                <div style="margin-bottom: 1rem;">
+                    <button class="btn" onclick="loadLogs()">Refresh Logs</button>
+                    <button class="btn btn-danger" onclick="clearLogs()">Clear Logs</button>
+                    <select id="logLevel" style="margin-left: 1rem; padding: 0.5rem;">
+                        <option value="">All Levels</option>
+                        <option value="ERROR">Error</option>
+                        <option value="WARNING">Warning</option>
+                        <option value="INFO">Info</option>
+                    </select>
+                </div>
+                
+                <div class="logs-container" id="logsContainer">
+                    <div class="log-entry">Loading logs...</div>
+                </div>
+            </div>
+
+            <!-- API Keys Tab -->
+            <div id="api-keys" class="tab-content">
+                <h3>API Key Management</h3>
+                
+                <div style="margin-bottom: 2rem;">
+                    <h4>Create New API Key</h4>
+                    <form id="apiKeyForm">
+                        <div class="form-group">
+                            <label for="partnerName">Partner Name</label>
+                            <input type="text" id="partnerName" name="partner_name" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Permissions</label>
+                            <div style="margin-top: 0.5rem;">
+                                <label style="display: inline-block; margin-right: 1rem;">
+                                    <input type="checkbox" name="permissions" value="score_user" checked> Score User
+                                </label>
+                                <label style="display: inline-block; margin-right: 1rem;">
+                                    <input type="checkbox" name="permissions" value="logs"> View Logs
+                                </label>
+                                <label style="display: inline-block;">
+                                    <input type="checkbox" name="permissions" value="retrain"> Model Retrain
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <button type="submit" class="btn">Create API Key</button>
+                    </form>
+                </div>
+                
+                <div>
+                    <h4>Existing API Keys</h4>
+                    <div id="apiKeysList">
+                        <div class="loading"></div> Loading API keys...
+                    </div>
+                </div>
+            </div>
+
+            <!-- Model Management Tab -->
+            <div id="model" class="tab-content">
+                <h3>Model Management</h3>
+                
+                <div style="margin-bottom: 2rem;">
+                    <h4>Current Model Status</h4>
+                    <div id="modelStatus">
+                        <div class="loading"></div> Loading model status...
+                    </div>
+                </div>
+                
+                <div>
+                    <h4>Model Operations</h4>
+                    <button class="btn" onclick="triggerRetrain()">Trigger Manual Retrain</button>
+                    <button class="btn btn-secondary" onclick="checkModelHealth()">Check Model Health</button>
+                </div>
+                
+                <div id="modelResult"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Configuration
+        const API_BASE_URL = 'http://localhost:8000';
+        const API_KEY = 'kifaa_admin_001'; // In production, this would be securely managed
+
+        // Initialize dashboard
+        document.addEventListener('DOMContentLoaded', function() {
+            loadDashboardStats();
+            loadLogs();
+            loadApiKeys();
+        });
+
+        // Tab management
+        function showTab(tabName) {
+            // Hide all tab contents
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            // Remove active class from all tabs
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Show selected tab content
+            document.getElementById(tabName).classList.add('active');
+            
+            // Add active class to clicked tab
+            event.target.classList.add('active');
+        }
+
+        // Load dashboard statistics
+        async function loadDashboardStats() {
+            try {
+                // API Health Check
+                const healthResponse = await fetch(`${API_BASE_URL}/health`);
+                const healthData = await healthResponse.json();
+                document.getElementById('apiHealth').textContent = healthData.status === 'healthy' ? '✅' : '❌';
+                
+                // USSD Sessions
+                try {
+                    const ussdResponse = await fetch(`${API_BASE_URL}/ussd/sessions`);
+                    const ussdData = await ussdResponse.json();
+                    document.getElementById('activeSessions').textContent = ussdData.active_sessions || 0;
+                } catch (e) {
+                    document.getElementById('activeSessions').textContent = 'N/A';
+                }
+                
+                // Mock data for other stats (in production, these would come from analytics)
+                document.getElementById('totalScores').textContent = Math.floor(Math.random() * 10000) + 5000;
+                document.getElementById('modelVersion').textContent = 'v1.0';
+                
+            } catch (error) {
+                console.error('Failed to load dashboard stats:', error);
+                document.getElementById('apiHealth').textContent = '❌';
+            }
+        }
+
+        // Credit scoring form
+        document.getElementById('scoringForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(e.target);
+            const userData = Object.fromEntries(formData.entries());
+            
+            // Convert numeric fields
+            ['age', 'income', 'credit_history_length', 'debt_to_income_ratio'].forEach(field => {
+                if (userData[field]) {
+                    userData[field] = parseFloat(userData[field]);
+                }
+            });
+            
+            const resultDiv = document.getElementById('scoringResult');
+            resultDiv.innerHTML = '<div class="loading"></div> Calculating credit score...';
+            
+            try {
+                const response = await fetch(`${API_BASE_URL}/score-user`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${API_KEY}`
+                    },
+                    body: JSON.stringify(userData)
+                });
+                
+                const result = await response.json();
+                
+                if (response.ok) {
+                    resultDiv.innerHTML = `
+                        <div class="result-card success">
+                            <h4>Credit Score Result</h4>
+                            <p><strong>Score:</strong> ${result.credit_score.toFixed(0)}</p>
+                            <p><strong>Category:</strong> ${result.score_category.category} (${result.score_category.range})</p>
+                            <p><strong>Description:</strong> ${result.score_category.description}</p>
+                            <p><strong>Model:</strong> ${result.model_version}</p>
+                            <p><strong>Timestamp:</strong> ${new Date(result.timestamp).toLocaleString()}</p>
+                        </div>
+                    `;
+                } else {
+                    resultDiv.innerHTML = `
+                        <div class="result-card error">
+                            <h4>Error</h4>
+                            <p>${result.error || 'Unknown error occurred'}</p>
+                        </div>
+                    `;
+                }
+            } catch (error) {
+                resultDiv.innerHTML = `
+                    <div class="result-card error">
+                        <h4>Network Error</h4>
+                        <p>Failed to connect to the API: ${error.message}</p>
+                    </div>
+                `;
+            }
+        });
+
+        // Load system logs
+        async function loadLogs() {
+            const container = document.getElementById('logsContainer');
+            const level = document.getElementById('logLevel').value;
+            
+            container.innerHTML = '<div class="log-entry">Loading logs...</div>';
+            
+            try {
+                const url = `${API_BASE_URL}/logs?lines=50${level ? `&level=${level}` : ''}`;
+                const response = await fetch(url, {
+                    headers: {
+                        'Authorization': `Bearer ${API_KEY}`
+                    }
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok && data.logs) {
+                    container.innerHTML = data.logs.map(log => {
+                        const logClass = log.toLowerCase().includes('error') ? 'error' : 
+                                        log.toLowerCase().includes('warning') ? 'warning' : 'info';
+                        return `<div class="log-entry ${logClass}">${log}</div>`;
+                    }).join('');
+                } else {
+                    container.innerHTML = '<div class="log-entry error">Failed to load logs</div>';
+                }
+            } catch (error) {
+                container.innerHTML = '<div class="log-entry error">Network error loading logs</div>';
+            }
+        }
+
+        // Clear system logs
+        async function clearLogs() {
+            if (!confirm('Are you sure you want to clear all logs?')) return;
+            
+            try {
+                const response = await fetch(`${API_BASE_URL}/logs`, {
+                    method: 'DELETE',
+                    headers: {
+                        'Authorization': `Bearer ${API_KEY}`
+                    }
+                });
+                
+                if (response.ok) {
+                    loadLogs();
+                    alert('Logs cleared successfully');
+                } else {
+                    alert('Failed to clear logs');
+                }
+            } catch (error) {
+                alert('Network error clearing logs');
+            }
+        }
+
+        // Load API keys
+        async function loadApiKeys() {
+            const container = document.getElementById('apiKeysList');
+            
+            try {
+                const response = await fetch(`${API_BASE_URL}/auth/api-keys`, {
+                    headers: {
+                        'Authorization': `Bearer ${API_KEY}`
+                    }
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok && data.api_keys) {
+                    const apiKeys = Object.entries(data.api_keys);
+                    
+                    if (apiKeys.length === 0) {
+                        container.innerHTML = '<p>No API keys found</p>';
+                    } else {
+                        container.innerHTML = apiKeys.map(([key, info]) => `
+                            <div class="api-key-item">
+                                <div class="api-key-info">
+                                    <div class="api-key-name">${info.name}</div>
+                                    <div class="api-key-permissions">Permissions: ${info.permissions.join(', ')}</div>
+                                    <div class="api-key-permissions">Key: ${key}</div>
+                                </div>
+                            </div>
+                        `).join('');
+                    }
+                } else {
+                    container.innerHTML = '<p>Failed to load API keys</p>';
+                }
+            } catch (error) {
+                container.innerHTML = '<p>Network error loading API keys</p>';
+            }
+        }
+
+        // Create API key
+        document.getElementById('apiKeyForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(e.target);
+            const partnerName = formData.get('partner_name');
+            const permissions = formData.getAll('permissions');
+            
+            try {
+                const response = await fetch(`${API_BASE_URL}/auth/api-key`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${API_KEY}`
+                    },
+                    body: JSON.stringify({
+                        partner_name: partnerName,
+                        permissions: permissions
+                    })
+                });
+                
+                const result = await response.json();
+                
+                if (response.ok) {
+                    alert(`API key created successfully: ${result.api_key}`);
+                    e.target.reset();
+                    loadApiKeys();
+                } else {
+                    alert(`Failed to create API key: ${result.error}`);
+                }
+            } catch (error) {
+                alert('Network error creating API key');
+            }
+        });
+
+        // Trigger model retrain
+        async function triggerRetrain() {
+            if (!confirm('Are you sure you want to trigger model retraining? This may take several minutes.')) return;
+            
+            const resultDiv = document.getElementById('modelResult');
+            resultDiv.innerHTML = '<div class="loading"></div> Triggering model retrain...';
+            
+            try {
+                const response = await fetch(`${API_BASE_URL}/retrain`, {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${API_KEY}`
+                    }
+                });
+                
+                const result = await response.json();
+                
+                if (response.ok) {
+                    resultDiv.innerHTML = `
+                        <div class="result-card success">
+                            <h4>Retrain Successful</h4>
+                            <p>${result.message}</p>
+                            <pre>${JSON.stringify(result.results, null, 2)}</pre>
+                        </div>
+                    `;
+                } else {
+                    resultDiv.innerHTML = `
+                        <div class="result-card error">
+                            <h4>Retrain Failed</h4>
+                            <p>${result.error}</p>
+                        </div>
+                    `;
+                }
+            } catch (error) {
+                resultDiv.innerHTML = `
+                    <div class="result-card error">
+                        <h4>Network Error</h4>
+                        <p>Failed to trigger retrain: ${error.message}</p>
+                    </div>
+                `;
+            }
+        }
+
+        // Check model health
+        async function checkModelHealth() {
+            const resultDiv = document.getElementById('modelResult');
+            resultDiv.innerHTML = '<div class="loading"></div> Checking model health...';
+            
+            try {
+                const response = await fetch(`${API_BASE_URL}/stats`, {
+                    headers: {
+                        'Authorization': `Bearer ${API_KEY}`
+                    }
+                });
+                
+                const result = await response.json();
+                
+                if (response.ok) {
+                    resultDiv.innerHTML = `
+                        <div class="result-card success">
+                            <h4>Model Health Check</h4>
+                            <pre>${JSON.stringify(result, null, 2)}</pre>
+                        </div>
+                    `;
+                } else {
+                    resultDiv.innerHTML = `
+                        <div class="result-card error">
+                            <h4>Health Check Failed</h4>
+                            <p>Unable to retrieve model statistics</p>
+                        </div>
+                    `;
+                }
+            } catch (error) {
+                resultDiv.innerHTML = `
+                    <div class="result-card error">
+                        <h4>Network Error</h4>
+                        <p>Failed to check model health: ${error.message}</p>
+                    </div>
+                `;
+            }
+        }
+
+        // Auto-refresh dashboard stats every 30 seconds
+        setInterval(loadDashboardStats, 30000);
+    </script>
+</body>
+</html>
+

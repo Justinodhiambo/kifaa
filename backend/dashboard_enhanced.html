@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kifaa Partner Dashboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .header h1 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .header p {
+            opacity: 0.9;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .auth-section {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+        
+        .dashboard-section {
+            display: none;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .stat-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        
+        .stat-card h3 {
+            color: #667eea;
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .stat-card p {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .content-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 2rem;
+        }
+        
+        .card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        .card h2 {
+            color: #333;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #667eea;
+        }
+        
+        .form-group {
+            margin-bottom: 1rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+        
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+        
+        .btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: transform 0.2s;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+        
+        .btn-secondary {
+            background: #6c757d;
+        }
+        
+        .btn-success {
+            background: #28a745;
+        }
+        
+        .btn-danger {
+            background: #dc3545;
+        }
+        
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+        
+        .table th, .table td {
+            padding: 0.75rem;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .table th {
+            background-color: #f8f9fa;
+            font-weight: 600;
+        }
+        
+        .table tr:hover {
+            background-color: #f8f9fa;
+        }
+        
+        .score-excellent { color: #28a745; font-weight: bold; }
+        .score-good { color: #17a2b8; font-weight: bold; }
+        .score-fair { color: #ffc107; font-weight: bold; }
+        .score-poor { color: #dc3545; font-weight: bold; }
+        
+        .status-approved { color: #28a745; }
+        .status-rejected { color: #dc3545; }
+        .status-pending { color: #ffc107; }
+        
+        .alert {
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border-radius: 5px;
+        }
+        
+        .alert-success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .alert-error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 2rem;
+            color: #666;
+        }
+        
+        .user-details {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+        }
+        
+        .user-details-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            max-width: 600px;
+            width: 90%;
+            max-height: 80%;
+            overflow-y: auto;
+        }
+        
+        .close-btn {
+            float: right;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #666;
+        }
+        
+        @media (max-width: 768px) {
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .container {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Kifaa Partner Dashboard</h1>
+        <p>AI-powered credit scoring platform for financial inclusion</p>
+    </div>
+
+    <div class="container">
+        <!-- Authentication Section -->
+        <div id="authSection" class="auth-section">
+            <h2>Partner Login</h2>
+            <div class="form-group">
+                <label for="username">Username:</label>
+                <input type="text" id="username" placeholder="Enter your username">
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" placeholder="Enter your password">
+            </div>
+            <div class="form-group">
+                <label for="partnerId">Partner ID:</label>
+                <input type="text" id="partnerId" placeholder="Enter your partner ID">
+            </div>
+            <button class="btn" onclick="login()">Login</button>
+            <div id="authMessage"></div>
+        </div>
+
+        <!-- Dashboard Section -->
+        <div id="dashboardSection" class="dashboard-section">
+            <!-- Statistics -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <h3 id="totalScores">-</h3>
+                    <p>Total Scores</p>
+                </div>
+                <div class="stat-card">
+                    <h3 id="scoresToday">-</h3>
+                    <p>Scores Today</p>
+                </div>
+                <div class="stat-card">
+                    <h3 id="avgScore">-</h3>
+                    <p>Average Score</p>
+                </div>
+                <div class="stat-card">
+                    <h3 id="approvalRate">-</h3>
+                    <p>Approval Rate</p>
+                </div>
+                <div class="stat-card">
+                    <h3 id="pendingApprovals">-</h3>
+                    <p>Pending Approvals</p>
+                </div>
+                <div class="stat-card">
+                    <h3 id="activeUsers">-</h3>
+                    <p>Active Users</p>
+                </div>
+            </div>
+
+            <div class="content-grid">
+                <!-- Recent Scores -->
+                <div class="card">
+                    <h2>Recent Credit Scores</h2>
+                    <div class="form-group">
+                        <button class="btn" onclick="loadScores()">Refresh Scores</button>
+                        <button class="btn btn-secondary" onclick="exportScores()">Export CSV</button>
+                    </div>
+                    <div id="scoresLoading" class="loading" style="display: none;">Loading scores...</div>
+                    <div id="scoresTable"></div>
+                </div>
+
+                <!-- User Actions -->
+                <div class="card">
+                    <h2>User Management</h2>
+                    <div class="form-group">
+                        <label for="searchUser">Search User:</label>
+                        <input type="text" id="searchUser" placeholder="Enter User ID">
+                        <button class="btn" onclick="searchUser()">Search</button>
+                    </div>
+                    
+                    <div id="userInfo" style="display: none;">
+                        <h3>User Information</h3>
+                        <div id="userDetails"></div>
+                        
+                        <h3>Approval Decision</h3>
+                        <div class="form-group">
+                            <label for="decision">Decision:</label>
+                            <select id="decision">
+                                <option value="pending">Pending</option>
+                                <option value="approve">Approve</option>
+                                <option value="reject">Reject</option>
+                            </select>
+                        </div>
+                        
+                        <div id="approvalFields" style="display: none;">
+                            <div class="form-group">
+                                <label for="creditLimit">Credit Limit:</label>
+                                <input type="number" id="creditLimit" placeholder="Enter credit limit">
+                            </div>
+                            <div class="form-group">
+                                <label for="interestRate">Interest Rate (%):</label>
+                                <input type="number" id="interestRate" step="0.01" placeholder="Enter interest rate">
+                            </div>
+                            <div class="form-group">
+                                <label for="termsMonths">Terms (Months):</label>
+                                <input type="number" id="termsMonths" placeholder="Enter loan term">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="notes">Notes:</label>
+                            <textarea id="notes" rows="3" placeholder="Enter any notes"></textarea>
+                        </div>
+                        
+                        <button class="btn btn-success" onclick="approveUser()">Submit Decision</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- User Details Modal -->
+    <div id="userDetailsModal" class="user-details">
+        <div class="user-details-content">
+            <span class="close-btn" onclick="closeUserDetails()">&times;</span>
+            <div id="userDetailsContent"></div>
+        </div>
+    </div>
+
+    <script>
+        let authToken = null;
+        let currentUser = null;
+        const API_BASE = window.location.origin;
+
+        // Authentication
+        async function login() {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const partnerId = document.getElementById('partnerId').value;
+
+            if (!username || !password) {
+                showAuthMessage('Please enter username and password', 'error');
+                return;
+            }
+
+            try {
+                const response = await fetch(`${API_BASE}/auth/token`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        username: username,
+                        password: password,
+                        partner_id: partnerId
+                    })
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    authToken = data.access_token;
+                    currentUser = data.user_info;
+                    
+                    // Hide auth section and show dashboard
+                    document.getElementById('authSection').style.display = 'none';
+                    document.getElementById('dashboardSection').style.display = 'block';
+                    
+                    // Load dashboard data
+                    loadDashboard();
+                    
+                    showAuthMessage('Login successful!', 'success');
+                } else {
+                    showAuthMessage(data.detail || 'Login failed', 'error');
+                }
+            } catch (error) {
+                showAuthMessage('Network error: ' + error.message, 'error');
+            }
+        }
+
+        function showAuthMessage(message, type) {
+            const messageDiv = document.getElementById('authMessage');
+            messageDiv.innerHTML = `<div class="alert alert-${type === 'error' ? 'error' : 'success'}">${message}</div>`;
+            setTimeout(() => {
+                messageDiv.innerHTML = '';
+            }, 5000);
+        }
+
+        // Dashboard functions
+        async function loadDashboard() {
+            await loadStats();
+            await loadScores();
+        }
+
+        async function loadStats() {
+            try {
+                const response = await fetch(`${API_BASE}/dashboard/stats`, {
+                    headers: {
+                        'Authorization': `Bearer ${authToken}`
+                    }
+                });
+
+                if (response.ok) {
+                    const stats = await response.json();
+                    
+                    document.getElementById('totalScores').textContent = stats.total_scores;
+                    document.getElementById('scoresToday').textContent = stats.scores_today;
+                    document.getElementById('avgScore').textContent = Math.round(stats.avg_score);
+                    document.getElementById('approvalRate').textContent = Math.round(stats.approval_rate) + '%';
+                    document.getElementById('pendingApprovals').textContent = stats.pending_approvals;
+                    document.getElementById('activeUsers').textContent = stats.active_users;
+                }
+            } catch (error) {
+                console.error('Error loading stats:', error);
+            }
+        }
+
+        async function loadScores() {
+            document.getElementById('scoresLoading').style.display = 'block';
+            
+            try {
+                const response = await fetch(`${API_BASE}/dashboard/scores?limit=20`, {
+                    headers: {
+                        'Authorization': `Bearer ${authToken}`
+                    }
+                });
+
+                if (response.ok) {
+                    const scores = await response.json();
+                    displayScores(scores);
+                }
+            } catch (error) {
+                console.error('Error loading scores:', error);
+            } finally {
+                document.getElementById('scoresLoading').style.display = 'none';
+            }
+        }
+
+        function displayScores(scores) {
+            const tableHtml = `
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>User ID</th>
+                            <th>Credit Score</th>
+                            <th>Score Range</th>
+                            <th>Date</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${scores.map(score => `
+                            <tr>
+                                <td>${score.user_id}</td>
+                                <td class="${getScoreClass(score.credit_score)}">${Math.round(score.credit_score)}</td>
+                                <td>${score.score_range}</td>
+                                <td>${new Date(score.date).toLocaleDateString()}</td>
+                                <td>
+                                    <button class="btn" onclick="viewUserDetails('${score.user_id}')">View</button>
+                                </td>
+                            </tr>
+                        `).join('')}
+                    </tbody>
+                </table>
+            `;
+            
+            document.getElementById('scoresTable').innerHTML = tableHtml;
+        }
+
+        function getScoreClass(score) {
+            if (score >= 800) return 'score-excellent';
+            if (score >= 670) return 'score-good';
+            if (score >= 580) return 'score-fair';
+            return 'score-poor';
+        }
+
+        async function searchUser() {
+            const userId = document.getElementById('searchUser').value;
+            if (!userId) return;
+
+            try {
+                const response = await fetch(`${API_BASE}/dashboard/users/${userId}`, {
+                    headers: {
+                        'Authorization': `Bearer ${authToken}`
+                    }
+                });
+
+                if (response.ok) {
+                    const userDetails = await response.json();
+                    displayUserInfo(userDetails);
+                } else {
+                    alert('User not found');
+                }
+            } catch (error) {
+                console.error('Error searching user:', error);
+                alert('Error searching user');
+            }
+        }
+
+        function displayUserInfo(userDetails) {
+            const userInfoDiv = document.getElementById('userInfo');
+            const userDetailsDiv = document.getElementById('userDetails');
+            
+            const profile = userDetails.profile;
+            const latestScore = userDetails.latest_score;
+            const approvalStatus = userDetails.approval_status;
+            
+            userDetailsDiv.innerHTML = `
+                <p><strong>User ID:</strong> ${userDetails.user_id}</p>
+                <p><strong>Age:</strong> ${profile.age}</p>
+                <p><strong>Income:</strong> $${profile.income?.toLocaleString()}</p>
+                <p><strong>Credit Score:</strong> <span class="${getScoreClass(latestScore.credit_score)}">${Math.round(latestScore.credit_score)}</span></p>
+                <p><strong>Score Range:</strong> ${latestScore.score_range}</p>
+                <p><strong>Current Status:</strong> <span class="status-${approvalStatus.decision || 'pending'}">${approvalStatus.decision || 'Pending'}</span></p>
+            `;
+            
+            // Set current values if already approved/rejected
+            if (approvalStatus.decision) {
+                document.getElementById('decision').value = approvalStatus.decision;
+                if (approvalStatus.credit_limit) {
+                    document.getElementById('creditLimit').value = approvalStatus.credit_limit;
+                }
+                if (approvalStatus.interest_rate) {
+                    document.getElementById('interestRate').value = approvalStatus.interest_rate;
+                }
+                if (approvalStatus.terms_months) {
+                    document.getElementById('termsMonths').value = approvalStatus.terms_months;
+                }
+                if (approvalStatus.notes) {
+                    document.getElementById('notes').value = approvalStatus.notes;
+                }
+            }
+            
+            userInfoDiv.style.display = 'block';
+            
+            // Show/hide approval fields based on decision
+            toggleApprovalFields();
+        }
+
+        function toggleApprovalFields() {
+            const decision = document.getElementById('decision').value;
+            const approvalFields = document.getElementById('approvalFields');
+            
+            if (decision === 'approve') {
+                approvalFields.style.display = 'block';
+            } else {
+                approvalFields.style.display = 'none';
+            }
+        }
+
+        // Add event listener for decision change
+        document.getElementById('decision').addEventListener('change', toggleApprovalFields);
+
+        async function approveUser() {
+            const userId = document.getElementById('searchUser').value;
+            const decision = document.getElementById('decision').value;
+            const creditLimit = document.getElementById('creditLimit').value;
+            const interestRate = document.getElementById('interestRate').value;
+            const termsMonths = document.getElementById('termsMonths').value;
+            const notes = document.getElementById('notes').value;
+
+            const approvalData = {
+                user_id: userId,
+                decision: decision,
+                notes: notes
+            };
+
+            if (decision === 'approve') {
+                if (creditLimit) approvalData.credit_limit = parseFloat(creditLimit);
+                if (interestRate) approvalData.interest_rate = parseFloat(interestRate);
+                if (termsMonths) approvalData.terms_months = parseInt(termsMonths);
+            }
+
+            try {
+                const response = await fetch(`${API_BASE}/dashboard/approve-user`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${authToken}`
+                    },
+                    body: JSON.stringify(approvalData)
+                });
+
+                if (response.ok) {
+                    alert('User decision submitted successfully!');
+                    loadStats(); // Refresh stats
+                    loadScores(); // Refresh scores
+                } else {
+                    const error = await response.json();
+                    alert('Error: ' + (error.detail || 'Failed to submit decision'));
+                }
+            } catch (error) {
+                console.error('Error approving user:', error);
+                alert('Network error occurred');
+            }
+        }
+
+        async function viewUserDetails(userId) {
+            try {
+                const response = await fetch(`${API_BASE}/dashboard/users/${userId}`, {
+                    headers: {
+                        'Authorization': `Bearer ${authToken}`
+                    }
+                });
+
+                if (response.ok) {
+                    const userDetails = await response.json();
+                    showUserDetailsModal(userDetails);
+                }
+            } catch (error) {
+                console.error('Error loading user details:', error);
+            }
+        }
+
+        function showUserDetailsModal(userDetails) {
+            const profile = userDetails.profile;
+            const latestScore = userDetails.latest_score;
+            const approvalStatus = userDetails.approval_status;
+            const scoreHistory = userDetails.score_history;
+
+            const content = `
+                <h2>User Details: ${userDetails.user_id}</h2>
+                
+                <h3>Profile Information</h3>
+                <p><strong>Age:</strong> ${profile.age}</p>
+                <p><strong>Income:</strong> $${profile.income?.toLocaleString()}</p>
+                <p><strong>Credit History Length:</strong> ${profile.credit_history_length} years</p>
+                <p><strong>Debt-to-Income Ratio:</strong> ${(profile.debt_to_income_ratio * 100).toFixed(1)}%</p>
+                <p><strong>Employment Length:</strong> ${profile.employment_length} years</p>
+                <p><strong>Number of Accounts:</strong> ${profile.number_of_accounts}</p>
+                <p><strong>Payment History Score:</strong> ${(profile.payment_history_score * 100).toFixed(1)}%</p>
+                <p><strong>Credit Utilization:</strong> ${(profile.credit_utilization * 100).toFixed(1)}%</p>
+                <p><strong>Recent Inquiries:</strong> ${profile.recent_inquiries}</p>
+                
+                <h3>Latest Credit Score</h3>
+                <p><strong>Score:</strong> <span class="${getScoreClass(latestScore.credit_score)}">${Math.round(latestScore.credit_score)}</span></p>
+                <p><strong>Range:</strong> ${latestScore.score_range}</p>
+                <p><strong>Model Version:</strong> ${latestScore.model_version}</p>
+                
+                <h3>Approval Status</h3>
+                <p><strong>Status:</strong> <span class="status-${approvalStatus.decision || 'pending'}">${approvalStatus.decision || 'Pending'}</span></p>
+                ${approvalStatus.credit_limit ? `<p><strong>Credit Limit:</strong> $${approvalStatus.credit_limit.toLocaleString()}</p>` : ''}
+                ${approvalStatus.interest_rate ? `<p><strong>Interest Rate:</strong> ${approvalStatus.interest_rate}%</p>` : ''}
+                ${approvalStatus.terms_months ? `<p><strong>Terms:</strong> ${approvalStatus.terms_months} months</p>` : ''}
+                
+                <h3>Score History</h3>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Score</th>
+                            <th>Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${scoreHistory.slice(0, 5).map(score => `
+                            <tr>
+                                <td class="${getScoreClass(score.credit_score)}">${Math.round(score.credit_score)}</td>
+                                <td>${new Date(score.date).toLocaleDateString()}</td>
+                            </tr>
+                        `).join('')}
+                    </tbody>
+                </table>
+            `;
+
+            document.getElementById('userDetailsContent').innerHTML = content;
+            document.getElementById('userDetailsModal').style.display = 'block';
+        }
+
+        function closeUserDetails() {
+            document.getElementById('userDetailsModal').style.display = 'none';
+        }
+
+        async function exportScores() {
+            try {
+                const response = await fetch(`${API_BASE}/dashboard/scores?limit=1000`, {
+                    headers: {
+                        'Authorization': `Bearer ${authToken}`
+                    }
+                });
+
+                if (response.ok) {
+                    const scores = await response.json();
+                    downloadCSV(scores);
+                }
+            } catch (error) {
+                console.error('Error exporting scores:', error);
+                alert('Error exporting data');
+            }
+        }
+
+        function downloadCSV(scores) {
+            const headers = ['User ID', 'Credit Score', 'Score Range', 'Date', 'Age', 'Income', 'Region'];
+            const csvContent = [
+                headers.join(','),
+                ...scores.map(score => [
+                    score.user_id,
+                    Math.round(score.credit_score),
+                    `"${score.score_range}"`,
+                    new Date(score.date).toLocaleDateString(),
+                    score.user_data.age || '',
+                    score.user_data.income || '',
+                    score.user_data.region || ''
+                ].join(','))
+            ].join('\n');
+
+            const blob = new Blob([csvContent], { type: 'text/csv' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `kifaa_scores_${new Date().toISOString().split('T')[0]}.csv`;
+            a.click();
+            window.URL.revokeObjectURL(url);
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('userDetailsModal');
+            if (event.target === modal) {
+                closeUserDetails();
+            }
+        }
+    </script>
+</body>
+</html>
+
