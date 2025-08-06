@@ -7,8 +7,9 @@ import { useAuth } from '@/hooks/use-auth';
 import { Wallet, CreditCard, BanknoteIcon, ArrowUpRight, ArrowDownLeft, Clock, TrendingUp, Users, Target } from 'lucide-react';
 import { format } from 'date-fns';
 import LaptopFrame from '@/components/LaptopFrame';
-import ScoreCard from '@/components/ScoreCard';
-import AssetMarketplace from '@/components/AssetMarketplace';
+import MobileScoreCard from '@/components/MobileScoreCard';
+import CompactAssetMarketplace from '@/components/CompactAssetMarketplace';
+import WalletInsights from '@/components/WalletInsights';
 import ScoreImprovementPlan from '@/components/ScoreImprovementPlan';
 import ActivityFeed from '@/components/ActivityFeed';
 
@@ -16,7 +17,7 @@ const Dashboard = () => {
   const { user, userProfile } = useAuth();
   const { wallets, transactions, loans, creditScore, isLoading } = useFinancial();
   const [laptopVariant, setLaptopVariant] = useState<'macbook' | 'windows'>('macbook');
-  const [activeTab, setActiveTab] = useState<'overview' | 'marketplace' | 'plan' | 'activity'>('overview');
+  const [activeView, setActiveView] = useState<'welcome' | 'score' | 'assets' | 'wallet'>('welcome');
 
   // Mock data for enhanced features
   const userTier = 'Silver';
@@ -77,221 +78,93 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="container mx-auto p-6">
-      <div className="flex justify-between items-center mb-6">
-        <header>
-          <div className="flex items-center gap-3">
-            <h1 className="text-3xl font-bold">
-              Welcome back, {userProfile?.first_name || user?.email?.split('@')[0] || 'User'}!
-            </h1>
-            <Badge className="bg-gradient-to-r from-primary to-primary/80 text-white">
-              {userTier} Tier
-            </Badge>
+    <div className="max-w-md mx-auto bg-background min-h-screen">
+      {/* Mobile Header */}
+      <div className="sticky top-0 z-10 bg-background/95 backdrop-blur border-b p-4">
+        <div className="flex items-center justify-between">
+          <div className="text-lg font-semibold">Kifaa</div>
+          <div className="flex gap-2">
+            {['welcome', 'score', 'assets', 'wallet'].map((view) => (
+              <button
+                key={view}
+                onClick={() => setActiveView(view as any)}
+                className={`w-2 h-2 rounded-full transition-colors ${
+                  activeView === view ? 'bg-primary' : 'bg-muted'
+                }`}
+              />
+            ))}
           </div>
-          <p className="text-muted-foreground mt-1">
-            Your financial dashboard • Profile {profileCompletion}% complete
-          </p>
-        </header>
-        <button 
-          onClick={toggleLaptopVariant} 
-          className="px-4 py-2 rounded-md bg-primary text-white text-sm"
-        >
-          Switch to {laptopVariant === 'macbook' ? 'Windows' : 'MacBook'} Style
-        </button>
-      </div>
-
-      {/* Quick Action Tabs */}
-      <div className="flex gap-2 mb-6 overflow-x-auto">
-        {[
-          { id: 'overview', label: 'Overview', icon: TrendingUp },
-          { id: 'marketplace', label: 'Asset Marketplace', icon: Users },
-          { id: 'plan', label: 'Improvement Plan', icon: Target },
-          { id: 'activity', label: 'Activity Feed', icon: Clock }
-        ].map(({ id, label, icon: Icon }) => (
-          <button
-            key={id}
-            onClick={() => setActiveTab(id as any)}
-            className={`flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-colors whitespace-nowrap ${
-              activeTab === id 
-                ? 'bg-primary text-white' 
-                : 'bg-background border hover:bg-accent'
-            }`}
-          >
-            <Icon className="h-4 w-4" />
-            {label}
-          </button>
-        ))}
+        </div>
       </div>
       
-      <LaptopFrame variant={laptopVariant}>
-        <div className="p-4 overflow-auto max-h-[calc(100vh-220px)]">
-          {activeTab === 'overview' && (
-            <>
-              {/* Enhanced Overview Dashboard */}
-              <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
-                <Card>
-                  <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                    <CardTitle className="text-sm font-medium">Wallet Balance</CardTitle>
-                    <Wallet className="h-4 w-4 text-muted-foreground" />
-                  </CardHeader>
-                  <CardContent>
-                    <div className="text-2xl font-bold">
-                      {isLoading ? 'Loading...' : formatCurrency(kesWalletBalance)}
-                    </div>
-                    <p className="text-xs text-muted-foreground mt-1">
-                      Available for withdrawal
-                    </p>
-                  </CardContent>
-                </Card>
-                
-                <Card>
-                  <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                    <CardTitle className="text-sm font-medium">Active Loans</CardTitle>
-                    <CreditCard className="h-4 w-4 text-muted-foreground" />
-                  </CardHeader>
-                  <CardContent>
-                    <div className="text-2xl font-bold">{isLoading ? 'Loading...' : activeLoansCount}</div>
-                    <p className="text-xs text-muted-foreground mt-1">
-                      {activeLoansCount === 1 ? 'Current loan' : 'Current loans'}
-                    </p>
-                  </CardContent>
-                </Card>
-                
-                <Card>
-                  <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                    <CardTitle className="text-sm font-medium">Eligible Offers</CardTitle>
-                    <Users className="h-4 w-4 text-muted-foreground" />
-                  </CardHeader>
-                  <CardContent>
-                    <div className="text-2xl font-bold">12</div>
-                    <p className="text-xs text-muted-foreground mt-1">
-                      Asset financing options
-                    </p>
-                  </CardContent>
-                </Card>
-                
-                <Card>
-                  <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                    <CardTitle className="text-sm font-medium">Profile Completion</CardTitle>
-                    <Target className="h-4 w-4 text-muted-foreground" />
-                  </CardHeader>
-                  <CardContent>
-                    <div className="text-2xl font-bold">{profileCompletion}%</div>
-                    <p className="text-xs text-muted-foreground mt-1">
-                      Complete for better offers
-                    </p>
-                  </CardContent>
-                </Card>
-              </div>
-              
-              <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                <div className="lg:col-span-1">
-                  <ScoreCard 
-                    score={creditScore || 672}
-                    previousScore={654}
-                    tier={userTier as any}
-                    breakdown={scoreBreakdown}
-                  />
-                </div>
-                
-                <Card className="lg:col-span-2">
-                  <CardHeader>
-                    <CardTitle>Recent Transactions</CardTitle>
-                    <CardDescription>Your latest financial activity</CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    {isLoading ? (
-                      <p className="text-sm text-muted-foreground">Loading transactions...</p>
-                    ) : recentTransactions.length === 0 ? (
-                      <p className="text-sm text-muted-foreground italic">No recent transactions</p>
-                    ) : (
-                      <div className="space-y-4">
-                        {recentTransactions.map((transaction) => (
-                          <div key={transaction.id} className="flex items-center justify-between">
-                            <div className="flex items-center gap-3">
-                              <div className="rounded-full p-2 bg-gray-100 dark:bg-gray-800">
-                                {getTransactionIcon(transaction.type)}
-                              </div>
-                              <div>
-                                <p className="text-sm font-medium">{transaction.description || transaction.type}</p>
-                                <p className="text-xs text-muted-foreground">
-                                  {transaction.created_at ? format(new Date(transaction.created_at), 'dd MMM yyyy, h:mm a') : ''}
-                                </p>
-                              </div>
-                            </div>
-                            <div className={`text-sm font-medium ${transaction.type === 'deposit' ? 'text-green-500' : transaction.type === 'withdrawal' ? 'text-red-500' : ''}`}>
-                              {transaction.type === 'deposit' ? '+' : transaction.type === 'withdrawal' ? '-' : ''}
-                              {formatCurrency(transaction.amount, transaction.currency)}
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                    )}
-                  </CardContent>
-                </Card>
-              </div>
-              
-              <div className="mt-6">
-                <Card>
-                  <CardHeader>
-                    <CardTitle>Quick Actions</CardTitle>
-                    <CardDescription>Manage your finances efficiently</CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                      <a 
-                        href="/wallet" 
-                        className="p-4 text-center rounded-lg border border-input bg-background hover:bg-accent hover:text-accent-foreground transition-colors"
-                      >
-                        <Wallet className="h-6 w-6 mx-auto mb-2" />
-                        <span className="text-sm font-medium">Fund Wallet</span>
-                      </a>
-                      <a 
-                        href="/loans" 
-                        className="p-4 text-center rounded-lg border border-input bg-background hover:bg-accent hover:text-accent-foreground transition-colors"
-                      >
-                        <CreditCard className="h-6 w-6 mx-auto mb-2" />
-                        <span className="text-sm font-medium">Apply for Loan</span>
-                      </a>
-                      <a 
-                        href="/products" 
-                        className="p-4 text-center rounded-lg border border-input bg-background hover:bg-accent hover:text-accent-foreground transition-colors"
-                      >
-                        <Users className="h-6 w-6 mx-auto mb-2" />
-                        <span className="text-sm font-medium">Browse Assets</span>
-                      </a>
-                      <a 
-                        href="/profile" 
-                        className="p-4 text-center rounded-lg border border-input bg-background hover:bg-accent hover:text-accent-foreground transition-colors"
-                      >
-                        <Target className="h-6 w-6 mx-auto mb-2" />
-                        <span className="text-sm font-medium">Complete Profile</span>
-                      </a>
-                    </div>
-                  </CardContent>
-                </Card>
-              </div>
-            </>
-          )}
-          
-          {activeTab === 'marketplace' && (
-            <AssetMarketplace />
-          )}
-          
-          {activeTab === 'plan' && (
-            <ScoreImprovementPlan 
-              currentScore={creditScore || 672}
-              currentTier={userTier}
-              nextTier={nextTier}
-              pointsToNextTier={28}
+      {/* Mobile Content */}
+      <div className="p-4 pb-20">
+        {activeView === 'welcome' && (
+          <div className="space-y-4">
+            <div className="text-center py-6">
+              <h1 className="text-2xl font-bold mb-2">
+                Welcome back, {userProfile?.first_name || 'Akinyi'}!
+              </h1>
+            </div>
+            
+            <MobileScoreCard 
+              score={creditScore || 672}
+              tier={userTier}
+              nextAction="Improve your score by linking your wallet"
+              breakdown={scoreBreakdown}
             />
-          )}
-          
-          {activeTab === 'activity' && (
-            <ActivityFeed />
-          )}
+          </div>
+        )}
+        
+        {activeView === 'score' && (
+          <div className="space-y-4">
+            <MobileScoreCard 
+              score={creditScore || 672}
+              tier={userTier}
+              nextAction="Improve your score by linking your wallet"
+              breakdown={scoreBreakdown}
+            />
+          </div>
+        )}
+        
+        {activeView === 'assets' && (
+          <CompactAssetMarketplace />
+        )}
+        
+        {activeView === 'wallet' && (
+          <WalletInsights 
+            balance={kesWalletBalance}
+            currency="KES"
+          />
+        )}
+      </div>
+
+      {/* Bottom Navigation */}
+      <div className="fixed bottom-0 left-0 right-0 bg-background border-t">
+        <div className="max-w-md mx-auto px-4 py-2">
+          <div className="flex justify-around">
+            {[
+              { id: 'welcome', label: 'Home', icon: '🏠' },
+              { id: 'score', label: 'Score', icon: '📊' },
+              { id: 'assets', label: 'Assets', icon: '🏦' },
+              { id: 'wallet', label: 'Wallet', icon: '💳' }
+            ].map(({ id, label, icon }) => (
+              <button
+                key={id}
+                onClick={() => setActiveView(id as any)}
+                className={`flex flex-col items-center gap-1 py-2 px-3 rounded-lg transition-colors ${
+                  activeView === id 
+                    ? 'text-primary bg-primary/10' 
+                    : 'text-muted-foreground hover:text-foreground'
+                }`}
+              >
+                <span className="text-lg">{icon}</span>
+                <span className="text-xs font-medium">{label}</span>
+              </button>
+            ))}
+          </div>
         </div>
-      </LaptopFrame>
+      </div>
     </div>
   );
 };
